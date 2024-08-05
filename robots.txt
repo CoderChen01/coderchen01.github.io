@@ -1,4 +1,4 @@
 User-agent: *
 Disallow:
 
-Sitemap: https://coderchen01.github.io/sitemap.xml
+Sitemap: https://www.junjie-chen.info/sitemap.xml
