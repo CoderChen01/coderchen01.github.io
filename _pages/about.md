@@ -26,6 +26,6 @@ I previously completed a high-definition map (HDMap) engineering internship at <
 
 Earlier, I completed a remote research internship with <a href="https://lichao-sun.github.io/">Lichao Sun</a>, whose guidance has been immensely helpful, and I am deeply grateful for his support.
 
-I am fully dedicated to advancing my research in these areas, working tirelessly toward my passion🏃‍♂️🤡.
+I am fully dedicated to advancing my research in these areas, working tirelessly toward my passion🏃‍♂️.
 
 Collaborative opportunities are always welcome—please feel free to reach out.
