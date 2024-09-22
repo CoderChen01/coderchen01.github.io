@@ -20,7 +20,7 @@ I am currently a second-year master's student at Anhui Polytechnic University, u
 
 My research centers on **Efficient AI**, **Multimodal AI**, and **Generative AI**, with a particular focus on **pruning Large Language Models (LLMs) for performance optimization.**
 
-I am honored to serve as a remote research assistant for <a href="http://www.zhanglinfeng.tech/">Linfeng Zhang</a>, where I contribute to projects on **Efficient AI**.
+I am honored to serve as a remote research assistant for <a href="https://scholar.google.com/citations?user=AK9VF30AAAAJ&hl">Linfeng Zhang</a>, where I contribute to projects on **Efficient AI**.
 
 Previously, I completed a remote research internship with <a href="https://lichao-sun.github.io/">Lichao Sun</a>, whose guidance has been immensely helpful, and I am deeply grateful for his support.
 
