@@ -22,7 +22,7 @@ My research centers on **Efficient AI**, **Multimodal AI**, and **Generative AI*
 
 I am honored to serve as a remote research assistant for <a href="https://scholar.google.com/citations?user=AK9VF30AAAAJ&hl">Linfeng Zhang</a>, where I contribute to projects on **Efficient AI**.
 
-I previously completed a high-precision map (HDMap) engineering internship at <a href="https://en.megvii.com/megvii_research">Megvii Research</a>'s Transformer Group for over 900 days, where I honed my collaboration and engineering skills.
+I previously completed a high-definition map (HDMap) engineering internship at <a href="https://en.megvii.com/megvii_research">Megvii Research</a>'s Transformer Group for over `900` days, where I honed my collaboration and engineering skills.
 
 Earlier, I completed a remote research internship with <a href="https://lichao-sun.github.io/">Lichao Sun</a>, whose guidance has been immensely helpful, and I am deeply grateful for his support.
 
