@@ -2,7 +2,7 @@
 layout: about
 title: about me
 permalink: /
-subtitle: <a href='#'>Anhui Polytechnic University</a>. Wuhu, Anhui, China. jorji.chen AT gmail DOT com.
+subtitle: Junjie Chen (陈俊杰)@AHPU. Wuhu, Anhui, China. jorji.chen AT gmail DOT com.
 
 profile:
   align: right
