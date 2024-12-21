@@ -1,7 +1,7 @@
 ---
 layout: page
 permalink: /publications/
-title: publications
+title: Publications
 description: Check out my early steps into the world of research—it's just the beginning, but the excitement is real!
 nav: true
 nav_order: 2
