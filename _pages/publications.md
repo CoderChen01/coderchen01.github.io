@@ -2,7 +2,7 @@
 layout: page
 permalink: /publications/
 title: Publications
-description: Check out my early steps into the world of research—it's just the beginning, but the excitement is real!
+description: https://scholar.google.com/citations?user=q3NWGzUAAAAJ&hl=en&authuser=1
 nav: true
 nav_order: 2
 ---
