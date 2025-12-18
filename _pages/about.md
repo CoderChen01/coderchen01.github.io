@@ -16,10 +16,6 @@ selected_papers: true # includes a list of papers marked as "selected={true}"
 social: true # includes social icons at the bottom of the page
 ---
 
-# Hi there, I’m Junjie (Jorji) Chen (陈俊杰) 👋
-
-## 🚀 About Me
-
 I am currently a third-year master’s student at **Anhui Polytechnic University (AHPU)**, supervised by **Prof. Subin Huang**.  
 My hometown is [Lu’an, Anhui, China](https://en.wikipedia.org/wiki/Lu%27an).
 
@@ -31,7 +27,7 @@ I am also working with **[Linfeng Zhang](https://scholar.google.com/citations?us
 
 ---
 
-## 🎯 Research Focus
+**🎯 Research Focus**
 
 I am primarily interested in the following research question:
 
@@ -47,7 +43,7 @@ My goal is to gradually develop dialogue systems that can align more closely wit
 
 ---
 
-## 🔬 Research Interests
+**🔬 Research Interests**
 
 The following areas reflect my **current interests and learning directions**, which support the above research focus:
 
@@ -70,7 +66,7 @@ These directions are not independent goals, but are explored as part of a broade
 
 ---
 
-## 💬 Let’s Collaborate!
+**💬 Let’s Collaborate!**
 
 I am always happy to learn from and collaborate with researchers interested in:
 - Emotion and affect modeling grounded in psychology
