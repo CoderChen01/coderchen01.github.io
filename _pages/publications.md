@@ -2,7 +2,6 @@
 layout: page
 permalink: /publications/
 title: Publications
-description: https://scholar.google.com/citations?user=q3NWGzUAAAAJ&hl=en&authuser=1
 nav: true
 nav_order: 2
 ---
@@ -12,6 +11,13 @@ nav_order: 2
 <!-- Bibsearch Feature -->
 
 {% include bib_search.liquid %}
+
+<p class="scholar-note">
+  For a complete list of publications, please see
+  <a href="https://scholar.google.com/citations?user=YOUR_ID" target="_blank" rel="noopener">
+    Google Scholar
+  </a>.
+</p>
 
 <div class="publications">
 
