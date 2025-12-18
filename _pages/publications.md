@@ -14,7 +14,7 @@ nav_order: 2
 
 <p class="scholar-note">
   For a complete list of publications, please see
-  <a href="https://scholar.google.com/citations?user=YOUR_ID" target="_blank" rel="noopener">
+  <a href="https://scholar.google.com/citations?user=q3NWGzUAAAAJ&hl=en&authuser=1" target="_blank" rel="noopener">
     Google Scholar
   </a>.
 </p>
