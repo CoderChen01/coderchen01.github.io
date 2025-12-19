@@ -2,7 +2,7 @@
 layout: about
 title: About Me
 permalink: /
-subtitle: Junjie Chen (陈俊杰)@AHPU. Wuhu, Anhui, China. jorji.chen AT gmail DOT com.
+subtitle: Junjie Chen (陈俊杰). Hefei, Anhui, China. jorji.chen AT gmail DOT com.
 
 profile:
   align: right
@@ -31,7 +31,7 @@ I am also working with **[Linfeng Zhang](https://scholar.google.com/citations?us
 
 I am primarily interested in the following research question:
 
-> **How can we build psychologically grounded, fine-grained, multimodal, and efficient conversational AI systems that better understand and respond to human emotions?**
+> **How can we build psychologically grounded, fine-grained, multimodal, efficient, and full-duplex conversational AI systems that better understand and respond to human emotions?**
 
 In particular, I am learning and exploring:
 - 🧠 **Psychology-informed modeling** of emotion and cognition in dialogue systems.
