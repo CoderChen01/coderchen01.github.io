@@ -1,39 +1,189 @@
+// /*******************************************************************************
+//  * Themes
+//  ******************************************************************************/
+
+// :root {
+//   --global-bg-color: #{$white-color};
+//   --global-code-bg-color: #{$code-bg-color-light};
+//   --global-text-color: #{$black-color};
+//   --global-text-color-light: #{$grey-color};
+//   --global-theme-color: #{$purple-color};
+//   --global-hover-color: #{$purple-color};
+//   --global-hover-text-color: #{$white-color};
+//   --global-footer-bg-color: #{$grey-color-dark};
+//   --global-footer-text-color: #{$grey-color-light};
+//   --global-footer-link-color: #{$white-color};
+//   --global-distill-app-color: #{$grey-color};
+//   --global-divider-color: rgba(0, 0, 0, 0.1);
+//   --global-card-bg-color: #{$white-color};
+//   --global-highlight-color: #{$red-color-dark};
+//   --global-back-to-top-bg-color: rgba(#{red($black-color)}, #{green($black-color)}, #{blue($black-color)}, 0.4);
+//   --global-back-to-top-text-color: #{$white-color};
+//   --global-newsletter-bg-color: #{$white-color};
+//   --global-newsletter-text-color: #{$black-color};
+
+//   --global-tip-block: #42b983;
+//   --global-tip-block-bg: #e2f5ec;
+//   --global-tip-block-text: #215d42;
+//   --global-tip-block-title: #359469;
+//   --global-warning-block: #e7c000;
+//   --global-warning-block-bg: #fff8d8;
+//   --global-warning-block-text: #6b5900;
+//   --global-warning-block-title: #b29400;
+//   --global-danger-block: #c00;
+//   --global-danger-block-bg: #ffe0e0;
+//   --global-danger-block-text: #600;
+//   --global-danger-block-title: #c00;
+
+//   #light-toggle-system {
+//     padding-left: 10px;
+//     padding-top: 12px;
+//     display: block;
+//   }
+
+//   #light-toggle-dark {
+//     display: none;
+//   }
+
+//   #light-toggle-light {
+//     display: none;
+//   }
+
+//   .repo-img-light {
+//     display: block;
+//   }
+//   .repo-img-dark {
+//     display: none;
+//   }
+
+//   #back-to-top {
+//     color: var(--global-back-to-top-text-color);
+//     background: var(--global-back-to-top-bg-color);
+//     bottom: $back-to-top-bottom;
+//     right: $back-to-top-right;
+//     height: $back-to-top-height;
+//     width: $back-to-top-width;
+//     z-index: $back-to-top-z-index;
+//   }
+// }
+
+// html[data-theme="dark"] {
+//   --global-bg-color: #{$grey-color-dark};
+//   --global-code-bg-color: #{$code-bg-color-dark};
+//   --global-text-color: #{$grey-color-light};
+//   --global-text-color-light: #{$grey-color};
+//   --global-theme-color: #{$cyan-color};
+//   --global-hover-color: #{$cyan-color};
+//   --global-hover-text-color: #{$white-color};
+//   --global-footer-bg-color: #{$grey-color-light};
+//   --global-footer-text-color: #{$grey-color-dark};
+//   --global-footer-link-color: #{$black-color};
+//   --global-distill-app-color: #{$grey-color-light};
+//   --global-divider-color: #424246;
+//   --global-card-bg-color: #{$grey-900};
+//   --global-back-to-top-bg-color: rgba(#{red($white-color)}, #{green($white-color)}, #{blue($white-color)}, 0.5);
+//   --global-back-to-top-text-color: #{$black-color};
+//   --global-newsletter-bg-color: #{$grey-color-light};
+//   --global-newsletter-text-color: #{$grey-color-dark};
+
+//   --global-tip-block: #42b983;
+//   --global-tip-block-bg: #e2f5ec;
+//   --global-tip-block-text: #215d42;
+//   --global-tip-block-title: #359469;
+//   --global-warning-block: #e7c000;
+//   --global-warning-block-bg: #fff8d8;
+//   --global-warning-block-text: #6b5900;
+//   --global-warning-block-title: #b29400;
+//   --global-danger-block: #c00;
+//   --global-danger-block-bg: #ffe0e0;
+//   --global-danger-block-text: #600;
+//   --global-danger-block-title: #c00;
+
+//   .repo-img-light {
+//     display: none;
+//   }
+//   .repo-img-dark {
+//     display: block;
+//   }
+// }
+
+// html[data-theme-setting="dark"] {
+//   #light-toggle-system {
+//     display: none;
+//   }
+
+//   #light-toggle-dark {
+//     padding-left: 10px;
+//     padding-top: 12px;
+//     display: block;
+//   }
+
+//   #light-toggle-light {
+//     display: none;
+//   }
+
+//   #back-to-top {
+//     color: var(--global-back-to-top-text-color);
+//     background: var(--global-back-to-top-bg-color);
+//   }
+// }
+
+// html[data-theme-setting="light"] {
+//   #light-toggle-system {
+//     display: none;
+//   }
+
+//   #light-toggle-dark {
+//     display: none;
+//   }
+
+//   #light-toggle-light {
+//     padding-left: 10px;
+//     padding-top: 12px;
+//     display: block;
+//   }
+// }
 /*******************************************************************************
- * Themes
+ * Themes - Cyberpunk / High-Tech Edition
  ******************************************************************************/
 
 :root {
-  --global-bg-color: #{$white-color};
-  --global-code-bg-color: #{$code-bg-color-light};
-  --global-text-color: #{$black-color};
-  --global-text-color-light: #{$grey-color};
-  --global-theme-color: #{$purple-color};
-  --global-hover-color: #{$purple-color};
-  --global-hover-text-color: #{$white-color};
-  --global-footer-bg-color: #{$grey-color-dark};
-  --global-footer-text-color: #{$grey-color-light};
-  --global-footer-link-color: #{$white-color};
-  --global-distill-app-color: #{$grey-color};
-  --global-divider-color: rgba(0, 0, 0, 0.1);
-  --global-card-bg-color: #{$white-color};
-  --global-highlight-color: #{$red-color-dark};
-  --global-back-to-top-bg-color: rgba(#{red($black-color)}, #{green($black-color)}, #{blue($black-color)}, 0.4);
-  --global-back-to-top-text-color: #{$white-color};
-  --global-newsletter-bg-color: #{$white-color};
-  --global-newsletter-text-color: #{$black-color};
+  /* =======================================================
+     Light Mode: "Sterile Lab" (冷峻实验室风格)
+     特点：高冷白、深海蓝、极致灰，模拟高科技实验室的洁净感
+     ======================================================= */
+  --global-bg-color: #f8f9fa; // 极淡的冷灰白背景
+  --global-code-bg-color: #eef1f5; // 代码块背景
+  --global-text-color: #1a1b1e; // 近乎黑色的深灰
+  --global-text-color-light: #5f6c7b; // 辅助文字冷灰
+  --global-theme-color: #0056b3; // 科技深蓝 (链接/重点)
+  --global-hover-color: #007bff; // 悬停时更亮的蓝
+  --global-hover-text-color: #ffffff;
+  --global-footer-bg-color: #1a1b1e; // 页脚深色
+  --global-footer-text-color: #a0aec0;
+  --global-footer-link-color: #ffffff;
+  --global-distill-app-color: #5f6c7b;
+  --global-divider-color: rgba(0, 86, 179, 0.15); // 淡淡的蓝色分割线
+  --global-card-bg-color: #ffffff;
+  --global-highlight-color: #d63384; // 品红高亮
+  --global-back-to-top-bg-color: rgba(26, 27, 30, 0.8);
+  --global-back-to-top-text-color: #ffffff;
+  --global-newsletter-bg-color: #ffffff;
+  --global-newsletter-text-color: #1a1b1e;
 
-  --global-tip-block: #42b983;
-  --global-tip-block-bg: #e2f5ec;
-  --global-tip-block-text: #215d42;
-  --global-tip-block-title: #359469;
-  --global-warning-block: #e7c000;
-  --global-warning-block-bg: #fff8d8;
-  --global-warning-block-text: #6b5900;
-  --global-warning-block-title: #b29400;
-  --global-danger-block: #c00;
-  --global-danger-block-bg: #ffe0e0;
-  --global-danger-block-text: #600;
-  --global-danger-block-title: #c00;
+  /* 提示块保持原有逻辑，但在科技风中可以稍微调冷色调 */
+  --global-tip-block: #00b894;
+  --global-tip-block-bg: #e6fffa;
+  --global-tip-block-text: #0d5f4d;
+  --global-tip-block-title: #009174;
+  --global-warning-block: #fdcb6e;
+  --global-warning-block-bg: #fffbf0;
+  --global-warning-block-text: #755f00;
+  --global-warning-block-title: #d4a72c;
+  --global-danger-block: #ff7675;
+  --global-danger-block-bg: #fff5f5;
+  --global-danger-block-text: #8c2a2a;
+  --global-danger-block-title: #d63031;
 
   #light-toggle-system {
     padding-left: 10px;
@@ -52,6 +202,7 @@
   .repo-img-light {
     display: block;
   }
+
   .repo-img-dark {
     display: none;
   }
@@ -68,45 +219,52 @@
 }
 
 html[data-theme="dark"] {
-  --global-bg-color: #{$grey-color-dark};
-  --global-code-bg-color: #{$code-bg-color-dark};
-  --global-text-color: #{$grey-color-light};
-  --global-text-color-light: #{$grey-color};
-  --global-theme-color: #{$cyan-color};
-  --global-hover-color: #{$cyan-color};
-  --global-hover-text-color: #{$white-color};
-  --global-footer-bg-color: #{$grey-color-light};
-  --global-footer-text-color: #{$grey-color-dark};
-  --global-footer-link-color: #{$black-color};
-  --global-distill-app-color: #{$grey-color-light};
-  --global-divider-color: #424246;
-  --global-card-bg-color: #{$grey-900};
-  --global-back-to-top-bg-color: rgba(#{red($white-color)}, #{green($white-color)}, #{blue($white-color)}, 0.5);
-  --global-back-to-top-text-color: #{$black-color};
-  --global-newsletter-bg-color: #{$grey-color-light};
-  --global-newsletter-text-color: #{$grey-color-dark};
+  /* =======================================================
+     Dark Mode: "Cyberpunk Neon" (赛博朋克霓虹风格)
+     特点：深邃黑背景、霓虹青/紫、发光的代码块
+     ======================================================= */
+  --global-bg-color: #050505; // 纯黑背景 (OLED Friendly)
+  --global-code-bg-color: #0f111a; // 极深蓝黑代码背景
+  --global-text-color: #c9d1d9; // 柔和的灰白文字
+  --global-text-color-light: #8b949e; // 暗灰辅助文字
+  --global-theme-color: #00f3ff; // ★ 核心：霓虹青 (Cyber Cyan)
+  --global-hover-color: #bc13fe; // ★ 悬停：霓虹紫 (Neon Purple)
+  --global-hover-text-color: #ffffff;
+  --global-footer-bg-color: #000000;
+  --global-footer-text-color: #8b949e;
+  --global-footer-link-color: #00f3ff; // 页脚链接也发光
+  --global-distill-app-color: #8b949e;
+  --global-divider-color: rgba(0, 243, 255, 0.2); // 发光的青色分割线
+  --global-card-bg-color: #0f111a; // 卡片背景与代码块一致
+  --global-back-to-top-bg-color: rgba(0, 243, 255, 0.2); // 返回顶部按钮也是半透明青色
+  --global-back-to-top-text-color: #00f3ff;
+  --global-newsletter-bg-color: #0f111a;
+  --global-newsletter-text-color: #c9d1d9;
 
-  --global-tip-block: #42b983;
-  --global-tip-block-bg: #e2f5ec;
-  --global-tip-block-text: #215d42;
-  --global-tip-block-title: #359469;
-  --global-warning-block: #e7c000;
-  --global-warning-block-bg: #fff8d8;
-  --global-warning-block-text: #6b5900;
-  --global-warning-block-title: #b29400;
-  --global-danger-block: #c00;
-  --global-danger-block-bg: #ffe0e0;
-  --global-danger-block-text: #600;
-  --global-danger-block-title: #c00;
+  /* 提示块颜色适配暗黑模式 */
+  --global-tip-block: #00f3ff; // 提示块变成青色
+  --global-tip-block-bg: rgba(0, 243, 255, 0.1);
+  --global-tip-block-text: #e0fbfc;
+  --global-tip-block-title: #00f3ff;
+  --global-warning-block: #f1c40f;
+  --global-warning-block-bg: rgba(241, 196, 15, 0.1);
+  --global-warning-block-text: #fcf6da;
+  --global-warning-block-title: #f1c40f;
+  --global-danger-block: #ff0055;
+  --global-danger-block-bg: rgba(255, 0, 85, 0.1);
+  --global-danger-block-text: #ffe5ee;
+  --global-danger-block-title: #ff0055;
 
   .repo-img-light {
     display: none;
   }
+
   .repo-img-dark {
     display: block;
   }
 }
 
+/* 切换按钮保持原有逻辑 */
 html[data-theme-setting="dark"] {
   #light-toggle-system {
     display: none;

@@ -1,39 +1,93 @@
+// /*******************************************************************************
+//  * Variables used throughout the theme.
+//  * To adjust anything, simply edit the variables below and rebuild the theme.
+//  ******************************************************************************/
+
+// // Colors
+// $red-color: #ff3636 !default;
+// $red-color-dark: #b71c1c !default;
+// $orange-color: #f29105 !default;
+// $blue-color: #0076df !default;
+// $blue-color-dark: #00369f !default;
+// $cyan-color: #2698ba !default;
+// $light-cyan-color: lighten($cyan-color, 25%);
+// $green-color: #00ab37 !default;
+// $green-color-lime: #b7d12a !default;
+// $green-color-dark: #009f06 !default;
+// $green-color-light: #ddffdd !default;
+// $green-color-bright: #11d68b !default;
+// $purple-color: #b509ac !default;
+// $light-purple-color: lighten($purple-color, 25%);
+// $pink-color: #f92080 !default;
+// $pink-color-light: #ffdddd !default;
+// $yellow-color: #efcc00 !default;
+
+// $grey-color: #828282 !default;
+// $grey-color-light: lighten($grey-color, 40%);
+// $grey-color-dark: #1c1c1d;
+// $grey-900: #212529;
+
+// $white-color: #ffffff !default;
+// $black-color: #000000 !default;
+
+// // Theme colors
+
+// $code-bg-color-light: rgba($purple-color, 0.05);
+// $code-bg-color-dark: #2c3237 !default;
+
+// // Font awesome location
+// $fa-font-path: "../webfonts";
+
+// // Tabler icons location
+// $ti-font-path: "../fonts";
+
+// // Back To Top button config
+// $back-to-top-z-index: 10;
+// $back-to-top-bottom: 30px;
+// $back-to-top-right: 30px;
+// $back-to-top-diameter: 40px;
+// $back-to-top-height: $back-to-top-diameter;
+// $back-to-top-width: $back-to-top-diameter;
+
 /*******************************************************************************
- * Variables used throughout the theme.
- * To adjust anything, simply edit the variables below and rebuild the theme.
+ * Variables used throughout the theme - High-Tech / Cyberpunk Edition
  ******************************************************************************/
 
-// Colors
-$red-color: #ff3636 !default;
-$red-color-dark: #b71c1c !default;
-$orange-color: #f29105 !default;
-$blue-color: #0076df !default;
-$blue-color-dark: #00369f !default;
-$cyan-color: #2698ba !default;
-$light-cyan-color: lighten($cyan-color, 25%);
-$green-color: #00ab37 !default;
-$green-color-lime: #b7d12a !default;
-$green-color-dark: #009f06 !default;
-$green-color-light: #ddffdd !default;
-$green-color-bright: #11d68b !default;
-$purple-color: #b509ac !default;
-$light-purple-color: lighten($purple-color, 25%);
-$pink-color: #f92080 !default;
-$pink-color-light: #ffdddd !default;
-$yellow-color: #efcc00 !default;
+// Colors - The Neon Palette (高饱和度霓虹色系)
+$red-color: #ff0055 !default; // Error/Glitch Red (故障红)
+$red-color-dark: #b9003a !default;
+$orange-color: #ff9f1c !default; // Amber Terminal (琥珀色终端)
+$blue-color: #00f3ff !default; // Cyber Cyan (赛博青 - 主色调)
+$blue-color-dark: #0056b3 !default;
+$cyan-color: #00f3ff !default; // 同上，确保一致性
+$light-cyan-color: rgba(0, 243, 255, 0.2);
 
-$grey-color: #828282 !default;
-$grey-color-light: lighten($grey-color, 40%);
-$grey-color-dark: #1c1c1d;
-$grey-900: #212529;
+$green-color: #0aff00 !default; // Matrix Green (黑客帝国绿)
+$green-color-lime: #ccff00 !default;
+$green-color-dark: #008f11 !default;
+$green-color-light: #0d1f12 !default; // 极深的绿色背景，用于终端模拟
+$green-color-bright: #0aff00 !default;
+
+$purple-color: #bc13fe !default; // Neon Purple (霓虹紫 - 强调色)
+$light-purple-color: rgba(188, 19, 254, 0.2);
+$pink-color: #ff00ff !default; // Magenta (洋红)
+$pink-color-light: #ffccff !default;
+$yellow-color: #f1c40f !default; // Warning Yellow
+
+// Greys - Cool Tones (冷色调灰，偏蓝/金属感)
+$grey-color: #a0aec0 !default; // 钛合金灰
+$grey-color-light: #eef1f5 !default; // 实验室白
+$grey-color-dark: #1a1b1e; // 枪械黑
+$grey-900: #0f111a; // 深空黑 (用于卡片背景)
 
 $white-color: #ffffff !default;
-$black-color: #000000 !default;
+$black-color: #050505 !default; // 接近纯黑，适配 OLED
 
 // Theme colors
-
-$code-bg-color-light: rgba($purple-color, 0.05);
-$code-bg-color-dark: #2c3237 !default;
+// 这是一个很棒的细节：让浅色模式的代码块看起来像全息投影的淡蓝色背景
+$code-bg-color-light: rgba(0, 243, 255, 0.05);
+// 深色模式代码块背景，深蓝黑
+$code-bg-color-dark: #0f111a !default;
 
 // Font awesome location
 $fa-font-path: "../webfonts";
@@ -48,3 +102,28 @@ $back-to-top-right: 30px;
 $back-to-top-diameter: 40px;
 $back-to-top-height: $back-to-top-diameter;
 $back-to-top-width: $back-to-top-diameter;
+
+/*******************************************************************************
+ * Typography - High Tech Edition
+ ******************************************************************************/
+
+// 1. 定义字体栈
+$font-family-sans-serif: "Rajdhani", "Roboto", sans-serif !default;
+$font-family-serif: "Rajdhani", "Roboto", serif !default; // 科技风通常不使用衬线体，强制统一
+$font-family-monospace: "JetBrains Mono", "Courier New", monospace !default;
+
+// 2. 基础字体设置
+$font-size-base: 1rem !default; // 保持默认
+$font-weight-base: 500; // 科技字体通常稍微粗一点点，增加清晰度
+$line-height-base: 1.6;
+
+// 3. 标题设置 (Headings)
+$headings-font-family: "Rajdhani", sans-serif !default;
+$headings-font-weight: 700;
+$headings-line-height: 1.2;
+$headings-color: var(--global-theme-color); // 让所有标题默认带上霓虹主色！
+
+// 4. 强制覆盖 Bootstrap 默认字体变量
+// (这一步很重要，因为 al-folio 基于 Bootstrap)
+$font-family-base: $font-family-sans-serif;
+$font-family-code: $font-family-monospace;

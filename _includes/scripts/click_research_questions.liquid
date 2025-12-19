@@ -1,0 +1,138 @@
+<style>
+    .click-floating-text {
+        position: fixed;
+        pointer-events: none;
+        color: var(--global-theme-color);
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.95rem;
+        font-weight: 600;
+        z-index: 9999;
+        opacity: 0;
+        /* 初始锚点 */
+        transform-origin: center bottom;
+        animation: floatUp 3.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        white-space: nowrap;
+        text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+        user-select: none;
+    }
+
+    /* 动画逻辑：气泡上升效果
+      从鼠标位置上方一点点出现，然后大幅度向上飘，同时左右轻微摇摆
+    */
+    @keyframes floatUp {
+        0% {
+            opacity: 0;
+            transform: translate(-50%, -20px) scale(0.8) rotate(var(--rot));
+        }
+        10% {
+            opacity: 1;
+            transform: translate(-50%, -40px) scale(1.1) rotate(var(--rot));
+        }
+        50% {
+            opacity: 1;
+            /* 中途稍微停顿感，便于阅读 */
+            transform: translate(-50%, -80px) scale(1) rotate(var(--rot)); 
+        }
+        100% {
+            opacity: 0;
+            /* 最终飘到更远的地方 */
+            transform: translate(-50%, -180px) scale(0.9) rotate(var(--rot));
+        }
+    }
+    
+    [data-theme="dark"] .click-floating-text {
+        text-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
+    }
+</style>
+
+<script>
+    (function() {
+        // --- 1. 对话链数据库 (内容保持不变) ---
+        const threads = [
+            // Track 1: 动机与核心
+            ["Why this problem?", "Is it real?", "Or just imaginary?", "Who suffers from it?", "Does it matter?"],
+            ["Starting point?", "First principles?", "Any assumption?", "Does it hold?", "Back to basics?"],
+            
+            // Track 2: 创新与价值
+            ["Is it novel?", "Really?", "Or just complex?", "Simpler way?", "Ockham's Razor?"],
+            ["So what?", "Incremental?", "Breakthrough?", "Will it last?", "10 years later?"],
+            ["Just SOTA hacking?", "0.1% improvement?", "Statistically significant?", "Is it worth it?", "True impact?"],
+
+            // Track 3: AI 本质反思
+            ["Does it understand?", "Or just pattern matching?", "Stochastic parrot?", "Reasoning or Retrieval?", "Intelligence?"],
+            ["Black box?", "Why it works?", "Interpretability?", "Can we trust it?", "Safety?"],
+            ["Data hungry?", "Quality over Quantity?", "Bias inside?", "Garbage in?", "Garbage out?"],
+
+            // Track 4: 泛化与鲁棒性
+            ["It works here.", "But everywhere?", "OOD generalization?", "Corner cases?", "Adversarial attack?"],
+            ["Too complex?", "Hard to deploy?", "GPU rich?", "Latency?", "Scalability?"],
+
+            // Track 5: 学术严谨性
+            ["Reproducible?", "Code available?", "Seeds fixed?", "Cherry-picked?", "Honest reporting?"],
+            ["Fair comparison?", "Weak baselines?", "Same settings?", "Ablation study?", "Isolating the gain?"],
+
+            // Track 6: 自我实现
+            ["Why research?", "For truth?", "For fame?", "Do you love it?", "Keep going."],
+            ["Stuck?", "Zoom out.", "Read more.", "Think deeper.", "Write it down."]
+        ];
+
+        let currentThread = null;
+        let currentIndex = 0;
+        let idleTimer = null;
+        let globalZIndex = 10000;
+
+        document.addEventListener('click', function(e) {
+            // --- 逻辑控制 ---
+            if (!currentThread || currentIndex >= currentThread.length) {
+                currentThread = threads[Math.floor(Math.random() * threads.length)];
+                currentIndex = 0;
+            }
+
+            const text = currentThread[currentIndex];
+            currentIndex++;
+
+            if (idleTimer) clearTimeout(idleTimer);
+            idleTimer = setTimeout(() => {
+                currentThread = null;
+                currentIndex = 0;
+            }, 5000);
+
+            // --- 视觉生成 ---
+            const el = document.createElement('span');
+            el.className = 'click-floating-text';
+            el.innerText = text;
+
+            globalZIndex++;
+            el.style.zIndex = globalZIndex;
+
+            // --- 关键修改：定向扩散逻辑 ---
+            
+            // 1. X轴散布 (Horizontal Scatter): 
+            // 范围扩大到 ±60px，让文字在水平方向铺开，互不遮挡
+            const scatterX = (Math.random() - 0.5) * 120; 
+            
+            // 2. Y轴 (Vertical): 
+            // 固定在鼠标上方 20px 处生成，然后通过 CSS 动画向上飘
+            // 不再随机 Y 轴，保证所有文字起点一致，形成“流”的感觉
+            const fixedY = -20; 
+
+            el.style.left = (e.clientX + scatterX) + 'px';
+            el.style.top = (e.clientY + fixedY) + 'px';
+
+            // 3. 旋转 (Rotation):
+            // 稍微减小旋转幅度 (-5 到 5度)，保持一点整齐感
+            const rotateDeg = (Math.random() - 0.5) * 10; 
+            el.style.setProperty('--rot', rotateDeg + 'deg');
+
+            // 4. 颜色微调
+            const randomHue = Math.floor(Math.random() * 10) - 5; 
+            el.style.filter = `hue-rotate(${randomHue}deg)`;
+
+            document.body.appendChild(el);
+
+            setTimeout(() => {
+                el.remove();
+            }, 3500); // 稍微延长到 3.5s 配合上浮动画
+        });
+    })();
+</script>

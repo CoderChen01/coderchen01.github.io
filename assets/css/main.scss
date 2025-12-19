@@ -3,6 +3,59 @@
 ---
 @charset "utf-8";
 
+
+/* ==========================================================================
+   Local Fonts Import (防止被墙)
+   ========================================================================== */
+
+/* rajdhani-regular - latin */
+@font-face {
+  font-family: 'Rajdhani';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../fonts/rajdhani-v17-latin-regular.woff2') format('woff2');
+}
+
+/* rajdhani-500 - latin */
+@font-face {
+  font-family: 'Rajdhani';
+  font-style: normal;
+  font-weight: 500;
+  src: url('../fonts/rajdhani-v17-latin-500.woff2') format('woff2');
+}
+
+/* rajdhani-600 - latin */
+@font-face {
+  font-family: 'Rajdhani';
+  font-style: normal;
+  font-weight: 600;
+  src: url('../fonts/rajdhani-v17-latin-600.woff2') format('woff2');
+}
+
+/* rajdhani-700 - latin */
+@font-face {
+  font-family: 'Rajdhani';
+  font-style: normal;
+  font-weight: 700;
+  src: url('../fonts/rajdhani-v17-latin-700.woff2') format('woff2');
+}
+
+/* jetbrains-mono-regular - latin */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../fonts/jetbrains-mono-v24-latin-regular.woff2') format('woff2');
+}
+
+/* jetbrains-mono-700 - latin */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 700;
+  src: url('../fonts/jetbrains-mono-v24-latin-700.woff2') format('woff2');
+}
+
 // Dimensions
 $max-content-width: {{ site.max_width }};
 
@@ -23,3 +76,93 @@ $max-content-width: {{ site.max_width }};
   "tabler-icons/tabler-icons-filled.scss",
   "tabler-icons/tabler-icons-outline.scss"
 ;
+
+/* =========================================
+   Cyberpunk Typography Tweaks
+   ========================================= */
+
+/* 让网页标题看起来像终端指令 */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-transform: uppercase;
+  /* 强制大写 */
+  letter-spacing: 0.05em;
+  /* 增加字间距 */
+  font-weight: 700 !important;
+}
+
+/* 导航栏字体微调 */
+.navbar {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* 代码块样式增强 */
+code,
+pre {
+  font-family: 'JetBrains Mono', monospace !important;
+}
+
+/* 给所有按钮加上硬朗的边框，去掉圆角 */
+.btn {
+  border-radius: 0px !important;
+  font-family: 'Rajdhani', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+}
+
+/* 个人名字 (Profile Name) 特效 */
+.profile .address p.name {
+  font-family: 'Rajdhani', sans-serif;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, var(--global-theme-color), #bc13fe);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  /* 名字变成渐变霓虹色 */
+  font-weight: 800;
+}
+
+/* =======================================================
+   Force Body Font (强制覆盖正文字体)
+   ======================================================= */
+
+body {
+  font-family: 'Rajdhani', sans-serif !important;
+  font-weight: 500;
+  /* 科技字体稍微加粗一点才清晰，400太细 */
+  font-size: 1.05rem;
+  /* 稍微调大一点点，增加可读性 */
+}
+
+/* 确保段落、列表也继承这个字体 */
+p,
+li,
+span,
+a {
+  font-family: 'Rajdhani', sans-serif !important;
+}
+
+/* 你的名字/标题如果不想要太方正，可以用无衬线兜底，但这里建议统一 */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Rajdhani', sans-serif !important;
+}
+
+p {
+  line-height: 1.7 !important;
+  /* 拉开行间距，更有呼吸感 */
+  letter-spacing: 0.02em;
+  /* 稍微拉开一点字间距 */
+}

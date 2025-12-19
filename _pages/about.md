@@ -2,7 +2,7 @@
 layout: about
 title: About Me
 permalink: /
-subtitle: Junjie Chen (陈俊杰). Hefei, Anhui, China. jorji.chen AT gmail DOT com.
+subtitle: Junjie Chen (陈俊杰). <a href="https://en.wikipedia.org/wiki/Hefei" target="_blank">Hefei, Anhui, China</a>. jorji.chen AT gmail DOT com.
 
 profile:
   align: right
@@ -16,8 +16,7 @@ selected_papers: true # includes a list of papers marked as "selected={true}"
 social: false # includes social icons at the bottom of the page
 ---
 
-I am currently a third-year master’s student at **Anhui Polytechnic University (AHPU)**, supervised by **Prof. Subin Huang**.  
-My hometown is [Lu’an, Anhui, China](https://en.wikipedia.org/wiki/Lu%27an).
+I was born in November 2002 in [Lu’an, Anhui, China](https://en.wikipedia.org/wiki/Lu%27an). I am currently in the final year of my Master’s degree at Anhui Polytechnic University (AHPU), supervised by Prof. Subin Huang.
 
 I am a **Research Intern** at the [Institute of Artificial Intelligence](https://iai.ustc.edu.cn/iai/), [Hefei](https://en.wikipedia.org/wiki/Hefei) Comprehensive National Science Center, supervised by **Prof. [Meng Wang](https://scholar.google.com/citations?user=rHagaaIAAAAJ&hl=en)**, and I plan to apply for **PhD studies in Fall 2026**.
 
@@ -39,7 +38,7 @@ In particular, I am learning and exploring:
 - 🔊🖼️ **Multimodal interaction**, combining language with visual, acoustic, and behavioral cues.
 - ⚡ **Efficiency-aware methods** for building deployable and scalable dialogue models.
 
-My goal is to gradually develop dialogue systems that can align more closely with human affective and cognitive processes, rather than relying on coarse or surface-level emotional signals.
+For a deeper dive into my long-term roadmap and methodology, please visit my **[Research Vision](./research-vision)**.
 
 ---
 
