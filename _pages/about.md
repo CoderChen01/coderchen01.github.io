@@ -2,7 +2,7 @@
 layout: about
 title: About Me
 permalink: /
-subtitle: Junjie Chen (陈俊杰). <a href="https://en.wikipedia.org/wiki/Hefei" target="_blank">Hefei, Anhui, China</a>. jorji.chen AT gmail DOT com.
+# subtitle: Chinese Name: 陈俊杰. <a href="https://en.wikipedia.org/wiki/Hefei" target="_blank">Hefei, Anhui, China</a>. jorji.chen AT gmail DOT com.
 
 profile:
   align: right
@@ -15,6 +15,12 @@ news: true # includes a list of news items
 selected_papers: true # includes a list of papers marked as "selected={true}"
 social: false # includes social icons at the bottom of the page
 ---
+
+My Chinese name is <span class="cyber-name">陈俊杰</span> <span style="font-family: monospace; color: var(--global-text-color-light); font-size: 0.8em;">// 陳俊傑 [Sounds like: Ch-urn June-Jee-eh]</span>.
+<span class="audio-btn" onclick="speakName()" title="Pronunciation: Chén Jùnjié">
+  <i class="fa-solid fa-volume-high"></i>
+</span>
+
 
 I was born in November 2002 in [Lu’an, Anhui, China](https://en.wikipedia.org/wiki/Lu%27an). I am currently in the final year of my Master’s degree at Anhui Polytechnic University (AHPU), supervised by Prof. Subin Huang.
 
@@ -73,3 +79,37 @@ I am always happy to learn from and collaborate with researchers interested in:
 - Efficient and practical conversational AI
 
 If our interests overlap, I would be glad to connect and exchange ideas.
+
+<script>
+function speakName() {
+  // 创建语音实例
+  const utterance = new SpeechSynthesisUtterance("陈俊杰");
+  // 强制使用中文语音包
+  utterance.lang = 'zh-CN'; 
+  // 语速稍微慢一点，让人听清
+  utterance.rate = 0.8; 
+  // 播放
+  window.speechSynthesis.speak(utterance);
+  
+  // 添加一点点击反馈动画 (可选)
+  const btn = document.querySelector('.audio-btn');
+  btn.style.color = 'var(--global-theme-color)';
+  setTimeout(() => { btn.style.color = ''; }, 1000);
+}
+</script>
+
+<style>
+.audio-btn {
+  cursor: pointer;
+  margin-left: 8px;
+  font-size: 0.9em;
+  opacity: 0.6;
+  transition: all 0.2s;
+  vertical-align: middle;
+}
+.audio-btn:hover {
+  opacity: 1;
+  transform: scale(1.1);
+  color: var(--global-theme-color); /* 悬停变霓虹色 */
+}
+</style>

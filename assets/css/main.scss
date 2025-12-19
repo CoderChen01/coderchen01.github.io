@@ -56,6 +56,36 @@
   src: url('../fonts/jetbrains-mono-v24-latin-700.woff2') format('woff2');
 }
 
+/* =======================================================
+   Local Chinese Font (Cyberpunk Calligraphy)
+   ======================================================= */
+@font-face {
+  font-family: 'CyberChinese';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../fonts/cyber-chinese.woff2') format('woff2');
+  font-display: swap;
+  /* 保证字体加载前文字也能显示 */
+}
+
+/* 定义一个实用类，方便在 Markdown 里调用 */
+.cyber-name {
+  font-family: 'CyberChinese', cursive !important;
+  font-size: 1.8em;
+  line-height: 1;
+  vertical-align: -8px;
+  /* 志莽行书重心偏高，稍微往下拉一点 */
+  margin: 0 5px;
+  color: var(--global-theme-color);
+  text-shadow: 0 0 10px rgba(var(--global-theme-color), 0.5);
+  /* 增强光晕 */
+
+  /* 强制移除所有干扰样式 */
+  border: none !important;
+  text-decoration: none !important;
+  font-weight: 400 !important;
+}
+
 // Dimensions
 $max-content-width: {{ site.max_width }};
 
