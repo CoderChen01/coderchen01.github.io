@@ -196,6 +196,8 @@ collections:
   projects:
     output: true
     permalink: /:collection/:title/
+  experience:
+    output: false
 
 announcements:
   enabled: true

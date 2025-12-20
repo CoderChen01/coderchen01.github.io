@@ -172,6 +172,14 @@ body {
   /* 稍微调大一点点，增加可读性 */
 }
 
+/* 允许 strong 和 b 标签显示加粗效果 */
+strong,
+b {
+  font-weight: 700 !important;
+  color: var(--global-text-color);
+  /* 确保颜色也是正色 */
+}
+
 /* 确保段落、列表也继承这个字体 */
 p,
 li,
