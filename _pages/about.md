@@ -4,9 +4,13 @@ title: About Me
 permalink: /
 subtitle: >
   My Chinese name is <span class="cyber-name">陈俊杰</span> <span style="font-family: monospace; color: var(--global-text-color-light); font-size: 0.8em;">// 陳俊傑 [Sounds like: Ch-urn June-Jee-eh]</span>.
-  <span class="audio-btn" onclick="speakName()" title="Pronunciation: Chén Jùnjié">
+  <span class="audio-btn" onclick="speakName('陈俊杰', 'zh-CN')" title="Pronunciation: Chén Jùnjié">
     <i class="fa-solid fa-volume-high"></i>
-  </span>
+  </span> <br/>
+  You can call me <strong>Jorji</strong>.
+  <span class="audio-btn" onclick="speakName('Jorji', 'en-US')" title="Pronunciation: Jorji">
+    <i class="fa-solid fa-volume-high"></i>
+  </span> <br/>
 profile:
   align: right
   image: prof_pic.jpg
@@ -76,11 +80,11 @@ I am always happy to learn from and collaborate with researchers interested in:
 If our interests overlap, I would be glad to connect and exchange ideas.
 
 <script>
-function speakName() {
+function speakName(name, lang) {
   // 创建语音实例
-  const utterance = new SpeechSynthesisUtterance("陈俊杰");
+  const utterance = new SpeechSynthesisUtterance(name);
   // 强制使用中文语音包
-  utterance.lang = 'zh-CN'; 
+  utterance.lang = lang; 
   // 语速稍微慢一点，让人听清
   utterance.rate = 0.8; 
   // 播放

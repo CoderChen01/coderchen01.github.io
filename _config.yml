@@ -3,15 +3,38 @@
 # -----------------------------------------------------------------------------
 
 title: blank # the website title (if blank, full name will be used instead)
-first_name: Junjie
+first_name: Junjie (Jorji)
 # middle_name:
 last_name: Chen
 email: jorji.chen@gmail.com
 description: > # the ">" symbol means to ignore newlines until "footer_text:"
-  Junjie (Jorji) Chen's Personal Homepage
+  Junjie (Jorji) Chen's Personal Homepage.
+  Junjie (Jorji) is a Research Intern at IAI Hefei and a PhD student at HFUT. 
+  Focusing on Efficient AI and Multimodal Learning. Exploring psychologically 
+  grounded models for affective computing.
 footer_text: >
   Powered by <a href="https://jekyllrb.com/" target="_blank">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio">al-folio</a> theme.
-keywords: 陈俊杰, Junjie, Jorji, Junjie Chen, Jorji Chen, Junjie (Jorji) Chen, EPIC Lab, Shanghai, IAI, Megvii, TeleAI, Hefei, Anhui, AI Researcher, Researcher, Multimodal, Efficient AI # add your own keywords or leave empty
+keywords: >
+  Junjie Chen, Jorji Chen, 陈俊杰, 陳俊傑, Junjie (Jorji) Chen, Jorji Junjie Chen, 
+  Junjie, Jorji, Junji, JJ Chen, JorjiC, Chen Junjie, Chen Jun Jie, 
+  Junjie Chen AI, Jorji Chen AI, Researcher Jorji, 
+  Institute of Artificial Intelligence, IAI, IAI Hefei, USTC IAI, 
+  Anhui Polytechnic University, AHPU, AHPU AI, EPIC Lab, 
+  Hefei University of Technology, HFUT, HFUT AI,
+  Linfeng Zhang, Zhang Linfeng, 张林峰, 張林峰,
+  Meng Wang, Wang Meng, 汪萌,
+  Fei Wang, Wang Fei, 王飞,
+  Kun Li, Li Kun, 李坤,
+  Xun Yang, Yang Xun, 杨勋,
+  Megvii, Megvii Research,旷视, TeleAI, 中国电信人工智能研究院, 
+  Hefei Comprehensive National Science Center, 合肥综合性国家科学中心, 
+  Artificial Intelligence, Machine Learning, Deep Learning, 
+  Efficient AI, Model Compression, Multimodal AI, Affective Computing, 
+  Psychology-informed AI, Human-Computer Interaction, HCI, 
+  Conversational AI, Full-duplex AI, Emotion Recognition, 
+  Hefei, Anhui, Lu'an, Wuhu, Shanghai, 
+  Junjie Chen GitHub, Jorji Chen Scholar, Jorji Chen PhD, 
+  人工智能陈俊杰, 情感计算陈俊杰, 深度学习陈俊杰, 模型压缩陈俊杰
 lang: en # the language of your site (for example: en, fr, cn, ru, etc.)
 icon: 🤗 # the emoji used as the favicon (alternatively, provide image name in /assets/img/)
 
