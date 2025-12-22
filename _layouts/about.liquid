@@ -42,43 +42,68 @@ layout: default
 
      <!-- News -->
     {% if page.news and site.announcements.enabled %}
-      <h2>
-        <a href="{{ '/news/' | relative_url }}" style="color: inherit">news</a>
-      </h2>
+      <div class="d-flex justify-content-between align-items-end" style="margin-top: 2rem; margin-bottom: 0.5rem; border-bottom: 1px solid var(--global-divider-color); padding-bottom: 5px;">
+        <h2 style="margin: 0;">
+          <a href="{{ '/news/' | relative_url }}" style="color: inherit">news</a>
+        </h2>
+        <a href="{{ '/news/' | relative_url }}" class="nav-hint d-none d-sm-flex" style="text-decoration: none; padding-bottom: 2px;">
+          <span class="text-upper">view all</span>
+        </a>
+      </div>
       {% include news.liquid limit=true %}
     {% endif %}
 
     <!-- Latest posts -->
     {% if site.latest_posts.enabled %}
-      <h2>
-        <a href="{{ '/blog/' | relative_url }}" style="color: inherit">latest posts</a>
-      </h2>
+      <div class="d-flex justify-content-between align-items-end" style="margin-top: 2.5rem; margin-bottom: 0.5rem; border-bottom: 1px solid var(--global-divider-color); padding-bottom: 5px;">
+        <h2 style="margin: 0;">
+          <a href="{{ '/blog/' | relative_url }}" style="color: inherit">latest posts</a>
+        </h2>
+        <a href="{{ '/blog/' | relative_url }}" class="nav-hint d-none d-sm-flex" style="text-decoration: none; padding-bottom: 2px;">
+          <span class="text-upper">all posts</span>
+        </a>
+      </div>
       {% include latest_posts.liquid %}
     {% endif %}
 
     <!-- Selected papers -->
     {% if page.selected_papers %}
-      <h2>
-        <a href="{{ '/publications/' | relative_url }}" style="color: inherit">selected publications</a>
-      </h2>
+      <div class="d-flex justify-content-between align-items-end" style="margin-top: 2.5rem; margin-bottom: 0.5rem; border-bottom: 1px solid var(--global-divider-color); padding-bottom: 5px;">
+        <h2 style="margin: 0;">
+          <a href="{{ '/publications/' | relative_url }}" style="color: inherit">selected publications</a>
+        </h2>
+        <a href="{{ '/publications/' | relative_url }}" class="nav-hint d-none d-sm-flex" style="text-decoration: none; padding-bottom: 2px;">
+          <span class="text-upper">full list</span>
+        </a>
+      </div>
       {% include selected_papers.liquid %}
     {% endif %}
 
     <!-- Experience -->
     {% if site.experience %}
-      <div class="d-flex justify-content-between align-items-center" style="margin-top: 2rem;">
-        <h2 style="margin-bottom: 0;">
+      <div class="d-flex justify-content-between align-items-end" style="margin-top: 2.5rem; margin-bottom: 0.5rem; border-bottom: 1px solid var(--global-divider-color); padding-bottom: 5px;">
+        <h2 style="margin: 0; ">
           <a href="javascript:void(0)" style="color: inherit">experience</a>
         </h2>
-        {% if site.experience.size > 3 %}
-          <small class="text-muted scroll-hint" style="font-family: monospace;">
-            scroll for more <i class="fa-solid fa-arrow-right-long"></i>
-          </small>
-        {% endif %}
+        
+        <div class="experience-nav d-flex align-items-center">
+          {% if site.experience.size > 3 %}
+          <div class="nav-hint d-none d-sm-flex">
+            <span class="text-upper">drag or scroll</span>
+            <div class="scanline"></div>
+          </div>
+          {% endif %}
+
+          <div class="nav-buttons">
+            <button class="nav-btn prev" onclick="scrollExp(-1)"><i class="fa-solid fa-chevron-left"></i></button>
+            <div class="nav-divider"></div>
+            <button class="nav-btn next" onclick="scrollExp(1)"><i class="fa-solid fa-chevron-right"></i></button>
+          </div>
+        </div>
       </div>
 
       <div class="experience-wrapper">
-        <div class="experience-scroll-container">
+        <div class="experience-scroll-container" id="exp-slider">
           {% assign experiences = site.experience | sort: "order" %}
           {% for exp in experiences %}
           <div class="exp-card">
@@ -109,15 +134,6 @@ layout: default
       </div>
     {% endif %}
 
-    <!-- Social -->
-    {% if page.social %}
-      <div class="social">
-        <div class="contact-icons">{% include social.liquid %}</div>
-
-        <div class="contact-note">{{ site.contact_note }}</div>
-      </div>
-    {% endif %}
-
     {% if site.newsletter.enabled and site.footer_fixed %}
       {% include scripts/newsletter.liquid center=true %}
     {% endif %}
@@ -127,3 +143,282 @@ layout: default
 <!-- <div class="widgetContainer" style="width:200px; margin: 5% auto">
   <script type="text/javascript" id="clstr_globe" src="//clustrmaps.com/globe.js?d=foODkqBoASC6PbFGWF8axcCpmcbrPFao0CtUrWRwM0g"></script>
 </div> -->
+
+<script>
+function scrollExp(direction) {
+  const slider = document.getElementById('exp-slider');
+  if (slider) {
+    const cardWidth = slider.querySelector('.exp-card').offsetWidth + 24; // 宽度+gap
+    slider.scrollBy({ left: direction * cardWidth, behavior: 'smooth' });
+  }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  const slider = document.getElementById('exp-slider');
+  if (!slider) return;
+
+  let isDown = false;
+  let startX;
+  let scrollLeft;
+
+  slider.addEventListener('mousedown', (e) => {
+    isDown = true;
+    slider.classList.add('active-drag');
+    startX = e.pageX - slider.offsetLeft;
+    scrollLeft = slider.scrollLeft;
+  });
+
+  slider.addEventListener('mouseleave', () => {
+    isDown = false;
+    slider.classList.remove('active-drag');
+  });
+
+  slider.addEventListener('mouseup', () => {
+    isDown = false;
+    slider.classList.remove('active-drag');
+  });
+
+  slider.addEventListener('mousemove', (e) => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - slider.offsetLeft;
+    const walk = (x - startX) * 2;
+    slider.scrollLeft = scrollLeft - walk;
+  });
+});
+</script>
+
+<style>
+/* =======================================================
+   1. 基础变量与全局装饰 (Global Layout & Lines)
+   ======================================================= */
+/* 统一各模块标题下方的线条颜色 */
+:root {
+  --global-divider-color: rgba(var(--global-theme-color-rgb), 0.15);
+}
+
+/* 复用科技感微缩文字样式 (用于 News, Posts, Papers, Experience 的右侧提示) */
+.nav-hint {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  color: var(--global-theme-color) !important;
+  text-transform: uppercase;
+  opacity: 0.8;
+  display: flex;
+  align-items: center;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.nav-hint:hover {
+  opacity: 1;
+  text-shadow: 0 0 8px var(--global-theme-color);
+}
+
+/* 统一呼吸闪烁动画 */
+.nav-hint span {
+  animation: cyber-blink 2s infinite;
+}
+
+@keyframes cyber-blink {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; text-shadow: 0 0 5px var(--global-theme-color); }
+}
+
+/* =======================================================
+   2. 经历模块容器 (Experience Scroll Container)
+   ======================================================= */
+.experience-wrapper {
+  position: relative;
+  width: 100%;
+  margin: 1rem 0 2rem 0;
+}
+
+.experience-scroll-container {
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: auto;
+  padding: 15px 5px 25px 5px; /* 留出阴影呼吸空间 */
+  scrollbar-width: none; /* Firefox */
+  scroll-snap-type: x mandatory;
+  cursor: grab;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+.experience-scroll-container::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
+
+/* 鼠标按下拖拽时的状态 */
+.experience-scroll-container.active-drag {
+  cursor: grabbing;
+  scroll-snap-type: none;
+  scroll-behavior: auto;
+}
+
+/* =======================================================
+   3. 紧凑型控制面板 (Experience Nav Buttons)
+   ======================================================= */
+.experience-nav {
+  gap: 15px;
+  margin-bottom: 2px;
+}
+
+/* 按钮间的垂直分割线 */
+.nav-divider {
+  width: 1px;
+  height: 12px;
+  background: rgba(var(--global-theme-color-rgb), 0.2);
+  margin: 0 2px;
+}
+
+/* 极简按钮面板 */
+.nav-buttons {
+  display: flex;
+  align-items: center;
+  background: rgba(var(--global-theme-color-rgb), 0.05);
+  border: 1px solid rgba(var(--global-theme-color-rgb), 0.2);
+  border-radius: 4px;
+  padding: 2px;
+}
+
+.nav-btn {
+  background: transparent;
+  border: none;
+  color: var(--global-theme-color);
+  width: 28px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  padding: 0;
+}
+
+.nav-btn:hover {
+  background: rgba(var(--global-theme-color-rgb), 0.2);
+  color: var(--global-theme-color) !important;
+}
+
+/* =======================================================
+   4. 经历卡片细节 (Experience Card)
+   ======================================================= */
+.exp-card {
+  flex: 0 0 320px; /* 锁定宽度 */
+  background: var(--global-bg-color);
+  border: 1px solid var(--global-divider-color);
+  border-radius: 12px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+  scroll-snap-align: start;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  user-select: none;
+}
+
+.exp-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--global-theme-color);
+  box-shadow: 0 8px 20px rgba(var(--global-theme-color-rgb), 0.15);
+}
+
+.exp-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.2rem;
+}
+
+/* Logo 容器：强制白色底色保护黑色 Logo */
+.exp-logo-box {
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  background: #ffffff;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  border: 1px solid var(--global-divider-color);
+  overflow: hidden;
+}
+
+/* 深色模式下 Logo 底色稍微调暗但保持对比度 */
+[data-theme="dark"] .exp-logo-box {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.exp-logo-img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  pointer-events: none; /* 防止拖拽图片 */
+}
+
+.exp-default-logo {
+  color: var(--global-theme-color);
+  font-size: 1.3rem;
+}
+
+/* 日期标签样式 */
+.exp-date-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--global-theme-color);
+  background: rgba(var(--global-theme-color-rgb), 0.08);
+  padding: 3px 10px;
+  border-radius: 15px;
+  border: 1px solid rgba(var(--global-theme-color-rgb), 0.1);
+}
+
+/* 卡片文本 */
+.exp-card-title {
+  font-size: 1.1rem;
+  font-weight: 800 !important;
+  margin-bottom: 4px;
+  text-transform: none;
+}
+
+.exp-card-company {
+  color: var(--global-theme-color);
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.exp-card-desc {
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: var(--global-text-color-light);
+}
+
+.exp-card-desc p {
+  margin: 0;
+}
+
+/* =======================================================
+   5. 响应式适配 (Mobile Optimization)
+   ======================================================= */
+@media (max-width: 768px) {
+  .exp-card {
+    flex: 0 0 280px; /* 手机端卡片稍微窄一点 */
+    padding: 1.2rem;
+  }
+  
+  /* 手机端隐藏辅助文字，保持整洁 */
+  .nav-hint {
+    display: none !important;
+  }
+  
+  /* 适当调整间距 */
+  [style*="margin-top: 2.5rem"] {
+    margin-top: 2rem !important;
+  }
+}
+</style>
