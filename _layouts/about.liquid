@@ -124,6 +124,18 @@ layout: default
             <div class="exp-card-body">
               <h5 class="exp-card-title">{{ exp.title }}</h5>
               <div class="exp-card-company">{{ exp.company }}</div>
+
+              {% if exp.mentors %}
+                <div class="exp-mentors">
+                  <span class="mentor-label">Mentored by:</span>
+                  {% for mentor in exp.mentors %}
+                    <a href="{{ mentor.url }}" target="_blank" class="mentor-link">
+                      {{ mentor.name }}{% unless forloop.last %}, {% endunless %}
+                    </a>
+                  {% endfor %}
+                </div>
+              {% endif %}
+
               <div class="exp-card-desc">
                 {{ exp.content | markdownify }}
               </div>
@@ -419,6 +431,46 @@ document.addEventListener('DOMContentLoaded', function() {
   /* 适当调整间距 */
   [style*="margin-top: 2.5rem"] {
     margin-top: 2rem !important;
+  }
+}
+
+/* Mentor 容器样式 */
+.exp-mentors {
+  font-size: 0.8rem;
+  margin-bottom: 10px;
+  line-height: 1.4;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  align-items: baseline;
+}
+
+/* "Mentored by:" 标签 */
+.mentor-label {
+  color: var(--global-text-color-light);
+  font-weight: 500;
+  margin-right: 4px;
+}
+
+/* Mentor 链接样式 */
+.mentor-link {
+  color: var(--global-theme-color) !important;
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.mentor-link:hover {
+  border-bottom: 1px solid var(--global-theme-color);
+  text-shadow: 0 0 5px rgba(var(--global-theme-color-rgb), 0.5);
+  text-decoration: none !important;
+}
+
+/* 适配移动端 */
+@media (max-width: 576px) {
+  .exp-mentors {
+    font-size: 0.75rem;
   }
 }
 </style>
