@@ -251,7 +251,7 @@ horizontal: false
         </p>
 
         <div class="mission-box">
-            "How can we build psychologically grounded, fine-grained, multimodal, efficient, and full-duplex conversational AI systems that better understand and respond to human emotions?"
+            "How can we build psychologically grounded, fine-grained, multimodal, efficient, evolving, and full-duplex conversational AI systems that better understand and respond to human emotions?"
         </div>
     </section>
 
