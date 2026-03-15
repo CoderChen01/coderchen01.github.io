@@ -35,7 +35,7 @@ I am a Research Intern at the [Institute of Artificial Intelligence](https://iai
 
 I am primarily interested in the following research question:
 
-> **How can we build psychologically grounded, fine-grained, multimodal, efficient, and full-duplex conversational AI systems that better understand and respond to human emotions?**
+> **How can we build psychologically grounded, fine-grained, multimodal, efficient, evolving, and full-duplex conversational AI systems that better understand and respond to human emotions?**
 
 In particular, I am learning and exploring:
 - 🧠 **Psychology-informed modeling** of emotion and cognition in dialogue systems.
