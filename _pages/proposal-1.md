@@ -249,7 +249,6 @@ horizontal: false
         <p class="lead" style="color: var(--tv-text-muted); font-size: 1.1rem; max-width: 800px;" data-i18n="hero_desc">
             Moving beyond surface-level signal processing to build embodied, psychologically grounded intelligence.
         </p>
-
         <div class="mission-box">
             "How can we build psychologically grounded, fine-grained, multimodal, efficient, evolving, and full-duplex conversational AI systems that better understand and respond to human emotions?"
         </div>
