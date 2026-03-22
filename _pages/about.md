@@ -25,7 +25,7 @@ social: false # includes social icons at the bottom of the page
 
 I was born in November 2002 in [Lu’an, Anhui, China](https://en.wikipedia.org/wiki/Lu%27an). I am currently in the final year of my Master’s degree at Anhui Polytechnic University (AHPU), supervised by Prof. Subin Huang.
 
-I am a Research Intern at the [Institute of Artificial Intelligence](https://iai.ustc.edu.cn/iai/), [Hefei](https://en.wikipedia.org/wiki/Hefei) Comprehensive National Science Center, supervised by Prof. [Meng Wang](https://scholar.google.com/citations?user=rHagaaIAAAAJ&hl=en), and I plan to apply for PhD studies in Fall 2026. I am also working with [Linfeng Zhang](https://scholar.google.com/citations?user=AK9VF30AAAAJ&hl=en&authuser=1) and his research group, where I am learning and exploring research problems related to Efficient AI.
+I am a Research Intern at the [Institute of Artificial Intelligence](https://iai.ustc.edu.cn/iai/), [Hefei](https://en.wikipedia.org/wiki/Hefei) Comprehensive National Science Center, supervised by Prof. [Meng Wang](https://scholar.google.com/citations?user=rHagaaIAAAAJ&hl=en) ([汪萌](https://www.hfut.edu.cn/info/1151/10847.htm)), and I plan to apply for PhD studies in Fall 2026. I am also working with Prof. [Linfeng Zhang](https://scholar.google.com/citations?user=AK9VF30AAAAJ&hl=en&authuser=1) and his research group, where I am learning and exploring research problems related to Efficient AI.
 
 💡 I am broadly interested in understanding how AI systems can better model human psychological and emotional states, and how such understanding can be incorporated into practical and efficient interactive systems.
 
