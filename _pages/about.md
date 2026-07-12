@@ -43,40 +43,6 @@ In particular, I am learning and exploring:
 
 For a deeper dive into my long-term roadmap and methodology, please visit my **[Research Vision](./research-vision)**.
 
----
-
-##### 🔬 Research Interests
-
-The following areas reflect my **current interests and learning directions**, which support the above research focus:
-
-- 🧠 **AI4Psychology**  
-  Computational approaches to modeling psychological processes.
-
-- ⚡ **Efficient AI**  
-  Model compression, acceleration, and efficiency-oriented learning.
-
-- 🎭 **Multimodal AI**  
-  Representation learning and fusion across multiple modalities.
-
-- 🖌️ **Generative AI**  
-  Controlled and interpretable generation for dialogue and simulation.
-
-- 🧭 **Spatial Intelligence**  
-  Embodied and environment-aware reasoning related to interaction and behavior.
-
-These directions are not independent goals, but are explored as part of a broader effort to understand and build psychologically informed conversational AI.
-
----
-
-##### 💬 Let’s Collaborate!
-
-I am always happy to learn from and collaborate with researchers interested in:
-- Emotion and affect modeling grounded in psychology
-- Multimodal dialogue systems
-- Efficient and practical conversational AI
-
-If our interests overlap, I would be glad to connect and exchange ideas.
-
 <script>
 function speakName(name, lang) {
   // 创建语音实例
