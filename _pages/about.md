@@ -23,7 +23,7 @@ selected_papers: true # includes a list of papers marked as "selected={true}"
 social: false # includes social icons at the bottom of the page
 ---
 
-I was born in November 2002 in [Lu’an, Anhui, China](https://en.wikipedia.org/wiki/Lu%27an). I am a PhD student at Hefei University of Technology (HFUT), supervised by Prof. [Meng Wang](https://scholar.google.com/citations?user=rHagaaIAAAAJ&hl=en) ([汪萌](https://www.hfut.edu.cn/info/1151/10847.htm)). I am also working with Prof. [Linfeng Zhang](https://scholar.google.com/citations?user=AK9VF30AAAAJ&hl=en&authuser=1) ([张林峰](https://baike.baidu.com/item/%E5%BC%A0%E6%9E%97%E5%B3%B0/65148190)) and his research group, where I am learning and exploring research problems related to Efficient AI.
+I was born in November 2002 in [Lu’an, Anhui, China](https://en.wikipedia.org/wiki/Lu%27an). I am a PhD student at Hefei University of Technology (HFUT), supervised by Prof. [Meng Wang](https://scholar.google.com/citations?user=rHagaaIAAAAJ&hl=en) ([汪萌](https://www.hfut.edu.cn/info/1151/10847.htm)). I am also working with Prof. [Linfeng Zhang](https://scholar.google.com/citations?user=AK9VF30AAAAJ&hl=en&authuser=1) ([张林峰](https://baike.baidu.com/item/%E5%BC%A0%E6%9E%97%E5%B3%B0/65148190)) and his research group, where I am learning and exploring research problems related to Efficient AI and Foundation Models.
 
 💡 I am broadly interested in understanding how AI systems can better model human psychological and emotional states, and how such understanding can be incorporated into practical and efficient interactive systems.
 
