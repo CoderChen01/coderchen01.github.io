@@ -1,0 +1,14 @@
+# this file contains the social media links and usernames of the author
+# the socials will be displayed in the order they are defined here
+# for more information, please refer to the documentation of jekyll-socials plugin: https://github.com/george-gca/jekyll-socials
+github_username: CoderChen01
+scholar_userid: q3NWGzUAAAAJ
+email: jorji.chen@gmail.com
+orcid_id: 0009-0001-5288-048X
+x_username: JorjiChen
+wechat:
+  title: Jorji on WeChat
+  url: /assets/img/wechat_qr.jpg
+  logo: fa-brands fa-weixin
+rss_icon: true # comment this line to hide the RSS icon
+# whatsapp_number: # your WhatsApp number (full phone number in international format. Omit any zeroes, brackets, or dashes when adding the phone number in international format.)

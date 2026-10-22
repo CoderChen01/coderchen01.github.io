@@ -1,0 +1,54 @@
+{% if site.experience and site.experience.size > 0 %}
+  <section class="home-section experience-section" aria-labelledby="experience-title">
+    <header class="section-heading">
+      <h2 id="experience-title">Experience</h2>
+      <div class="experience-controls">
+        <span class="section-hint">drag or scroll</span>
+        <button class="experience-button" type="button" data-experience-direction="-1" aria-label="Previous experience">
+          <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+        </button>
+        <button class="experience-button" type="button" data-experience-direction="1" aria-label="Next experience">
+          <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+        </button>
+      </div>
+    </header>
+
+    <div class="experience-track" data-experience-track tabindex="0" aria-label="Research and industry experience">
+      {% assign experiences = site.experience | sort: 'order' %}
+      {% for experience in experiences %}
+        <article class="experience-card">
+          <header class="experience-card-header">
+            <div class="experience-logo">
+              {% if experience.logo %}
+                {% assign logo_path = experience.logo | prepend: '/assets/img/' %}
+                <img src="{{ logo_path | relative_url }}" alt="{{ experience.company }} logo" loading="lazy">
+              {% else %}
+                <i class="fa-solid fa-building-columns" aria-hidden="true"></i>
+              {% endif %}
+            </div>
+            <span class="experience-date">{{ experience.date_start }} - {{ experience.date_end }}</span>
+          </header>
+
+          <h3>{{ experience.title }}</h3>
+          <p class="experience-company">{{ experience.company }}</p>
+
+          {% if experience.mentors %}
+            <p class="experience-mentors">
+              <span>Mentored by:</span>
+              {% for mentor in experience.mentors %}
+                {% if mentor.url %}
+                  <a href="{{ mentor.url }}" target="_blank" rel="noopener">{{ mentor.name }}</a>
+                {% else %}
+                  {{ mentor.name }}
+                {% endif %}
+                {% unless forloop.last %}, {% endunless %}
+              {% endfor %}
+            </p>
+          {% endif %}
+
+          <div class="experience-description">{{ experience.content | markdownify }}</div>
+        </article>
+      {% endfor %}
+    </div>
+  </section>
+{% endif %}

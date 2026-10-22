@@ -5,4 +5,4 @@ inline: true
 related_posts: false
 ---
 
-🎉 Our paper *"Seeing Sarcasm Through Different Eyes: Analyzing Multimodal Sarcasm Perception in Large Vision-Language Models"* has been accepted for publication in *IEEE Transactions on Computational Social Systems*!
+🎉 Our paper _"Seeing Sarcasm Through Different Eyes: Analyzing Multimodal Sarcasm Perception in Large Vision-Language Models"_ has been accepted for publication in _IEEE Transactions on Computational Social Systems_!

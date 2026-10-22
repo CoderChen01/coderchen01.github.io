@@ -1,7 +1,26 @@
 <!doctype html>
-<html lang="{{ site.lang }}">
-  <!-- Head -->
+{%- comment -%}
+  Site override of al_folio_core's default layout. It keeps the upstream layout
+  intact while setting a two-state, dark-first theme and loading site effects.
+{%- endcomment -%}
+{%- capture html_attributes -%}
+  {%- if site.plugins contains 'al_rtl' -%}
+    {%- include plugins/al_rtl_html_attrs.liquid -%}
+  {%- else -%}
+    lang="{{ site.lang }}"
+  {%- endif -%}
+{%- endcapture -%}
+<html {{ html_attributes }}>
   <head>
+    <script>
+      (() => {
+        const savedTheme = localStorage.getItem('theme');
+        const theme = savedTheme === 'light' || savedTheme === 'dark' ? savedTheme : 'dark';
+        localStorage.setItem('theme', theme);
+        document.documentElement.setAttribute('data-theme-setting', theme);
+        document.documentElement.setAttribute('data-theme', theme);
+      })();
+    </script>
     {% if page.redirect %}
       {% if page.redirect == true %}
         {% assign redirect = site.baseurl | append: '/' %}
@@ -13,32 +32,58 @@
       <meta http-equiv="refresh" content="3; url={{ redirect }}">
     {% endif %}
     {% include head.liquid %}
+    {% if site.enable_darkmode %}
+      <script>
+        toggleThemeSetting = () => {
+          const currentTheme = determineComputedTheme();
+          setThemeSetting(currentTheme === 'dark' ? 'light' : 'dark');
+          updateSiteThemeToggleLabel();
+        };
+
+        const updateSiteThemeToggleLabel = () => {
+          const button = document.getElementById('light-toggle');
+          if (!button) return;
+          const targetTheme = determineComputedTheme() === 'dark' ? 'light' : 'dark';
+          button.title = `Switch to ${targetTheme} theme`;
+          button.setAttribute('aria-label', `Switch to ${targetTheme} theme`);
+        };
+
+        document.addEventListener('DOMContentLoaded', updateSiteThemeToggleLabel, { once: true });
+      </script>
+    {% endif %}
   </head>
 
-  <!-- Body -->
   <body class="{% if site.navbar_fixed %}fixed-top-nav{% endif %} {% unless site.footer_fixed %}sticky-bottom-footer{% endunless %}">
-    <!-- Header -->
     {% include header.liquid %}
 
-    <!-- Content -->
     <div class="container mt-5" role="main">
       {% if page.toc and page.toc.sidebar %}
+        {% assign toc_collapse = page.toc.collapse | default: 'expanded' %}
+        {% assign toc_collapse_depth = page.toc.collapse_depth | default: '' %}
         {% if page.toc.sidebar == 'right' %}
           <div class="row">
-            <!-- main content area -->
             <div class="col-sm-9">{{ content }}</div>
-            <!-- sidebar, which will move to the top on a small screen -->
             <div class="col-sm-3">
-              <nav id="toc-sidebar" class="sticky-top"></nav>
+              <nav
+                id="toc-sidebar"
+                class="sticky-top toc toc-sidebar"
+                aria-label="Table of contents"
+                data-toc-collapse="{{ toc_collapse }}"
+                data-toc-collapse-depth="{{ toc_collapse_depth }}"
+              ></nav>
             </div>
           </div>
         {% else %}
           <div class="row">
-            <!-- sidebar, which will move to the top on a small screen -->
             <div class="col-sm-3">
-              <nav id="toc-sidebar" class="sticky-top"></nav>
+              <nav
+                id="toc-sidebar"
+                class="sticky-top toc toc-sidebar"
+                aria-label="Table of contents"
+                data-toc-collapse="{{ toc_collapse }}"
+                data-toc-collapse-depth="{{ toc_collapse_depth }}"
+              ></nav>
             </div>
-            <!-- main content area -->
             <div class="col-sm-9">{{ content }}</div>
           </div>
         {% endif %}
@@ -47,32 +92,8 @@
       {% endif %}
     </div>
 
-    <!-- Footer -->
     {% include footer.liquid %}
-
-    <!-- JavaScripts -->
-    {% include scripts/jquery.liquid %}
-    {% include scripts/bootstrap.liquid %}
-    {% include scripts/masonry.liquid %}
-    {% include scripts/mermaid.liquid %}
-    {% include scripts/diff2html.liquid %}
-    {% include scripts/leaflet.liquid %}
-    {% include scripts/chartjs.liquid %}
-    {% include scripts/echarts.liquid %}
-    {% include scripts/vega.liquid %}
-    {% include scripts/tikzjax.liquid %}
-    {% include scripts/typograms.liquid %}
-    {% include scripts/misc.liquid %}
-    {% include scripts/badges.liquid %}
-    {% include scripts/mathjax.liquid %}
-    {% include scripts/pseudocode.liquid %}
-    {% include scripts/analytics.liquid %}
-    {% include scripts/progressBar.liquid %}
-    {% include scripts/wechatModal.liquid %}
-    {% include scripts/imageLayouts.liquid %}
-    {% include scripts/jekyll_tabs.liquid %}
-    {% include scripts/back_to_top.liquid %}
-    {% include scripts/search.liquid %}
-    {% include scripts/click_research_questions.liquid %}
+    {% include scripts.liquid %}
+    <script defer src="{{ '/assets/js/site-custom.js' | relative_url | bust_file_cache }}"></script>
   </body>
 </html>

@@ -26,7 +26,23 @@
         {% endif %}
       {% endif %}
       {% if entry.preview %}
-        {% if entry.preview contains '://' %}
+        {%- comment -%}
+          A preview may be a video file rather than an image. Rendering one through the
+          image path below produces a broken <img>, so hand it to video.liquid instead.
+          Keep this list in sync with the native-video branch of _includes/video.liquid:
+          an extension it does not recognize falls through to its <iframe> branch.
+          See alshedivat/al-folio#3564.
+        {%- endcomment -%}
+        {% assign preview_video_extensions = 'mp4,webm,ogg,mov' | split: ',' %}
+        {% assign preview_extension = entry.preview | split: '.' | last | split: '?' | first | downcase %}
+        {% if preview_video_extensions contains preview_extension %}
+          {% if entry.preview contains '://' %}
+            {% assign preview_video_path = entry.preview %}
+          {% else %}
+            {% assign preview_video_path = entry.preview | prepend: '/assets/img/publication_preview/' %}
+          {% endif %}
+          {% include video.liquid path=preview_video_path class="preview z-depth-1 rounded" controls=true %}
+        {% elsif entry.preview contains '://' %}
           <img class="preview z-depth-1 rounded" src="{{ entry.preview }}">
         {% else %}
           {% assign entry_path = entry.preview | prepend: '/assets/img/publication_preview/' %}
@@ -37,6 +53,7 @@
             sizes = "200px"
             class="preview z-depth-1 rounded"
             zoomable=true
+            avoid_scaling=true
             alt=entry.preview
           %}
         {% endif %}
@@ -51,95 +68,61 @@
     <!-- Author -->
     <div class="author">
       {% assign author_array_size = entry.author_array | size %}
+      {% assign author_head_limit = site.author_head_limit | default: 2 %}
+      {% assign author_tail_limit = site.author_tail_limit | default: 3 %}
+      {% assign visible_author_limit = author_head_limit | plus: author_tail_limit %}
 
-      {% assign author_array_limit = author_array_size %}
-      {% if site.max_author_limit and author_array_size > site.max_author_limit %}
-        {% assign author_array_limit = site.max_author_limit %}
-      {% endif %}
-
-      {%- for author in entry.author_array limit: author_array_limit -%}
-        {% assign author_is_self = false %}
-        {%- assign author_last_name = author.last | regex_replace: '[*∗†‡§¶‖&^]', '' -%}
-        {%- assign author_last_html = author.last | regex_replace: '([*∗†‡§¶‖&^]+)', '<sup>\1</sup>' -%}
-        {% if site.scholar.last_name contains author_last_name %}
-          {% if site.scholar.first_name contains author.first %}
-            {% assign author_is_self = true %}
-          {% endif %}
-        {%- endif -%}
-        {% assign coauthor_url = null %}
-        {%- assign clean_last_name = author_last_name | downcase | remove_accents -%}
-        {% if site.data.coauthors[clean_last_name] %}
-          {%- for coauthor in site.data.coauthors[clean_last_name] -%}
-            {% if coauthor.firstname contains author.first %}
-              {%- assign coauthor_url = coauthor.url -%}
-              {% break %}
-            {% endif %}
-          {% endfor %}
-        {%- endif -%}
-
-        {%- if forloop.length > 1 -%}
-          {% if forloop.first == false %},&nbsp;{% endif %}
-          {%- if forloop.last and author_array_limit == author_array_size %}and&nbsp;{% endif -%}
+      {% if author_array_size > visible_author_limit %}
+        {% assign middle_author_count = author_array_size | minus: visible_author_limit %}
+        {% assign tail_author_offset = author_array_size | minus: author_tail_limit %}
+        {% assign middle_author_id = 'author-middle-' | append: entry.key %}
+        {% assign middle_author_noun = 'authors' %}
+        {% if middle_author_count == 1 %}
+          {% assign middle_author_noun = 'author' %}
         {% endif %}
-        {%- if author_is_self -%}
-          <em>
-            {{- author.first }}
-            {{ author_last_html -}}
-          </em>
-        {%- else -%}
-          {%- if coauthor_url -%}
-            <a href="{{ coauthor_url }}">
-              {{- author.first }}
-              {{ author_last_html -}}
-            </a>
-          {%- else -%}
-            {{- author.first }}
-            {{ author_last_html -}}
-          {% endif %}
-        {%- endif -%}
-      {% endfor %}
-      {%- assign more_authors = author_array_size | minus: author_array_limit -%}
 
-      {%- assign more_authors_hide = more_authors | append: ' more author' -%}
-      {% if more_authors > 0 %}
-        {%- if more_authors > 1 -%}
-          {% assign more_authors_hide = more_authors_hide | append: 's' %}
-        {%- endif -%}
-        {% assign more_authors_show = '' %}
-        {%- for author in entry.author_array offset: author_array_limit -%}
-          {% assign more_authors_show = more_authors_show | append: author.first | append: ' ' | append: author.last %}
-          {% unless forloop.last %}
-            {% assign more_authors_show = more_authors_show | append: ', ' %}
-          {% endunless %}
-        {%- endfor -%}
-        {%- assign more_authors_show = more_authors_show | regex_replace: '([*∗†‡§¶‖&^]+)', '<sup>\1</sup>' -%}
-        , and
-        <span
-          class="more-authors"
-          title="click to view {{ more_authors_hide }}"
-          onclick="
-              var element = $(this);
-              element.attr('title', '');
-              var more_authors_text = element.text() == '{{ more_authors_hide }}' ? '{{ more_authors_show }}' : '{{ more_authors_hide }}';
-              var cursorPosition = 0;
-              var textAdder = setInterval(function(){
-                element.html(more_authors_text.substring(0, cursorPosition + 1));
-                if (++cursorPosition == more_authors_text.length){
-                  clearInterval(textAdder);
-                }
-            }, '{{ site.more_authors_animation_delay }}');
-          "
+        {% for author in entry.author_array limit: author_head_limit %}
+          {% unless forloop.first %}, {% endunless %}
+          {% include publication_author.liquid author=author %}
+        {% endfor %}
+        ,
+        <button
+          class="author-toggle"
+          type="button"
+          data-author-toggle
+          data-collapsed-label="… {{ middle_author_count }} {{ middle_author_noun }} …"
+          data-expanded-label="hide {{ middle_author_count }} {{ middle_author_noun }}"
+          aria-controls="{{ middle_author_id }}"
+          aria-expanded="false"
         >
-          {{- more_authors_hide -}}
+          … {{ middle_author_count }}
+          {{ middle_author_noun }} …
+        </button>
+        <span class="author-middle" id="{{ middle_author_id }}" hidden>
+          {% for author in entry.author_array offset: author_head_limit limit: middle_author_count %}
+            , {% include publication_author.liquid author=author %}
+          {% endfor %}
         </span>
+        ,
+        {% for author in entry.author_array offset: tail_author_offset %}
+          {% unless forloop.first -%}
+            {%- if forloop.last %}, and {% else %}, {% endif -%}
+          {%- endunless %}
+          {% include publication_author.liquid author=author %}
+        {% endfor %}
+      {% else %}
+        {% for author in entry.author_array %}
+          {% unless forloop.first -%}
+            {%- if forloop.last %} and {% else %}, {% endif -%}
+          {%- endunless %}
+          {% include publication_author.liquid author=author %}
+        {% endfor %}
       {% endif %}
       {% if entry.annotation %}
         <i
-          class="fa-solid fa-circle-info ml-1"
-          data-toggle="popover"
-          data-placement="top"
-          data-html="true"
-          data-content="{{ entry.annotation | escape }}"
+          class="fa-solid fa-circle-info publication-annotation"
+          title="{{ entry.annotation | strip_html | escape }}"
+          aria-label="{{ entry.annotation | strip_html | escape }}"
         >
         </i>
       {% endif %}
@@ -157,9 +140,11 @@
     {% else %}
       {% capture entrytype %}{% endcapture %}
     {% endif %}
+    {% assign entrymonth = '' %}
     {% if entry.month %}
       {% capture entrymonth %}{{ " " }}{{ entry.month | capitalize }}{% endcapture %}
     {% endif %}
+    {% assign entryyear = '' %}
     {% if entry.year %}
       {% capture entryyear %}{{ " " }}{{ entry.year }}{% endcapture %}
     {% endif %}
@@ -192,8 +177,14 @@
       {% if entry.abstract %}
         <a class="abstract btn btn-sm z-depth-0" role="button">Abs</a>
       {% endif %}
+      {% if entry.doi %}
+        <a href="https://doi.org/{{ entry.doi }}" class="btn btn-sm z-depth-0" role="button">DOI</a>
+      {% endif %}
       {% if entry.arxiv %}
-        <a href="http://arxiv.org/abs/{{ entry.arxiv }}" class="btn btn-sm z-depth-0" role="button">arXiv</a>
+        <a href="https://arxiv.org/abs/{{ entry.arxiv }}" class="btn btn-sm z-depth-0" role="button">arXiv</a>
+      {% endif %}
+      {% if entry.hal %}
+        <a href="https://hal.science/{{ entry.hal }}" class="btn btn-sm z-depth-0" role="button">HAL</a>
       {% endif %}
       {% if entry.bibtex_show %}
         <a class="bibtex btn btn-sm z-depth-0" role="button">Bib</a>
@@ -263,7 +254,12 @@
       {% if entry.google_scholar_id %}
         {% assign entry_has_google_scholar_badge = true %}
       {% endif %}
-      {% if entry_has_altmetric_badge or entry_has_dimensions_badge or entry_has_google_scholar_badge %}
+
+      {% assign entry_has_inspirehep_badge = false %}
+      {% if entry.inspirehep_id %}
+        {% assign entry_has_inspirehep_badge = true %}
+      {% endif %}
+      {% if entry_has_altmetric_badge or entry_has_dimensions_badge or entry_has_google_scholar_badge or entry_has_inspirehep_badge %}
         <div class="badges">
           {% if site.enable_publication_badges.altmetric and entry_has_altmetric_badge %}
             <span
@@ -302,13 +298,43 @@
           {% endif %}
           {% if site.enable_publication_badges.google_scholar and entry_has_google_scholar_badge %}
             <a
-              href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user={{ site.scholar_userid }}&citation_for_view={{ site.scholar_userid }}:{{ entry.google_scholar_id }}"
+              href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user={{ site.data.socials.scholar_userid }}&citation_for_view={{ site.data.socials.scholar_userid }}:{{ entry.google_scholar_id }}"
               aria-label="Google Scholar link"
               role="button"
             >
+              {% assign citation_count = 0 %}
+              {% assign scholar_id_key = site.scholar_userid | append: ':' | append: entry.google_scholar_id %}
+              {% assign publication_key = entry.google_scholar_id %}
+
+              {% if site.data.citations.papers[scholar_id_key] %}
+                {% assign citation_count = site.data.citations.papers[scholar_id_key].citations %}
+              {% elsif site.data.citations.papers[publication_key] %}
+                {% assign citation_count = site.data.citations.papers[publication_key].citations %}
+              {% else %}
+                {% for paper in site.data.citations.papers %}
+                  {% assign paper_key = paper[0] %}
+                  {% if paper_key contains entry.google_scholar_id %}
+                    {% assign citation_count = paper[1].citations %}
+                    {% break %}
+                  {% endif %}
+                {% endfor %}
+              {% endif %}
+
               <img
-                src="https://img.shields.io/badge/scholar-{% google_scholar_citations site.scholar_userid entry.google_scholar_id %}-4285F4?logo=googlescholar&labelColor=beige"
-                alt="{% google_scholar_citations site.scholar_userid entry.google_scholar_id %} Google Scholar citations"
+                src="https://img.shields.io/badge/scholar-{{ citation_count }}-4285F4?logo=googlescholar&labelColor=beige"
+                alt="{{ citation_count }} Google Scholar citations"
+              >
+            </a>
+          {% endif %}
+          {% if site.enable_publication_badges.inspirehep and entry_has_inspirehep_badge %}
+            <a
+              href="https://inspirehep.net/literature/{{ entry.inspirehep_id }}"
+              aria-label="Inspirehep link"
+              role="button"
+            >
+              <img
+                src="https://img.shields.io/badge/inspire-{% inspirehep_citations entry.inspirehep_id %}-001628?logo=inspire&logoColor=001628&labelColor=beige"
+                alt="{% inspirehep_citations entry.inspirehep_id %} InspireHEP citations"
               >
             </a>
           {% endif %}
@@ -335,7 +361,7 @@
       <div class="bibtex hidden">
         {% highlight bibtex %}
         {{- entry.bibtex | hideCustomBibtex -}}
-        {% endhighlight %}
+      {% endhighlight %}
       </div>
     {% endif %}
 

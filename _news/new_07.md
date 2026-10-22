@@ -5,4 +5,4 @@ inline: true
 related_posts: false
 ---
 
-🥰 Our paper *"InterCLIP-MEP: Interactive CLIP and Memory-Enhanced Predictor for Multi-modal Sarcasm Detection"* has been accepted for publication in *ACM Transactions on Multimedia Computing, Communications and Applications*!
+🥰 Our paper _"InterCLIP-MEP: Interactive CLIP and Memory-Enhanced Predictor for Multi-modal Sarcasm Detection"_ has been accepted for publication in _ACM Transactions on Multimedia Computing, Communications and Applications_!

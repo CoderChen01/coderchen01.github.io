@@ -1,11 +1,10 @@
 ---
-layout: cv
+layout: page
 permalink: /cv/
-title: cv
+title: CV
 nav: false
 nav_order: 5
-cv_pdf: example_pdf.pdf
-description: This is a description of the page. You can modify it in '_pages/cv.md'. You can also change or remove the top pdf download button.
-toc:
-  sidebar: left
+description: Academic profile for Junjie (Jorji) Chen.
 ---
+
+For current publications and research activity, please visit my [publications]({{ '/publications/' | relative_url }}) page or [Google Scholar](https://scholar.google.com/citations?user=q3NWGzUAAAAJ&hl=en). A full CV is available on request.
