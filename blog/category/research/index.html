@@ -1,0 +1,219 @@
+<!DOCTYPE html> <html lang="en"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <script>
+      (() => {
+        const savedTheme = localStorage.getItem('theme');
+        const theme = savedTheme === 'light' || savedTheme === 'dark' ? savedTheme : 'dark';
+        localStorage.setItem('theme', theme);
+        document.documentElement.setAttribute('data-theme-setting', theme);
+        document.documentElement.setAttribute('data-theme', theme);
+      })();
+    </script> <meta name="google-site-verification" content="01APa1dNbiUMPaA5Uo5QUFkBlgFcz8CoezHxoI5gDlU"> <meta http-equiv="Permissions-Policy" content="interest-cohort=()"> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title> research | Junjie (Jorji) Chen </title> <meta name="author" content="Junjie (Jorji) Chen"> <meta name="description" content="Junjie (Jorji) Chen's personal homepage. I am a PhD student at Hefei University of Technology working on efficient, multimodal, and psychologically grounded AI. "> <meta name="keywords" content="Junjie Chen, Jorji Chen, 陈俊杰, Hefei University of Technology, HFUT, efficient AI, multimodal AI, affective computing, conversational AI, full-duplex AI, emotion recognition, 3D talking heads "> <meta property="og:site_name" content="Junjie (Jorji) Chen"> <meta property="og:type" content="website"> <meta property="og:title" content="Junjie (Jorji) Chen | research"> <meta property="og:url" content="https://www.junjie-chen.info/blog/category/research/"> <meta property="og:description" content="Junjie (Jorji) Chen's personal homepage. I am a PhD student at Hefei University of Technology working on efficient, multimodal, and psychologically grounded AI. "> <meta property="og:image" content="https://www.junjie-chen.info/assets/img/og_image.png"> <meta property="og:locale" content="en"> <meta name="twitter:card" content="summary"> <meta name="twitter:title" content="research"> <meta name="twitter:description" content="Junjie (Jorji) Chen's personal homepage. I am a PhD student at Hefei University of Technology working on efficient, multimodal, and psychologically grounded AI. "> <meta name="twitter:image" content="https://www.junjie-chen.info/assets/img/og_image.png"> <script type="application/ld+json">
+    {
+        "author":
+        {
+            "@type": "Person",
+            "name": "Junjie (Jorji) Chen"
+        },
+        "url": "https://www.junjie-chen.info/blog/category/research/",
+        "@type": "WebSite",
+        "description": "Junjie (Jorji) Chen's personal homepage. I am a PhD student at Hefei University of Technology working on efficient, multimodal, and psychologically grounded AI.
+",
+        "headline": "research",
+        
+        "sameAs": ["https://github.com/CoderChen01","https://scholar.google.com/citations?user=q3NWGzUAAAAJ","https://orcid.org/0009-0001-5288-048X","https://twitter.com/JorjiChen","/assets/img/wechat_qr.jpg"],
+        
+        "name": "Junjie (Jorji) Chen",
+        "@context": "https://schema.org"
+    }
+  </script> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' data: https:; media-src 'self' https:; frame-src 'self' https:; connect-src 'self' https:;"> <style>
+  :root {
+    --max-content-width: 930px;
+  }
+</style> <link rel="stylesheet" href="/assets/css/tailwind.css?v=50c64c15cbb9fd1ce6056fdb8bcb4b62"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css" integrity="sha256-MVopmdyC2tYTiJ8wlktf0uh0v4NgT+vNdyVFepi7Q0c=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.5/css/academicons.min.css" integrity="sha256-SzrCOBJbGVFMahewkgjwnApaV2+av1DwMAA+/QGLyZw=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/scholar-icons@1.0.3/css/scholar-icons.css" integrity="sha256-VY3hHVj/hNX3fYG6wtbA6TcKJQl7+FthzGSyIB64klY=" crossorigin="anonymous"> <link defer rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&amp;family=Noto+Sans+SC:wght@400;500;600;700&amp;family=Space+Grotesk:wght@400;500;600;700&amp;display=swap"> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-github.css?v=591dab5a4e56573bf4ef7fd332894c99" media="" id="highlight_theme_light"> <link rel="shortcut icon" href="data:image/svg+xml,&lt;svg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20100%20100%22&gt;&lt;text%20y=%22.9em%22%20font-size=%2290%22&gt;%F0%9F%A4%97&lt;/text&gt;&lt;/svg&gt;"> <link rel="stylesheet" href="/assets/css/main.css?v=3116ba77db9ee1581d05bb3e86fbf7f1"> <link rel="canonical" href="https://www.junjie-chen.info/blog/category/research/"> <script src="/assets/js/theme.js?v=5286c3e4c334d0ecb8fc0c40ff4fa7ec"></script> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-native.css?v=5847e5ed4a4568527aa6cfab446049ca" media="none" id="highlight_theme_dark"> <script>
+    initTheme();
+  </script> <script>
+        toggleThemeSetting = () => {
+          const currentTheme = determineComputedTheme();
+          setThemeSetting(currentTheme === 'dark' ? 'light' : 'dark');
+          updateSiteThemeToggleLabel();
+        };
+
+        const updateSiteThemeToggleLabel = () => {
+          const button = document.getElementById('light-toggle');
+          if (!button) return;
+          const targetTheme = determineComputedTheme() === 'dark' ? 'light' : 'dark';
+          button.title = `Switch to ${targetTheme} theme`;
+          button.setAttribute('aria-label', `Switch to ${targetTheme} theme`);
+        };
+
+        document.addEventListener('DOMContentLoaded', updateSiteThemeToggleLabel, { once: true });
+      </script> </head> <body class="fixed-top-nav "> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation"> <div class="container"> <a class="navbar-brand title font-weight-lighter" href="/"> <span class="font-weight-bold">Junjie (Jorji)</span> Chen </a> <button class="navbar-toggler collapsed navbar-toggler-main" type="button" data-nav-toggle="navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse navbar-collapse-main" id="navbarNav"> <ul class="navbar-nav navbar-menu-list flex-nowrap"> <li class="nav-item "> <a class="nav-link" href="/">About Me </a> </li> <li class="nav-item "> <a class="nav-link" href="/publications/">Publications </a> </li> <li class="nav-item active"> <a class="nav-link" href="/blog/">Blogs </a> </li> <li class="nav-item"> <button id="search-toggle" type="button" title="Search" aria-label="Open search"> <span class="nav-link">ctrl k <i class="fa-solid fa-magnifying-glass"></i></span> </button> </li> <li class="toggle-container"> <button id="light-toggle" type="button" title="Change theme" aria-label="Change color theme"> <i class="fa-half-sun-moon" id="light-toggle-system"></i> <i class="fa-solid fa-moon" id="light-toggle-dark"></i> <i class="fa-solid fa-sun" id="light-toggle-light"></i> </button> </li> </ul> </div> </div> </nav> <progress id="progress" value="0"> <div class="progress-container"> <span class="progress-bar"></span> </div> </progress> </header> <div class="container mt-5" role="main"> <div class="post"> <header class="post-header"> <h1 class="post-title"> <i class="fa-solid fa-tag fa-sm"></i> research</h1> <p class="post-description">an archive of posts in this category</p> </header> <article class="archive"> <div class="table-responsive"> <table class="table table-sm table-borderless"> <tr> <th scope="row">Mar 15, 2026</th> <td> <a class="post-link" href="/blog/2026/research-vision/">Research Interests</a> </td> </tr> </table> </div> </article> </div> </div> <footer class="fixed-bottom" role="contentinfo"> <div class="container mt-0"> © Copyright 2026 Junjie (Jorji) Chen. Powered by <a href="https://jekyllrb.com/" target="_blank" rel="external nofollow noopener">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio" rel="external nofollow noopener" target="_blank">al-folio</a> theme. Last updated: October 22, 2026. </div> </footer> <script>
+  window.alFolio = {
+    compatBootstrap: false
+  };
+</script> <script src="/assets/js/nav-toggle.js?v=141bd79a73ebc0f0b6ea58e440ae79fc"></script> <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script> <script defer src="/assets/js/masonry.js?v=e49affc7bd2646f6acdad1dbe02c2359" type="text/javascript"></script> <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script> <script src="/assets/al_math/js/mathjax-setup.js"></script> <script src="/assets/js/tooltips-setup.js?v=fe487e99db6c43751e6e7bdb2d6a0611"></script> <script src="/assets/js/no_defer.js?v=53b1b1a645525975c963ce8bf8bfefcf"></script> <script defer src="/assets/js/common.js?v=87baac90f765f2f3362dcf6aaf312a8a"></script> <script defer src="/assets/js/copy_code.js?v=c8a01c11a92744d44b093fc3bda915df" type="text/javascript"></script> <script defer src="/assets/js/jupyter_new_tab.js?v=896d254890d9b47f0281f63bfccf0dee"></script> <script async src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script> <script async src="https://badge.dimensions.ai/badge.js"></script> <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script> <script defer src="/assets/al_img_tools/js/zoom.js"></script> <script defer src="/assets/js/progress-bar.js?v=499464c5c63ced6cf7ad62509f1e2610" type="text/javascript"></script> <script src="https://cdn.jsdelivr.net/npm/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js" integrity="sha256-uMJJ3EoTyfRBoTbR+lrfu1uRQ87RZG8AR3cVNuQVeFg=" crossorigin="anonymous"></script> <script>
+    addBackToTop();
+  </script> <script type="module" src="/assets/al_search/js/search/ninja-keys.min.js"></script> <ninja-keys hidebreadcrumbs noautoloadmdicons placeholder="Type to start searching"></ninja-keys> <script src="/assets/al_search/js/search-setup.js"></script> <script>
+// get the ninja-keys element
+const ninja = document.querySelector('ninja-keys');
+
+// add the home and posts menu items
+ninja.data = [{
+    id: "nav-about-me",
+    title: "About Me",
+    section: "Navigation",
+    handler: () => {
+      window.location.href = "/";
+    },
+  },{id: "nav-publications",
+          title: "Publications",
+          description: "Publications in reverse chronological order.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/publications/";
+          },
+        },{id: "nav-blogs",
+          title: "Blogs",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/blog/";
+          },
+        },{id: "post-research-interests",
+        
+          title: "Research Interests",
+        
+        description: "Towards cognitive-affective symbiosis through efficient, multimodal, psychologically grounded, and full-duplex AI.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/research-vision/";
+          
+        },
+      },{id: "experience-high-precision-map-hdmap-data-format-and-algorithm-design-development-of-a-visualization-platform-and-development-of-the-mapping-module-for-autonomous-driving-software",
+          title: 'High-precision map (HDMap) data format and algorithm design; development of a visualization platform;...',
+          description: "",
+          section: "Experience",},{id: "experience-remote-intern",
+          title: 'Remote Intern',
+          description: "",
+          section: "Experience",handler: () => {
+              window.location.href = "/experience/2024_04_15-lehigh/";
+            },},{id: "experience-research-assistant",
+          title: 'Research Assistant',
+          description: "",
+          section: "Experience",handler: () => {
+              window.location.href = "/experience/2024_07_22-epic/";
+            },},{id: "experience-research-intern",
+          title: 'Research Intern',
+          description: "",
+          section: "Experience",handler: () => {
+              window.location.href = "/experience/2025_03_28-teleai/";
+            },},{id: "experience-research-intern",
+          title: 'Research Intern',
+          description: "",
+          section: "Experience",handler: () => {
+              window.location.href = "/experience/2025_07_03-iai-ustc/";
+            },},{id: "news-i-led-the-team-ahpu-new-peasants-to-win-the-second-prize-in-the-opendigger-open-source-software-ecosystem-data-analysis-mining-platform-challenge-news-link",
+          title: '🥳 I led the team ahpu_new_peasants to win the second prize in the...',
+          description: "",
+          section: "News",},{id: "news-i-have-fully-committed-myself-to-academic-research-and-have-resigned-from-my-internship-at-megvii-which-i-started-in-my-sophomore-year",
+          title: '🌱 I have fully committed myself to academic research and have resigned from...',
+          description: "",
+          section: "News",},{id: "news-our-paper-de-esd-dual-encoder-based-entity-synonym-discovery-using-pre-trained-contextual-embeddings-has-been-accepted-for-publication-in-expert-systems-with-applications",
+          title: '🥳 Our paper “DE-ESD: Dual Encoder-based Entity Synonym Discovery using Pre-trained Contextual Embeddings”...',
+          description: "",
+          section: "News",},{id: "news-i-joined-teleai-as-a-research-intern-to-study-two-stage-text-to-video-technology",
+          title: '🥳 I joined TeleAI as a research intern to study two-stage text-to-video technology....',
+          description: "",
+          section: "News",},{id: "news-i-joined-the-institute-of-artificial-intelligence-hefei-comprehensive-national-science-center-as-a-research-intern-to-study-conversational-ai-systems-grounded-in-psychological-theories-with-an-emphasis-on-efficiency",
+          title: '✨ I joined the Institute of Artificial Intelligence, Hefei Comprehensive National Science Center...',
+          description: "",
+          section: "News",},{id: "news-our-paper-seeing-sarcasm-through-different-eyes-analyzing-multimodal-sarcasm-perception-in-large-vision-language-models-has-been-accepted-for-publication-in-ieee-transactions-on-computational-social-systems",
+          title: '🎉 Our paper “Seeing Sarcasm Through Different Eyes: Analyzing Multimodal Sarcasm Perception in...',
+          description: "",
+          section: "News",},{id: "news-our-paper-interclip-mep-interactive-clip-and-memory-enhanced-predictor-for-multi-modal-sarcasm-detection-has-been-accepted-for-publication-in-acm-transactions-on-multimedia-computing-communications-and-applications",
+          title: '🥰 Our paper “InterCLIP-MEP: Interactive CLIP and Memory-Enhanced Predictor for Multi-modal Sarcasm Detection”...',
+          description: "",
+          section: "News",},{id: "news-our-paper-towards-seamless-interaction-causal-turn-level-modeling-of-interactive-3d-conversational-head-dynamics-timar-is-now-available-on-arxiv-with-the-source-code-released",
+          title: '🚀 Our paper “Towards Seamless Interaction: Causal Turn-Level Modeling of Interactive 3D Conversational...',
+          description: "",
+          section: "News",},{id: "news-our-paper-evolvingavatar-interactive-3d-head-generation-that-adapts-as-conversations-unfold-is-now-available-on-arxiv-with-an-interactive-project-page",
+          title: '🚀 Our paper “EvolvingAvatar: Interactive 3D Head Generation That Adapts as Conversations Unfold”...',
+          description: "",
+          section: "News",},{
+        id: 'social-github',
+        title: 'GitHub',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://github.com/CoderChen01", "_blank");
+        },
+      },{
+        id: 'social-scholar',
+        title: 'Google Scholar',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://scholar.google.com/citations?user=q3NWGzUAAAAJ", "_blank");
+        },
+      },{
+        id: 'social-email',
+        title: 'email',
+        section: 'Socials',
+        handler: () => {
+          window.open("mailto:%6A%6F%72%6A%69.%63%68%65%6E@%67%6D%61%69%6C.%63%6F%6D", "_blank");
+        },
+      },{
+        id: 'social-orcid',
+        title: 'ORCID',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://orcid.org/0009-0001-5288-048X", "_blank");
+        },
+      },{
+        id: 'social-x',
+        title: 'X',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://twitter.com/JorjiChen", "_blank");
+        },
+      },{
+        id: 'social-wechat',
+        title: 'Wechat',
+        section: 'Socials',
+        handler: () => {
+          window.open("/assets/img/wechat_qr.jpg", "_blank");
+        },
+      },{
+        id: 'social-rss',
+        title: 'RSS Feed',
+        section: 'Socials',
+        handler: () => {
+          window.open("/feed.xml", "_blank");
+        },
+      },{
+      id: 'light-theme',
+      title: 'Change theme to light',
+      description: 'Change the theme of the site to Light',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("light");
+      },
+    },
+    {
+      id: 'dark-theme',
+      title: 'Change theme to dark',
+      description: 'Change the theme of the site to Dark',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("dark");
+      },
+    },
+    {
+      id: 'system-theme',
+      title: 'Use system default theme',
+      description: 'Change the theme of the site to System Default',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("system");
+      },
+    },];
+
+</script> <script src="/assets/al_search/js/shortcut-key.js"></script> <script defer src="/assets/js/site-custom.js?v=37d34c31455b35da9dbf54c43b889a3d"></script> </body> </html>
