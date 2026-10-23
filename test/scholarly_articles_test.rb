@@ -32,6 +32,7 @@ class ScholarlyArticlesTest < Minitest::Test
       with_pdf["scholarly"]["report_number"] = "TR-1"
       write_post(source, "with-pdf", with_pdf)
       write_post(source, "ordinary", { "layout" => "post", "title" => "Ordinary blog" })
+      write_post(source, "scheduled", base.merge("date" => "2099-01-01 12:34:56 +0800"))
       config = Jekyll.configuration({ "source" => source, "destination" => File.join(source, "_site"), "theme" => "al_folio_core", "url" => "https://example.org", "baseurl" => "", "permalink" => "/blog/:year/:title/", "exclude" => ["assets/pdf/blog/"], "quiet" => true })
       site = Jekyll::Site.new(config)
       site.process
@@ -63,6 +64,9 @@ class ScholarlyArticlesTest < Minitest::Test
       refute File.exist?(File.join(output, "with-pdf/paper.pdf"))
       removed = Nokogiri::HTML(File.read(File.join(output, "with-pdf/index.html")))
       assert_empty removed.css('meta[name="citation_pdf_url"], a[href$="paper.pdf"]')
+      refute File.exist?(File.join(source, "_site/blog/2099/scheduled/index.html"))
+      Jekyll::Site.new(config.merge("future" => true)).process
+      assert File.exist?(File.join(source, "_site/blog/2099/scheduled/index.html"))
     end
   end
 
