@@ -5,12 +5,12 @@ layout: post
   <p class="scholarly-authors">{{ page.scholarly.authors | join: '; ' | escape }}</p>
   <p class="scholarly-kind">
     {% if page.scholarly.kind == 'technical-report' %}Technical report{% else %}Research note{% endif %}
-    {% if page.scholarly.institution != blank %} · {{ page.scholarly.institution | escape }}{% endif %}
-    {% if page.scholarly.report_number != blank %} · {{ page.scholarly.report_number | escape }}{% endif %}
+    {% if page.scholarly.institution and page.scholarly.institution != '' %} · {{ page.scholarly.institution | escape }}{% endif %}
+    {% if page.scholarly.report_number and page.scholarly.report_number != '' %} · {{ page.scholarly.report_number | escape }}{% endif %}
   </p>
   <h2 id="scholarly-abstract-title">Abstract</h2>
   <p>{{ page.scholarly.abstract | escape | newline_to_br }}</p>
-  {% if page.scholarly.pdf != blank %}
+  {% if page.scholarly.pdf and page.scholarly.pdf != '' %}
     <a href="{{ page.url | append: 'paper.pdf' | relative_url }}">Read PDF ↗</a>
   {% endif %}
 </section>
@@ -22,7 +22,7 @@ layout: post
   <p class="scholarly-citation-actions">
     <button type="button" data-copy-scholarly-citation>Copy BibTeX</button>
     <a href="{{ page.url | append: 'citation.bib' | relative_url }}" download>Download .bib</a>
-    {% if page.scholarly.pdf != blank %}
+    {% if page.scholarly.pdf and page.scholarly.pdf != '' %}
       <a href="{{ page.url | append: 'paper.pdf' | relative_url }}">PDF ↗</a>
     {% endif %}
   </p>

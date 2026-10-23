@@ -4,18 +4,18 @@
     <meta name="citation_author" content="{{ author | escape }}">
   {% endfor %}
   <meta name="citation_publication_date" content="{{ page.date | date: '%Y/%m/%d' }}">
-  {% if page.scholarly.doi != blank %}
+  {% if page.scholarly.doi and page.scholarly.doi != '' %}
     <meta name="citation_doi" content="{{ page.scholarly.doi | escape }}">
   {% endif %}
   {% if page.scholarly.kind == 'technical-report' %}
-    {% if page.scholarly.institution != blank %}
+    {% if page.scholarly.institution and page.scholarly.institution != '' %}
       <meta name="citation_technical_report_institution" content="{{ page.scholarly.institution | escape }}">
     {% endif %}
-    {% if page.scholarly.report_number != blank %}
+    {% if page.scholarly.report_number and page.scholarly.report_number != '' %}
       <meta name="citation_technical_report_number" content="{{ page.scholarly.report_number | escape }}">
     {% endif %}
   {% endif %}
-  {% if page.scholarly.pdf != blank %}
+  {% if page.scholarly.pdf and page.scholarly.pdf != '' %}
     <meta name="citation_pdf_url" content="{{ page.url | append: 'paper.pdf' | absolute_url }}">
   {% endif %}
   <link rel="stylesheet" href="{{ '/assets/css/scholarly.css' | relative_url | bust_file_cache }}">
