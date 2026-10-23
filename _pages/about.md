@@ -24,7 +24,7 @@ social: false
 announcements:
   enabled: true
   scrollable: true
-  limit: 5
+  limit: null # Render every entry inside the scrollable homepage panel.
 
 latest_posts:
   enabled: true

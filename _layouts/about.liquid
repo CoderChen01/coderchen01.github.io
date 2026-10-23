@@ -44,7 +44,9 @@ layout: default
       <h2>
         <a href="{{ '/news/' | relative_url }}" style="color: inherit">News</a>
       </h2>
-      {% include news.liquid limit=true %}
+      <section class="home-news-scroll" tabindex="0" role="region" aria-label="All news, scroll to read older updates">
+        {% include news.liquid %}
+      </section>
     {% endif %}
 
     {% if page.latest_posts and page.latest_posts.enabled %}

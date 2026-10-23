@@ -612,6 +612,25 @@ blockquote {
   }
 }
 
+.home-news-scroll {
+  max-height: min(27rem, 65vh);
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
+  scrollbar-width: thin;
+  scrollbar-color: var(--global-theme-color) transparent;
+  padding-right: 0.65rem;
+  border-bottom: 1px solid var(--global-divider-color);
+
+  &:focus-visible {
+    outline: 2px solid var(--global-theme-color);
+    outline-offset: 4px;
+  }
+
+  .table-responsive {
+    overflow: visible;
+  }
+}
+
 .news table tbody tr {
   transition:
     background-color 0.2s ease,
