@@ -693,172 +693,7 @@ blockquote {
   }
 }
 
-/* Research Interests blog post */
-.tech-vision-container {
-  --vision-muted: var(--global-text-color-light);
-  --vision-primary: var(--global-theme-color);
-  --vision-border: var(--global-divider-color);
-  --vision-card: var(--global-card-bg-color);
-  --vision-code: var(--global-code-bg-color);
-  line-height: 1.7;
-  overflow-x: hidden;
-}
-
-.vision-panel[hidden] {
-  display: none;
-}
-
-.vision-accent {
-  color: var(--vision-primary);
-}
-
-.vision-header,
-.vision-section-title {
-  align-items: center;
-  border-bottom: 1px solid var(--vision-border);
-  display: flex;
-  justify-content: space-between;
-  padding-bottom: 0.75rem;
-}
-
-.vision-header {
-  margin-bottom: 2rem;
-}
-
-.vision-doc-id,
-.vision-label,
-.vision-language {
-  font-family: var(--site-font-mono);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.vision-doc-id {
-  color: var(--vision-muted);
-  font-size: 0.72rem;
-}
-
-.vision-language button {
-  background: transparent;
-  border: 1px solid transparent;
-  color: var(--vision-muted);
-  cursor: pointer;
-  padding: 0.15rem 0.45rem;
-
-  &[aria-pressed="true"] {
-    border-color: var(--vision-primary);
-    color: var(--vision-primary);
-  }
-}
-
-.vision-hero h2 {
-  font-size: clamp(1.8rem, 5vw, 2.5rem);
-  letter-spacing: 0.03em;
-  line-height: 1.15;
-  text-transform: uppercase;
-}
-
-.vision-label {
-  color: var(--vision-primary);
-  font-size: 0.68rem;
-}
-
-.vision-mission {
-  background: var(--vision-code);
-  border: 1px solid var(--vision-border);
-  border-left: 0.25rem solid var(--vision-primary);
-  font-size: 1.05rem;
-  font-style: italic;
-  margin: 2rem 0;
-  padding: 1.5rem;
-  position: relative;
-
-  &::after {
-    animation: mission-scan 4.8s ease-in-out infinite;
-    background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--vision-primary) 30%, transparent), transparent);
-    content: "";
-    height: 1px;
-    left: 0;
-    position: absolute;
-    top: 0;
-    width: 38%;
-  }
-}
-
-.vision-section-title {
-  gap: 0.75rem;
-  justify-content: flex-start;
-  margin: 3rem 0 1.5rem;
-  text-transform: uppercase;
-}
-
-.vision-grid {
-  display: grid;
-  gap: 1rem;
-}
-
-.vision-card {
-  background: linear-gradient(145deg, color-mix(in srgb, var(--vision-card) 96%, var(--vision-primary) 4%), var(--vision-card));
-  border: 1px solid var(--vision-border);
-  padding: 1.25rem;
-  transition:
-    border-color 0.2s ease,
-    transform 0.2s ease;
-
-  &:hover {
-    border-color: var(--vision-primary);
-    box-shadow: 0 0 1.5rem color-mix(in srgb, var(--vision-primary) 12%, transparent);
-    transform: translateY(-0.25rem);
-  }
-
-  h3 {
-    font-size: 1.05rem;
-    text-transform: uppercase;
-  }
-}
-
-.vision-comparison {
-  display: grid;
-  gap: 1rem;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
-.vision-current {
-  color: var(--vision-muted);
-}
-
-.vision-target {
-  font-weight: 600;
-}
-
-.vision-horizon {
-  border-left: 2px solid var(--vision-border);
-  margin-bottom: 2rem;
-  padding-left: 1.5rem;
-  position: relative;
-
-  &::before {
-    animation: node-pulse 3s ease-in-out infinite;
-    background: var(--global-bg-color);
-    border: 2px solid var(--vision-primary);
-    content: "";
-    height: 0.55rem;
-    left: -0.38rem;
-    position: absolute;
-    top: 0.2rem;
-    transform: rotate(45deg);
-    width: 0.55rem;
-  }
-
-  h3 {
-    text-transform: uppercase;
-  }
-
-  li {
-    color: var(--vision-muted);
-    margin-bottom: 0.6rem;
-  }
-}
+/* Interactive blog styles are owned by assets/css/blog/research-vision.css. */
 
 @keyframes nav-scan {
   0%,
@@ -874,34 +709,6 @@ blockquote {
 
   50% {
     left: 76%;
-  }
-}
-
-@keyframes mission-scan {
-  0%,
-  100% {
-    left: -8%;
-    opacity: 0;
-  }
-
-  20%,
-  80% {
-    opacity: 1;
-  }
-
-  50% {
-    left: 70%;
-  }
-}
-
-@keyframes node-pulse {
-  0%,
-  100% {
-    box-shadow: 0 0 0 0 color-mix(in srgb, var(--vision-primary) 0%, transparent);
-  }
-
-  50% {
-    box-shadow: 0 0 0.8rem 0.12rem color-mix(in srgb, var(--vision-primary) 26%, transparent);
   }
 }
 
@@ -967,10 +774,6 @@ blockquote {
       width: 1.5rem;
     }
   }
-
-  .vision-comparison {
-    grid-template-columns: 1fr;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -983,9 +786,7 @@ blockquote {
     display: none;
   }
 
-  .navbar::after,
-  .vision-horizon::before,
-  .vision-mission::after {
+  .navbar::after {
     animation: none;
   }
 

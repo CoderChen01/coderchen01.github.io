@@ -13,6 +13,7 @@ This checkout is **CoderChen01/coderchen01.github.io**, Junjie (Jorji) Chen's pe
 - After publishing, inspect Actions for the actual pushed commit SHA, confirm Pages deployment success, and inspect the live behavior. Do not report deployment complete based only on `git push`.
 - Home news must render all entries inside `.home-news-scroll`, with bounded height, touch/keyboard scrolling and focus visibility. Do not reintroduce a five-entry Liquid limit.
 - Publication annotations use `.publication-note-trigger` and an immediate custom tooltip implemented in `assets/js/site-custom.js`; preserve hover, focus, touch/click and Escape/outside dismissal. Never restore delayed native `title` tooltips for notes.
+- Interactive blogs keep HTML in `_posts/*.html`, article CSS in `assets/css/blog/`, and JavaScript in `assets/js/blog/`. Research Interests uses `_posts/2026-03-15-research-vision.html` plus `research-vision.css`/`.js` in those folders. Keep its existing public URL and post slug. Do not move article styles back into `_sass/_site-custom.scss` or parse this HTML article as Markdown in the CMS.
 
 **This file is the authoritative entry point for coding agents working in this repo.** Read it before making any change. It is intentionally short and tool-neutral; it links to the one place each longer-form fact lives.
 
