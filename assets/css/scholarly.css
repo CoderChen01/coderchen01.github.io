@@ -1,0 +1,42 @@
+.scholarly-abstract,
+.scholarly-citation {
+  margin: 1.5rem 0 2.5rem;
+  padding: 1.4rem;
+  border: 1px solid var(--global-divider-color);
+  border-radius: 12px;
+}
+.scholarly-abstract h2,
+.scholarly-citation h2 {
+  margin-top: 0;
+}
+.scholarly-authors {
+  font-weight: 600;
+}
+.scholarly-kind {
+  color: var(--global-text-color-light);
+  font-size: 0.9rem;
+}
+.scholarly-citation-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+}
+.scholarly-citation button {
+  border: 1px solid var(--global-theme-color);
+  border-radius: 6px;
+  padding: 0.35rem 0.7rem;
+  color: var(--global-theme-color);
+  background: transparent;
+  cursor: pointer;
+}
+.scholarly-citation button:focus-visible {
+  outline: 2px solid var(--global-theme-color);
+  outline-offset: 3px;
+}
+.scholarly-citation pre {
+  overflow: auto;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  margin-bottom: 0;
+}

@@ -230,6 +230,8 @@ exclude:
   - docker-compose.yml
   - docker-compose-slim.yml
   - docs/
+  - templates/
+  - assets/pdf/blog/
   - Gemfile
   - Gemfile.lock
   - LICENSE

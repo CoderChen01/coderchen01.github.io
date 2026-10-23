@@ -1,0 +1,31 @@
+---
+layout: post
+---
+<section class="scholarly-abstract" aria-labelledby="scholarly-abstract-title">
+  <p class="scholarly-authors">{{ page.scholarly.authors | join: '; ' | escape }}</p>
+  <p class="scholarly-kind">
+    {% if page.scholarly.kind == 'technical-report' %}Technical report{% else %}Research note{% endif %}
+    {% if page.scholarly.institution != blank %} · {{ page.scholarly.institution | escape }}{% endif %}
+    {% if page.scholarly.report_number != blank %} · {{ page.scholarly.report_number | escape }}{% endif %}
+  </p>
+  <h2 id="scholarly-abstract-title">Abstract</h2>
+  <p>{{ page.scholarly.abstract | escape | newline_to_br }}</p>
+  {% if page.scholarly.pdf != blank %}
+    <a href="{{ page.url | append: 'paper.pdf' | relative_url }}">Read PDF ↗</a>
+  {% endif %}
+</section>
+
+{{ content }}
+
+<section class="scholarly-citation" aria-labelledby="scholarly-citation-title">
+  <h2 id="scholarly-citation-title">Cite this article</h2>
+  <p class="scholarly-citation-actions">
+    <button type="button" data-copy-scholarly-citation>Copy BibTeX</button>
+    <a href="{{ page.url | append: 'citation.bib' | relative_url }}" download>Download .bib</a>
+    {% if page.scholarly.pdf != blank %}
+      <a href="{{ page.url | append: 'paper.pdf' | relative_url }}">PDF ↗</a>
+    {% endif %}
+  </p>
+  <pre><code data-scholarly-bibtex>{{ page.scholarly_bibtex | escape }}</code></pre>
+</section>
+<script defer src="{{ '/assets/js/scholarly.js' | relative_url | bust_file_cache }}"></script>
