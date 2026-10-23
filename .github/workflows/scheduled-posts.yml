@@ -1,0 +1,48 @@
+name: Publish scheduled posts
+
+on:
+  schedule:
+    - cron: "3-58/5 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: write
+
+concurrency:
+  group: scheduled-post-check
+  cancel-in-progress: false
+
+jobs:
+  check:
+    if: github.repository == 'CoderChen01/coderchen01.github.io'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.3.5"
+      - name: Check due dates since the last successful production build
+        id: dates
+        run: |
+          set -euo pipefail
+          active=$(gh api "repos/$GH_REPO/actions/workflows/deploy.yml/runs?per_page=20" --jq '[.workflow_runs[] | select(.event != "pull_request" and .head_branch == "master" and (.status == "in_progress" or .status == "queued" or .status == "waiting"))] | length')
+          if [ "$active" -gt 0 ]; then
+            echo 'due=false' >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          LAST_BUILD_STARTED_AT=$(gh api "repos/$GH_REPO/actions/workflows/deploy.yml/runs?status=success&per_page=20" --jq '[.workflow_runs[] | select(.event != "pull_request" and .head_branch == "master")][0].run_started_at // empty')
+          if [ -z "$LAST_BUILD_STARTED_AT" ]; then
+            echo 'No successful production build to compare; waiting for initial deployment.'
+            echo 'due=false' >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          export LAST_BUILD_STARTED_AT
+          ruby bin/due_posts.rb >> "$GITHUB_OUTPUT"
+      - name: Rebuild Pages when a scheduled article is due
+        if: steps.dates.outputs.due == 'true'
+        run: gh workflow run deploy.yml --ref master

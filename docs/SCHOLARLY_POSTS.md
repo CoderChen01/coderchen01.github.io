@@ -1,6 +1,10 @@
 # Scholarly blog posts
 
-The CMS Blog page offers **New research note** and a downloadable Markdown template. Ordinary posts can opt in with **Research note / technical report**. Write the article in Markdown with LaTeX, fill in authors and an abstract, and optionally upload a PDF. Save, review the Git diff, validate, then publish as usual.
+Create an article from the CMS Blog page, then select **Blog post**, **Research note** or **Technical report** in the right-hand editor. Selecting a research type fills an empty body with the Markdown/LaTeX outline and reveals **Research details**. Switching types preserves existing text and metadata. A fresh Markdown template can also be downloaded there. Fill in authors and an abstract, optionally upload a PDF, then save, review the Git diff, validate and publish as usual.
+
+Publication time defaults to the actual local date, time and UTC offset when the article is created. **Use current time** captures a new timestamp; the date/time picker can schedule a future release. Private Jekyll previews include future and unpublished articles. **Preview article** saves the current article and opens its own URL in the built preview.
+
+The production build excludes future articles until their timestamp. Once a scheduled article has been committed through Publish, the **Publish scheduled posts** workflow checks every five minutes and triggers a production rebuild when it becomes due. Only the public repository is checked; uncommitted CMS drafts are never published by this job. GitHub Actions can delay scheduled runs, so release is after the selected time rather than guaranteed at the exact second. The checker compares against the last successful production build's start time, and skips while another production build is active.
 
 The website renders a visible abstract and author list, Highwire `citation_*` metadata, and a bottom **Cite this article** section with copyable BibTeX and a `.bib` download. A PDF is optional: without one, neither a PDF link nor `citation_pdf_url` is emitted. Do not invent a DOI, institution, report number or publication venue. A technical report requires its actual issuing institution; otherwise use Research note.
 
