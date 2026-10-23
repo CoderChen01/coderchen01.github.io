@@ -106,3 +106,4 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: _site
+          clean: true # Remove generated pages and downloads when a post is hidden.

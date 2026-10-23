@@ -16,6 +16,12 @@ Uploads are stored under `assets/pdf/blog/` with unique filenames and never over
 
 The Jekyll generator publishes attachments as `<article-url>paper.pdf` and citations as `<article-url>citation.bib`. This keeps the PDF in the article's directory, as required for `citation_pdf_url`. The raw upload directory and templates are excluded from public output. Removing an attachment clears its reference; the original upload remains recoverable in Git.
 
+## Hide and restore
+
+The Blog editor's **Hide post** action sets `published: false` without deleting or rewriting the article body or its attachments. The entry stays in the editor with a **Hidden** badge; **Restore post** sets it back to visible while retaining its URL and publication time. Click **Publish** to apply either change to the public site. Saving visibility never automatically publishes other workspace edits.
+
+After the production deployment, a hidden post is absent from the blog index, home-page post lists, feeds, site search and sitemap. Its public article URL and the generated scholarly `paper.pdf` / `citation.bib` are removed from the output. Source files and the original PDF stay in Git for restoration. Private previews intentionally include hidden posts. Hiding a scheduled article also prevents the due-date job from releasing it.
+
 ## Indexing
 
 Follow the [Google Scholar inclusion guidelines](https://scholar.google.com/intl/en/scholar/inclusion.html). Correct metadata makes a qualifying article easier to parse; it does not guarantee indexing. Keep at least the complete abstract publicly visible, use ordinary HTML links from the blog index, and check inclusion by searching the full title in Scholar. Adding a record to your Scholar profile is separate from search indexing.
