@@ -20,7 +20,7 @@ class ScholarlyArticlesTest < Minitest::Test
       File.write(File.join(source, "_layouts/default.liquid"), '<html><head>{% include scholarly-head.liquid %}</head><body>{{ content }}</body></html>')
       File.write(File.join(source, "assets/pdf/blog/test.pdf"), "%PDF-1.4\nFixture PDF\n%%EOF")
       base = {
-        "layout" => "scholarly", "title" => "A {test} & 50%_result", "date" => "2026-01-01 12:00:00 +0000",
+        "layout" => "scholarly", "title" => "A {test} & 50%_result", "date" => "2026-01-01 01:02:03 +0800",
         "related_posts" => false,
         "scholarly" => { "enabled" => true, "authors" => ["Junjie Chen", "Xi Qiu"], "abstract" => "Complete abstract with <safe> content.", "kind" => "research-note" }
       }
@@ -33,7 +33,7 @@ class ScholarlyArticlesTest < Minitest::Test
       write_post(source, "with-pdf", with_pdf)
       write_post(source, "ordinary", { "layout" => "post", "title" => "Ordinary blog" })
       write_post(source, "scheduled", base.merge("date" => "2099-01-01 12:34:56 +0800"))
-      config = Jekyll.configuration({ "source" => source, "destination" => File.join(source, "_site"), "theme" => "al_folio_core", "url" => "https://example.org", "baseurl" => "", "permalink" => "/blog/:year/:title/", "exclude" => ["assets/pdf/blog/"], "quiet" => true })
+      config = Jekyll.configuration({ "source" => source, "destination" => File.join(source, "_site"), "theme" => "al_folio_core", "url" => "https://example.org", "baseurl" => "", "timezone" => "Asia/Shanghai", "permalink" => "/blog/:year/:title/", "exclude" => ["assets/pdf/blog/"], "quiet" => true })
       site = Jekyll::Site.new(config)
       site.process
       output = File.join(source, "_site/blog/2026")
