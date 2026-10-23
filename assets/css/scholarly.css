@@ -1,0 +1,29 @@
+
+.scholarly-citation {
+  margin: 1.5rem 0 2.5rem;
+  padding: 1.4rem;
+  border: 1px solid var(--global-divider-color);
+  border-radius: 12px;
+}
+
+.scholarly-citation h2 {
+  margin-top: 0;
+}
+.scholarly-citation button {
+  border: 1px solid var(--global-theme-color);
+  border-radius: 6px;
+  padding: 0.35rem 0.7rem;
+  color: var(--global-theme-color);
+  background: transparent;
+  cursor: pointer;
+}
+.scholarly-citation button:focus-visible {
+  outline: 2px solid var(--global-theme-color);
+  outline-offset: 3px;
+}
+.scholarly-citation pre {
+  overflow: auto;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  margin-bottom: 0;
+}
