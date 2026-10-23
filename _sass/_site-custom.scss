@@ -557,8 +557,45 @@ blockquote {
 }
 
 .publications .publication-annotation {
-  cursor: help;
-  margin-left: 0.25rem;
+  display: inline-flex;
+  margin-left: 0.4rem;
+
+  .publication-note-trigger {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    border: 1px solid var(--global-theme-color);
+    border-radius: 1rem;
+    padding: 0.1rem 0.5rem;
+    color: var(--global-theme-color);
+    background: color-mix(in srgb, var(--global-theme-color) 12%, var(--global-bg-color));
+    font: inherit;
+    font-size: 0.75rem;
+    cursor: pointer;
+  }
+}
+
+.publication-note {
+  position: fixed;
+  z-index: 10000;
+  width: max-content;
+  max-width: min(26rem, calc(100vw - 2rem));
+  padding: 0.8rem 1rem;
+  border: 1px solid var(--global-theme-color);
+  border-radius: 0.65rem;
+  background: var(--global-bg-color);
+  color: var(--global-text-color);
+  box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.3);
+  font-size: 0.9rem;
+  font-weight: 500;
+  line-height: 1.6;
+  text-align: left;
+  pointer-events: auto;
+  visibility: hidden;
+
+  &.is-visible {
+    visibility: visible;
+  }
 }
 
 .publications ol.bibliography > li {

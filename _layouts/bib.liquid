@@ -119,12 +119,18 @@
         {% endfor %}
       {% endif %}
       {% if entry.annotation %}
-        <i
-          class="fa-solid fa-circle-info publication-annotation"
-          title="{{ entry.annotation | strip_html | escape }}"
-          aria-label="{{ entry.annotation | strip_html | escape }}"
-        >
-        </i>
+        <span class="publication-annotation">
+          <button
+            type="button"
+            class="publication-note-trigger"
+            aria-label="Publication note"
+            aria-describedby="note-{{ entry.key }}"
+            aria-expanded="false"
+          >
+            <i class="fa-solid fa-circle-info" aria-hidden="true"></i><span>Note</span>
+          </button>
+          <span class="publication-note" id="note-{{ entry.key }}" role="tooltip">{{ entry.annotation | strip_html | escape }}</span>
+        </span>
       {% endif %}
     </div>
 

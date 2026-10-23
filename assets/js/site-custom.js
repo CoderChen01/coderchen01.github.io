@@ -64,6 +64,51 @@
     });
   };
 
+  const initPublicationNotes = () => {
+    document.querySelectorAll(".publication-annotation").forEach((container) => {
+      const trigger = container.querySelector(".publication-note-trigger");
+      const note = container.querySelector(".publication-note");
+      if (!trigger || !note) return;
+      document.body.append(note);
+      let hideTimer;
+      const hide = () => {
+        note.classList.remove("is-visible");
+        trigger.setAttribute("aria-expanded", "false");
+      };
+      const show = () => {
+        clearTimeout(hideTimer);
+        const bounds = trigger.getBoundingClientRect();
+        const width = note.getBoundingClientRect().width;
+        const height = note.getBoundingClientRect().height;
+        note.style.left = `${Math.max(16, Math.min(bounds.left, window.innerWidth - width - 16))}px`;
+        note.style.top = `${bounds.top > height + 24 ? bounds.top - height - 10 : bounds.bottom + 10}px`;
+        note.classList.add("is-visible");
+        trigger.setAttribute("aria-expanded", "true");
+      };
+      const hideSoon = () => {
+        hideTimer = setTimeout(hide, 100);
+      };
+      trigger.addEventListener("pointerenter", show);
+      trigger.addEventListener("pointerleave", hideSoon);
+      trigger.addEventListener("focus", show);
+      trigger.addEventListener("blur", hide);
+      trigger.addEventListener("click", (event) => {
+        event.stopPropagation();
+        show();
+      });
+      note.addEventListener("pointerenter", () => clearTimeout(hideTimer));
+      note.addEventListener("pointerleave", hideSoon);
+      document.addEventListener("click", (event) => {
+        if (!note.contains(event.target) && !trigger.contains(event.target)) hide();
+      });
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") hide();
+      });
+      window.addEventListener("scroll", hide, { passive: true });
+      window.addEventListener("resize", hide, { passive: true });
+    });
+  };
+
   const initPointerGlow = () => {
     if (prefersReducedMotion.matches || !window.matchMedia("(pointer: fine)").matches) return;
 
@@ -188,6 +233,7 @@
     initSpeechButtons();
     initExperienceTrack();
     initAuthorToggles();
+    initPublicationNotes();
     initPointerGlow();
     initScrollReveals();
     initClickResearchQuestions();

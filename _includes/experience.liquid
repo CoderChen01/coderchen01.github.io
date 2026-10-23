@@ -19,8 +19,12 @@
         <article class="experience-card">
           <header class="experience-card-header">
             <div class="experience-logo">
-              {% if experience.logo %}
-                {% assign logo_path = experience.logo | prepend: '/assets/img/' %}
+              {% if experience.logo != blank %}
+                {% if experience.logo contains '://' %}
+                  {% assign logo_path = experience.logo %}
+                {% else %}
+                  {% assign logo_path = experience.logo | prepend: '/assets/img/' %}
+                {% endif %}
                 <img src="{{ logo_path | relative_url }}" alt="{{ experience.company }} logo" loading="lazy">
               {% else %}
                 <i class="fa-solid fa-building-columns" aria-hidden="true"></i>

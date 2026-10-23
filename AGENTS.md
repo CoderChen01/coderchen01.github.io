@@ -1,5 +1,19 @@
 # Agent Guidelines for al-folio (v1.x)
 
+## This personal site's working contract
+
+This checkout is **CoderChen01/coderchen01.github.io**, Junjie (Jorji) Chen's personal site, not the upstream starter. The site-specific rules in this section take precedence over generic starter guidance below.
+
+- Publish source changes to `master`; GitHub Actions builds and pushes generated output to `gh-pages`. Never delete `gh-pages` or commit generated `_site` output.
+- The real production `baseurl` is empty (root at `https://www.junjie-chen.info`). Do not force `/al-folio` for this site.
+- Local `_layouts`, `_includes`, and `_sass` overrides are intentional and supported. Read `docs/ARCHITECTURE.md#local-overrides-your-site-vs-this-repo`. Preserve them and audit drift when editing gem-owned paths. Starter-only ownership/integration jobs are intentionally skipped on this personal repository; keep actual formatting, build, upgrade and site checks enabled.
+- Install JavaScript dependencies with `npm ci`; CI must use the committed lockfile, never install latest formatter packages during a check.
+- After changing an override, run `bundle exec al-folio upgrade overrides audit`, review the result, then `bundle exec al-folio upgrade overrides accept <path>` when appropriate. **Run formatting after the audit/accept command:** it rewrites `.al-folio-overrides.yml` and can otherwise make CI fail despite an earlier clean check.
+- Before committing, run `npx prettier <changed supported files> --write`, then `npm run lint:prettier`, `bundle exec jekyll build`, and `git diff --check`. Include the updated `.al-folio-overrides.yml` in the commit. Use an available supported Ruby/Bundler executable if the system Ruby is obsolete.
+- After publishing, inspect Actions for the actual pushed commit SHA, confirm Pages deployment success, and inspect the live behavior. Do not report deployment complete based only on `git push`.
+- Home news must render all entries inside `.home-news-scroll`, with bounded height, touch/keyboard scrolling and focus visibility. Do not reintroduce a five-entry Liquid limit.
+- Publication annotations use `.publication-note-trigger` and an immediate custom tooltip implemented in `assets/js/site-custom.js`; preserve hover, focus, touch/click and Escape/outside dismissal. Never restore delayed native `title` tooltips for notes.
+
 **This file is the authoritative entry point for coding agents working in this repo.** Read it before making any change. It is intentionally short and tool-neutral; it links to the one place each longer-form fact lives.
 
 `al-folio` v1.x is a **thin Jekyll starter, not a theme**. This repo owns starter wiring, example content, docs, and cross-plugin tests. All runtime — layouts, includes, Sass, Liquid tags, filters, feature JS — lives in versioned gems published under [`al-org-dev`](https://github.com/al-org-dev).
