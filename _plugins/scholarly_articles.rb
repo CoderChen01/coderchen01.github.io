@@ -24,7 +24,7 @@ module ScholarlyArticles
       "year" => date.strftime("%Y"),
       "month" => date.strftime("%m"),
       "url" => "#{site.config['url']}#{site.config['baseurl']}#{data['url']}",
-      "note" => report ? "Technical report" : "Research note"
+      "note" => report ? "Technical report" : "Research Blog"
     }
     if report
       fields["institution"] = scholarly["institution"]

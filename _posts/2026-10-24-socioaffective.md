@@ -8,7 +8,7 @@ description: ""
 tags:
   - research-interest
 categories:
-  - research-notes
+  - research-blog
 math: true
 related_posts: false
 studio_format: markdown

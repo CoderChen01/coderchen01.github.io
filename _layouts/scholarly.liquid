@@ -4,7 +4,7 @@ layout: post
 <section class="scholarly-abstract" aria-labelledby="scholarly-abstract-title">
   <p class="scholarly-authors">{{ page.scholarly.authors | join: '; ' | escape }}</p>
   <p class="scholarly-kind">
-    {% if page.scholarly.kind == 'technical-report' %}Technical report{% else %}Research note{% endif %}
+    {% if page.scholarly.kind == 'technical-report' %}Technical report{% else %}Research Blog{% endif %}
     {% if page.scholarly.institution and page.scholarly.institution != '' %} · {{ page.scholarly.institution | escape }}{% endif %}
     {% if page.scholarly.report_number and page.scholarly.report_number != '' %} · {{ page.scholarly.report_number | escape }}{% endif %}
   </p>

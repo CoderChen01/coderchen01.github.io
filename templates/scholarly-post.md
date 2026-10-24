@@ -1,10 +1,10 @@
 ---
 layout: scholarly
-title: "Replace with your research note title"
+title: "Replace with your research blog title"
 date: 2026-10-24 12:00:00 +0800
 description: "A short description for the blog index."
 tags: [research]
-categories: [research-notes]
+categories: [research-blog]
 math: true
 related_posts: false
 scholarly:
@@ -44,7 +44,7 @@ Explain what the evidence supports and when the method may fail.
 
 ## 5. Conclusion
 
-Summarize the findings supported by this note.
+Summarize the findings supported by this article.
 
 ## References
 
