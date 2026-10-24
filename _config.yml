@@ -341,9 +341,6 @@ jekyll-archives:
       tags: "/blog/:type/:name/"
       categories: "/blog/:type/:name/"
 
-display_tags: ["research-interests", "multimodal-ai", "affective-computing", "conversational-ai"] # shown on the blog landing page
-display_categories: ["research"] # shown on the blog landing page
-
 # -----------------------------------------------------------------------------
 # Jekyll Scholar
 # -----------------------------------------------------------------------------
