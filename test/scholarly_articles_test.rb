@@ -7,6 +7,7 @@ require "nokogiri"
 require "jekyll-toc"
 require "jekyll/scholar"
 require_relative "../_plugins/scholarly_articles"
+require_relative "../_plugins/blog_feeds"
 
 class ScholarlyArticlesTest < Minitest::Test
   ROOT = File.expand_path("..", __dir__)
@@ -14,7 +15,7 @@ class ScholarlyArticlesTest < Minitest::Test
   def test_static_html_optional_pdf_and_bibtex_downloads
     Dir.mktmpdir("scholarly-site-") do |source|
       %w[_posts _layouts _includes assets/pdf/blog].each { |dir| FileUtils.mkdir_p(File.join(source, dir)) }
-      %w[_layouts/scholarly.liquid _includes/scholarly-head.liquid].each do |file|
+      %w[_layouts/scholarly.liquid _includes/scholarly-head.liquid _includes/content-license.liquid].each do |file|
         FileUtils.cp(File.join(ROOT, file), File.join(source, file))
       end
       File.write(File.join(source, "_layouts/default.liquid"), '<html><head>{% include scholarly-head.liquid %}</head><body>{{ content }}</body></html>')
