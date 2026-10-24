@@ -42,6 +42,7 @@ class ScholarlyArticlesTest < Minitest::Test
       assert_equal ["Junjie Chen", "Xi Qiu"], html.css('meta[name="citation_author"]').map { |tag| tag["content"] }
       assert_equal "2026/01/01", html.at_css('meta[name="citation_publication_date"]')["content"]
       assert_equal "Complete abstract with <safe> content.", html.at_css(".scholarly-abstract p:last-of-type").text
+      assert_equal "Research Blog", html.at_css(".scholarly-kind").text.strip
       assert_empty html.css('meta[name="citation_pdf_url"], a[href$="paper.pdf"]')
       assert_empty html.css('meta[name="citation_doi"], meta[name="citation_technical_report_institution"], meta[name="citation_technical_report_number"]')
       assert html.at_css(".scholarly-citation")
@@ -49,10 +50,12 @@ class ScholarlyArticlesTest < Minitest::Test
       assert_includes bib, 'title = {A \{test\} \& 50\%\_result}'
       assert_includes bib, 'author = {Junjie Chen and Xi Qiu}'
       assert_includes bib, 'url = {https://example.org/blog/2026/without-pdf/}'
+      assert_includes bib, 'note = {Research Blog}'
       assert_equal bib.strip, html.at_css("[data-scholarly-bibtex]").text.strip
       html_pdf = Nokogiri::HTML(File.read(File.join(output, "with-pdf/index.html")))
       assert_equal "https://example.org/blog/2026/with-pdf/paper.pdf", html_pdf.at_css('meta[name="citation_pdf_url"]')["content"]
       assert_equal "Actual institution", html_pdf.at_css('meta[name="citation_technical_report_institution"]')["content"]
+      assert_includes html_pdf.at_css(".scholarly-kind").text, "Technical report"
       assert File.file?(File.join(output, "with-pdf/paper.pdf"))
       assert_includes File.read(File.join(output, "with-pdf/citation.bib")), "@techreport{"
       refute File.exist?(File.join(source, "_site/assets/pdf/blog/test.pdf"))
