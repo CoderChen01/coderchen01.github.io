@@ -1,11 +1,18 @@
 # Normalize authors once for both Atom feeds without overriding article metadata.
 require "json"
+require "cgi"
 module BlogFeeds
   LICENSE = "CC-BY-4.0".freeze
   LICENSE_URL = "https://creativecommons.org/licenses/by/4.0/".freeze
   LICENSES = {
     LICENSE => { "url" => LICENSE_URL, "name" => "CC BY 4.0" },
-    "CC-BY-NC-ND-4.0" => { "url" => "https://creativecommons.org/licenses/by-nc-nd/4.0/", "name" => "CC BY-NC-ND 4.0" }
+    "CC-BY-SA-4.0" => { "url" => "https://creativecommons.org/licenses/by-sa/4.0/", "name" => "CC BY-SA 4.0" },
+    "CC-BY-ND-4.0" => { "url" => "https://creativecommons.org/licenses/by-nd/4.0/", "name" => "CC BY-ND 4.0" },
+    "CC-BY-NC-4.0" => { "url" => "https://creativecommons.org/licenses/by-nc/4.0/", "name" => "CC BY-NC 4.0" },
+    "CC-BY-NC-SA-4.0" => { "url" => "https://creativecommons.org/licenses/by-nc-sa/4.0/", "name" => "CC BY-NC-SA 4.0" },
+    "CC-BY-NC-ND-4.0" => { "url" => "https://creativecommons.org/licenses/by-nc-nd/4.0/", "name" => "CC BY-NC-ND 4.0" },
+    "CC0-1.0" => { "url" => "https://creativecommons.org/publicdomain/zero/1.0/", "name" => "CC0 1.0" },
+    "all-rights-reserved" => { "name" => "All rights reserved" }
   }.freeze
 
   class Metadata < Jekyll::Generator
@@ -25,14 +32,17 @@ module BlogFeeds
           { "name" => name, "uri" => orcid.to_s.empty? ? data["uri"] : "https://orcid.org/#{orcid.to_s.delete_prefix('https://orcid.org/')}" }
         end
         post.data["syndication_language"] = scholarly["language"].to_s.empty? ? post.data["lang"] || site.config["lang"] : scholarly["language"]
-        license = LICENSES[scholarly["license"]]
+        license_id = post.data.key?("license") ? post.data["license"] : scholarly["license"]
+        license = LICENSES[license_id]
+        post.data.delete("syndication_license")
+        post.data.delete("syndication_license_name")
         if license
           post.data["syndication_license"] = license["url"]
           post.data["syndication_license_name"] = license["name"]
         end
-        archive_licensed = scholarly["license"] == LICENSE
+        archive_licensed = license_id == LICENSE
         post.data["research_feed_included"] = scholarly["enabled"] == true && scholarly["archive"] == true && archive_licensed
-        if scholarly["archive"] == true && !archive_licensed
+        if scholarly["enabled"] == true && scholarly["archive"] == true && !archive_licensed
           raise Jekyll::Errors::FatalException, "#{post.relative_path}: research archive feed requires an explicit CC-BY-4.0 license"
         end
         next unless scholarly["enabled"] == true
@@ -48,9 +58,28 @@ module BlogFeeds
             person
           end
         }
-        jsonld["license"] = license["url"] if license
+        jsonld["license"] = license["url"] if license && license["url"]
         post.data["scholarly_jsonld"] = JSON.generate(jsonld).gsub("<", '\\u003c')
       end
     end
+  end
+end
+
+# Standalone HTML articles bypass the theme layouts, but still honor their license.
+Jekyll::Hooks.register :documents, :post_render do |post|
+  next unless post.collection.label == "posts" && post.data["layout"].nil?
+  name = post.data["syndication_license_name"]
+  next unless name
+
+  url = post.data["syndication_license"]
+  label = CGI.escapeHTML(name)
+  credit = url ? %(<a rel="license" href="#{url}" style="color:inherit">#{label}</a>) : label
+  footer = %(<p class="scholarly-license" style="text-align:right;font:12px/1.6 system-ui;opacity:.7;margin:2rem 1rem">#{credit}</p>)
+  head = %(<meta name="DC.rights" content="#{CGI.escapeHTML(url || name)}">)
+  head += %(<link rel="license" href="#{url}">) if url
+  post.output = if post.output.match?(%r{</body>}i)
+    post.output.sub(%r{</body>}i, "#{footer}</body>").sub(%r{</head>}i, "#{head}</head>")
+  else
+    "#{post.output}#{footer}"
   end
 end

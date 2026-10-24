@@ -98,6 +98,9 @@
       {% else %}
         {{ content }}
       {% endif %}
+      {% if page.collection == 'posts' and page.scholarly.enabled != true %}
+        {% include content-license.liquid %}
+      {% endif %}
     </div>
 
     {% include footer.liquid %}

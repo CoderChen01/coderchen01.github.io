@@ -10,6 +10,43 @@ class BlogFeedsTest < Minitest::Test
   ROOT = File.expand_path("..", __dir__)
   NS = { "a" => "http://www.w3.org/2005/Atom" }.freeze
 
+  def test_content_license_catalog_in_ordinary_pages_and_feeds
+    Dir.mktmpdir("content-licenses-") do |root|
+      %w[_posts _includes _layouts].each { |dir| FileUtils.mkdir_p(File.join(root, dir)) }
+      %w[feed.xml research-feed.xml _includes/blog-feed.liquid _includes/scholarly-head.liquid _includes/content-license.liquid].each { |file| FileUtils.cp(File.join(ROOT, file), File.join(root, file)) }
+      File.write(File.join(root, "_layouts/post.liquid"), '<html><head>{% include scholarly-head.liquid %}</head><body>{{ content }}{% include content-license.liquid %}</body></html>')
+      BlogFeeds::LICENSES.each_with_index do |(id, _license), index|
+        write_post(File.join(root, "_posts/2026-01-01-license-#{index}.md"), { "layout" => "post", "title" => id, "license" => id, "scholarly" => { "enabled" => false, "license" => "CC-BY-4.0", "archive" => true } })
+      end
+      write_post(File.join(root, "_posts/2026-01-01-empty.md"), { "layout" => "post", "license" => "", "scholarly" => { "license" => "CC-BY-4.0" } })
+      File.write(File.join(root, "_posts/2026-01-01-standalone.html"), { "layout" => nil, "title" => "Standalone", "license" => "CC-BY-NC-4.0" }.to_yaml + "---\n<!doctype html><html><head><title>Standalone</title></head><body><h1>Original HTML</h1></body></html>")
+      Jekyll::Site.new(Jekyll.configuration({ "source" => root, "destination" => File.join(root, "_site"), "url" => "https://example.org", "baseurl" => "", "permalink" => "/blog/:year/:title/", "quiet" => true })).process
+      all = feed(root, "feed.xml")
+      BlogFeeds::LICENSES.each_with_index do |(_id, license), index|
+        html = Nokogiri::HTML(File.read(File.join(root, "_site/blog/2026/license-#{index}/index.html")))
+        assert_equal license["name"], html.at_css(".scholarly-license").text.strip
+        assert_equal license["url"] || license["name"], html.at_css('meta[name="DC.rights"]')["content"]
+        assert_empty html.css('meta[name="citation_title"]'), "ordinary posts must not gain scholarly metadata"
+        entry = all.at_xpath("//a:entry[a:id='https://example.org/blog/2026/license-#{index}/']", NS)
+        assert_equal license["name"], entry.at_xpath("a:rights", NS).text
+        if license["url"]
+          assert_equal license["url"], html.at_css('p a[rel="license"]')["href"]
+          assert_equal license["url"], entry.at_xpath('a:link[@rel="license"]', NS)["href"]
+        else
+          assert_empty html.css('a[rel="license"], link[rel="license"]'), "reserved rights is not a CC grant"
+          assert_empty entry.xpath('a:link[@rel="license"]', NS)
+        end
+      end
+      empty = Nokogiri::HTML(File.read(File.join(root, "_site/blog/2026/empty/index.html")))
+      assert_empty empty.css('.scholarly-license, meta[name="DC.rights"], link[rel="license"]'), "clearing a license overrides legacy scholarly data"
+      standalone = Nokogiri::HTML(File.read(File.join(root, "_site/blog/2026/standalone/index.html")))
+      assert_equal "Original HTML", standalone.at_css("h1").text
+      assert_equal "CC BY-NC 4.0", standalone.at_css(".scholarly-license").text
+      assert_equal "https://creativecommons.org/licenses/by-nc/4.0/", standalone.at_css('head link[rel="license"]')["href"]
+      assert_empty feed(root, "research-feed.xml").xpath("//a:entry", NS)
+    end
+  end
+
   def test_full_text_author_license_and_publication_lifecycle
     Dir.mktmpdir("blog-feeds-") do |root|
       %w[_posts _includes].each { |dir| FileUtils.mkdir_p(File.join(root, dir)) }

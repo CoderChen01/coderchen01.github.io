@@ -32,8 +32,10 @@
               {%- endif %}
             </author>
           {% endfor %}
-          {% if post.syndication_license %}
+          {% if post.syndication_license_name %}
             <rights>{{ post.syndication_license_name | xml_escape }}</rights>
+          {% endif %}
+          {% if post.syndication_license %}
             <link rel="license" href="{{ post.syndication_license }}" />
           {% endif %}
           {% assign abstract = post.scholarly.abstract | default: post.description %}

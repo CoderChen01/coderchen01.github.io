@@ -1,3 +1,12 @@
+{% if page.syndication_license %}
+  <link rel="license" href="{{ page.syndication_license | escape }}">
+  <meta name="DC.rights" content="{{ page.syndication_license | escape }}">
+{% elsif page.syndication_license_name %}
+  <meta name="DC.rights" content="{{ page.syndication_license_name | escape }}">
+{% endif %}
+{% if page.syndication_license_name or page.scholarly.enabled == true %}
+  <link rel="stylesheet" href="{{ '/assets/css/scholarly.css' | relative_url | bust_file_cache }}">
+{% endif %}
 {% if page.scholarly.enabled == true %}
   <meta name="citation_title" content="{{ page.title | escape }}">
   {% for author in page.scholarly.authors %}
@@ -18,17 +27,9 @@
   {% if page.scholarly.pdf and page.scholarly.pdf != '' %}
     <meta name="citation_pdf_url" content="{{ page.url | append: 'paper.pdf' | absolute_url }}">
   {% endif %}
-  {% if page.scholarly.license == 'CC-BY-NC-ND-4.0' %}
-    <link rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">
-    <meta name="DC.rights" content="https://creativecommons.org/licenses/by-nc-nd/4.0/">
-  {% elsif page.scholarly.license == 'CC-BY-4.0' %}
-    <link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
-    <meta name="DC.rights" content="https://creativecommons.org/licenses/by/4.0/">
-  {% endif %}
   {% if page.scholarly_jsonld %}
     <script type="application/ld+json">
       {{ page.scholarly_jsonld }}
     </script>
   {% endif %}
-  <link rel="stylesheet" href="{{ '/assets/css/scholarly.css' | relative_url | bust_file_cache }}">
 {% endif %}

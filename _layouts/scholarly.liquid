@@ -28,9 +28,5 @@ layout: post
   </p>
   <pre><code data-scholarly-bibtex>{{ page.scholarly_bibtex | escape }}</code></pre>
 </section>
-{% if page.scholarly.license == 'CC-BY-NC-ND-4.0' %}
-  <p class="scholarly-license"><a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a></p>
-{% elsif page.scholarly.license == 'CC-BY-4.0' %}
-  <p class="scholarly-license"><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></p>
-{% endif %}
+{% include content-license.liquid %}
 <script defer src="{{ '/assets/js/scholarly.js' | relative_url | bust_file_cache }}"></script>

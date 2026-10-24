@@ -1,0 +1,9 @@
+{% if page.syndication_license_name %}
+  <p class="scholarly-license">
+    {% if page.syndication_license %}
+      <a rel="license" href="{{ page.syndication_license | escape }}">{{ page.syndication_license_name | escape }}</a>
+    {% else %}
+      {{ page.syndication_license_name | escape }}
+    {% endif %}
+  </p>
+{% endif %}

@@ -15,7 +15,7 @@ class PostVisibilityTest < Minitest::Test
   def test_hide_and_restore_remove_public_outputs_while_retaining_source_and_private_preview
     Dir.mktmpdir("post-visibility-") do |root|
       %w[_posts _layouts _includes assets/pdf/blog].each { |dir| FileUtils.mkdir_p(File.join(root, dir)) }
-      %w[_layouts/scholarly.liquid _includes/scholarly-head.liquid].each do |file|
+      %w[_layouts/scholarly.liquid _includes/scholarly-head.liquid _includes/content-license.liquid].each do |file|
         FileUtils.cp(File.join(ROOT, file), File.join(root, file))
       end
       File.write(File.join(root, "_layouts/default.liquid"), '<html><head>{% include scholarly-head.liquid %}</head><body>{{ content }}</body></html>')
