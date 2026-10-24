@@ -51,6 +51,6 @@ In particular, I am learning and exploring:
 - 🔊🖼️ **Multimodal interaction**, combining language with visual, acoustic, and behavioral cues.
 - ⚡ **Efficiency-aware methods** for building deployable and scalable dialogue models.
 
-For a deeper dive into my current directions and methodology, read **[Research Interests]({% post_url 2026-03-15-research-vision %})**.
+For a deeper dive into my current directions and methodology, read **[Research Interests]({% post_url 2026-10-24-socioaffective %})**.
 
 {% include experience.liquid %}
