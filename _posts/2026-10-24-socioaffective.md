@@ -36,7 +36,7 @@ scholarly:
   kind: research-note
   pdf: >-
     assets/pdf/blog/6af73b83-9523-42e9-8ede-6d48380b7a19-socio_affective_iclr2027_source.pdf
-permalink: /blog/2026/toward-fine-grained-socio-affective-intelligence-in-full-duplex-/
+permalink: /blog/2026/toward-fine-grained-socio-affective-intelligence/
 ---
 
 Imagine a conversation in which someone quietly says, _“I'm fine.”_ There is a short pause before the answer. Their brow briefly tightens, and one hand moves toward the opposite arm. A conventional voice assistant may hear the words and proceed as if nothing happened. A video-language model may accurately describe the frown and hand movement. Neither capability, on its own, tells us what the person feels—or what the assistant ought to do next.
