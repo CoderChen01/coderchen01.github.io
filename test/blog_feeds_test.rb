@@ -64,6 +64,16 @@ class BlogFeedsTest < Minitest::Test
       write_post(article, metadata.merge("scholarly" => scholarly.merge("archive" => false)))
       Jekyll::Site.new(config).process
       assert_empty feed(root, "research-feed.xml").xpath("//a:entry", NS)
+      restricted = metadata.merge("scholarly" => scholarly.merge("archive" => false, "license" => "CC-BY-NC-ND-4.0"))
+      write_post(article, restricted)
+      site = Jekyll::Site.new(config)
+      site.process
+      restricted_entry = feed(root, "feed.xml").at_xpath('//a:entry[a:id="https://example.org/blog/2026/public/"]', NS)
+      assert_equal "https://creativecommons.org/licenses/by-nc-nd/4.0/", restricted_entry.at_xpath('a:link[@rel="license"]', NS)["href"]
+      assert_equal "CC BY-NC-ND 4.0", restricted_entry.at_xpath("a:rights", NS).text
+      assert_empty feed(root, "research-feed.xml").xpath("//a:entry", NS)
+      jsonld = JSON.parse(site.posts.docs.find { |post| post.basename_without_ext.end_with?("public") }.data["scholarly_jsonld"])
+      assert_equal "https://creativecommons.org/licenses/by-nc-nd/4.0/", jsonld["license"]
       write_post(article, metadata.merge("scholarly" => scholarly.merge("license" => "")))
       assert_raises(Jekyll::Errors::FatalException) { Jekyll::Site.new(config).process }
     end
