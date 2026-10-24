@@ -12,6 +12,11 @@ scholarly:
   kind: research-note
   authors:
     - Junjie Chen
+  author_orcids:
+    Junjie Chen: 0009-0001-5288-048X
+  language: en
+  license: ""
+  archive: false
   abstract: >-
     Replace with a complete abstract covering the problem, approach, evidence,
     and main findings. The abstract appears above the article body.

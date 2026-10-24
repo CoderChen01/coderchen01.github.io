@@ -33,6 +33,13 @@
     {% endif %}
     {% include head.liquid %}
     {% include scholarly-head.liquid %}
+    <link rel="alternate" type="application/atom+xml" title="{{ site.blog_name | escape }}" href="{{ '/feed.xml' | relative_url }}">
+    <link
+      rel="alternate"
+      type="application/atom+xml"
+      title="{{ site.research_feed.title | escape }}"
+      href="{{ '/research-feed.xml' | relative_url }}"
+    >
     {% if site.enable_darkmode %}
       <script>
         toggleThemeSetting = () => {

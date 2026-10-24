@@ -29,6 +29,7 @@ jobs:
       - run: bundle exec ruby test/due_posts_test.rb
       - run: bundle exec ruby test/post_visibility_test.rb
       - run: bundle exec ruby test/blog_taxonomy_test.rb
+      - run: bundle exec ruby test/blog_feeds_test.rb
       - run: sudo apt-get update && sudo apt-get install -y imagemagick
       - run: bundle exec jekyll build
         env:

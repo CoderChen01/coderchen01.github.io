@@ -26,6 +26,7 @@ pagination:
   <div class="header-bar">
     <h1>{{ site.blog_name }}</h1>
     <h2>{{ site.blog_description }}</h2>
+    <p><a href="{{ '/research-feed.xml' | relative_url }}">Research Blog feed</a> &middot; <a href="{{ '/feed.xml' | relative_url }}">All posts feed</a></p>
   </div>
   {% endif %}
 

@@ -19,6 +19,12 @@ layout: post
 
 <section class="scholarly-citation" aria-labelledby="scholarly-citation-title">
   <h2 id="scholarly-citation-title">Cite this article</h2>
+  {% if page.scholarly.license == 'CC-BY-4.0' %}
+    <p>
+      This article is licensed under <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Third-party material retains
+      its original rights.
+    </p>
+  {% endif %}
   <p class="scholarly-citation-actions">
     <button type="button" data-copy-scholarly-citation>Copy BibTeX</button>
     <a href="{{ page.url | append: 'citation.bib' | relative_url }}" download>Download .bib</a>

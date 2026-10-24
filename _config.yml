@@ -6,6 +6,10 @@ title: blank # the website title (if blank, full name will be used instead)
 first_name: Junjie (Jorji)
 # middle_name:
 last_name: Chen
+author:
+  name: Junjie Chen
+  uri: https://orcid.org/0009-0001-5288-048X
+  orcid: 0009-0001-5288-048X
 contact_note: >
   The best way to reach me is via email. Feel free to get in touch.
 description: > # the ">" symbol means to ignore newlines until "footer_text:"
@@ -141,6 +145,9 @@ bing_site_verification: # out your bing-site-verification ID (Bing Webmaster)
 
 blog_name: Junjie (Jorji) Chen's Blogs # blog_name will be displayed in your blog page
 blog_description: Notes on efficient, multimodal, and psychologically grounded interactive AI.
+research_feed:
+  title: Junjie Chen — Research Blog
+  description: Research articles on multimodal, real-time conversational AI.
 permalink: /blog/:year/:title/
 lsi: false # produce an index for related posts
 

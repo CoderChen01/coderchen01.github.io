@@ -26,4 +26,10 @@ After the production deployment, a hidden post is absent from the blog index, ho
 
 ## Indexing
 
+The public [all-posts Atom feed](https://www.junjie-chen.info/feed.xml) includes full article bodies and normalized author metadata. The [Research Blog Atom feed](https://www.junjie-chen.info/research-feed.xml) includes only scholarly articles with both `scholarly.archive: true` and `scholarly.license: CC-BY-4.0`. Hidden posts and future articles are excluded from both feeds even in a private preview build. Feed metadata includes the blog title, authors, available ORCID URLs, language, dates, complete body and the article's actual license. New templates start without an open license or archive opt-in.
+
+In CMS **Research details → Publication & archiving**, set the language and each author's own ORCID, choose the article license and enable **Include in Research Blog feed**. CC BY permits sharing and adaptation, including commercial reuse, with attribution; license only material you are entitled to license. Article pages expose the selected license visibly and as structured metadata. Removing an article from this site's feed does not recall copies already archived by third parties. The general feed does not impose CC BY on other posts or site assets.
+
+This prepares the feed for a separate [Rogue Scholar application](https://rogue-scholar.org/faq). It does not submit an application, grant platform acceptance or register a DOI. A DOI must be assigned by the service before it is entered in the CMS.
+
 Follow the [Google Scholar inclusion guidelines](https://scholar.google.com/intl/en/scholar/inclusion.html). Correct metadata makes a qualifying article easier to parse; it does not guarantee indexing. Keep at least the complete abstract publicly visible, use ordinary HTML links from the blog index, and check inclusion by searching the full title in Scholar. Adding a record to your Scholar profile is separate from search indexing.
