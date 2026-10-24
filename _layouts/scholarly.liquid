@@ -19,12 +19,6 @@ layout: post
 
 <section class="scholarly-citation" aria-labelledby="scholarly-citation-title">
   <h2 id="scholarly-citation-title">Cite this article</h2>
-  {% if page.scholarly.license == 'CC-BY-4.0' %}
-    <p>
-      This article is licensed under <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Third-party material retains
-      its original rights.
-    </p>
-  {% endif %}
   <p class="scholarly-citation-actions">
     <button type="button" data-copy-scholarly-citation>Copy BibTeX</button>
     <a href="{{ page.url | append: 'citation.bib' | relative_url }}" download>Download .bib</a>
@@ -34,4 +28,9 @@ layout: post
   </p>
   <pre><code data-scholarly-bibtex>{{ page.scholarly_bibtex | escape }}</code></pre>
 </section>
+{% if page.scholarly.license == 'CC-BY-NC-ND-4.0' %}
+  <p class="scholarly-license"><a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a></p>
+{% elsif page.scholarly.license == 'CC-BY-4.0' %}
+  <p class="scholarly-license"><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></p>
+{% endif %}
 <script defer src="{{ '/assets/js/scholarly.js' | relative_url | bust_file_cache }}"></script>

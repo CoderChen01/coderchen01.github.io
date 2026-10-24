@@ -3,6 +3,10 @@ require "json"
 module BlogFeeds
   LICENSE = "CC-BY-4.0".freeze
   LICENSE_URL = "https://creativecommons.org/licenses/by/4.0/".freeze
+  LICENSES = {
+    LICENSE => { "url" => LICENSE_URL, "name" => "CC BY 4.0" },
+    "CC-BY-NC-ND-4.0" => { "url" => "https://creativecommons.org/licenses/by-nc-nd/4.0/", "name" => "CC BY-NC-ND 4.0" }
+  }.freeze
 
   class Metadata < Jekyll::Generator
     safe true
@@ -21,10 +25,14 @@ module BlogFeeds
           { "name" => name, "uri" => orcid.to_s.empty? ? data["uri"] : "https://orcid.org/#{orcid.to_s.delete_prefix('https://orcid.org/')}" }
         end
         post.data["syndication_language"] = scholarly["language"].to_s.empty? ? post.data["lang"] || site.config["lang"] : scholarly["language"]
-        licensed = scholarly["license"] == LICENSE
-        post.data["syndication_license"] = LICENSE_URL if licensed
-        post.data["research_feed_included"] = scholarly["enabled"] == true && scholarly["archive"] == true && licensed
-        if scholarly["archive"] == true && !licensed
+        license = LICENSES[scholarly["license"]]
+        if license
+          post.data["syndication_license"] = license["url"]
+          post.data["syndication_license_name"] = license["name"]
+        end
+        archive_licensed = scholarly["license"] == LICENSE
+        post.data["research_feed_included"] = scholarly["enabled"] == true && scholarly["archive"] == true && archive_licensed
+        if scholarly["archive"] == true && !archive_licensed
           raise Jekyll::Errors::FatalException, "#{post.relative_path}: research archive feed requires an explicit CC-BY-4.0 license"
         end
         next unless scholarly["enabled"] == true
@@ -40,7 +48,7 @@ module BlogFeeds
             person
           end
         }
-        jsonld["license"] = LICENSE_URL if licensed
+        jsonld["license"] = license["url"] if license
         post.data["scholarly_jsonld"] = JSON.generate(jsonld).gsub("<", '\\u003c')
       end
     end

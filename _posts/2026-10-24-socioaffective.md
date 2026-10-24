@@ -15,8 +15,8 @@ studio_format: markdown
 scholarly:
   enabled: true
   language: en
-  license: CC-BY-4.0
-  archive: true
+  license: CC-BY-NC-ND-4.0
+  archive: false
   author_orcids:
     Junjie Chen: 0009-0001-5288-048X
   authors:

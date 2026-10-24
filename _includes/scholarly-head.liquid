@@ -18,7 +18,10 @@
   {% if page.scholarly.pdf and page.scholarly.pdf != '' %}
     <meta name="citation_pdf_url" content="{{ page.url | append: 'paper.pdf' | absolute_url }}">
   {% endif %}
-  {% if page.scholarly.license == 'CC-BY-4.0' %}
+  {% if page.scholarly.license == 'CC-BY-NC-ND-4.0' %}
+    <link rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">
+    <meta name="DC.rights" content="https://creativecommons.org/licenses/by-nc-nd/4.0/">
+  {% elsif page.scholarly.license == 'CC-BY-4.0' %}
     <link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
     <meta name="DC.rights" content="https://creativecommons.org/licenses/by/4.0/">
   {% endif %}

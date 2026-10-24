@@ -22,7 +22,7 @@ class ScholarlyArticlesTest < Minitest::Test
       base = {
         "layout" => "scholarly", "title" => "A {test} & 50%_result", "date" => "2026-01-01 01:02:03 +0800",
         "related_posts" => false,
-        "scholarly" => { "enabled" => true, "authors" => ["Junjie Chen", "Xi Qiu"], "abstract" => "Complete abstract with <safe> content.", "kind" => "research-note" }
+        "scholarly" => { "enabled" => true, "authors" => ["Junjie Chen", "Xi Qiu"], "abstract" => "Complete abstract with <safe> content.", "kind" => "research-note", "license" => "CC-BY-NC-ND-4.0" }
       }
       write_post(source, "without-pdf", base)
       with_pdf = Marshal.load(Marshal.dump(base))
@@ -43,6 +43,9 @@ class ScholarlyArticlesTest < Minitest::Test
       assert_equal "2026/01/01", html.at_css('meta[name="citation_publication_date"]')["content"]
       assert_equal "Complete abstract with <safe> content.", html.at_css(".scholarly-abstract p:last-of-type").text
       assert_equal "Research Blog", html.at_css(".scholarly-kind").text.strip
+      assert_equal "https://creativecommons.org/licenses/by-nc-nd/4.0/", html.at_css('meta[name="DC.rights"]')["content"]
+      assert_equal "CC BY-NC-ND 4.0", html.at_css(".scholarly-license").text.strip
+      assert_empty html.css('.scholarly-citation a[rel="license"]'), "keep the license outside the citation panel as a quiet footer"
       assert_empty html.css('meta[name="citation_pdf_url"], a[href$="paper.pdf"]')
       assert_empty html.css('meta[name="citation_doi"], meta[name="citation_technical_report_institution"], meta[name="citation_technical_report_number"]')
       assert html.at_css(".scholarly-citation")

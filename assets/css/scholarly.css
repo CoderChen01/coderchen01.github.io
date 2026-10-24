@@ -40,3 +40,17 @@
   overflow-wrap: anywhere;
   margin-bottom: 0;
 }
+.scholarly-license {
+  margin: -1.5rem 0 2rem;
+  text-align: right;
+  font-size: 0.75rem;
+  color: var(--global-text-color-light);
+}
+.scholarly-license a {
+  color: inherit;
+  text-decoration: none;
+}
+.scholarly-license a:hover,
+.scholarly-license a:focus-visible {
+  text-decoration: underline;
+}

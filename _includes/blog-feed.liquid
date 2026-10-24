@@ -15,10 +15,6 @@
     <name>{{ site.author.name | xml_escape }}</name>
     <uri>{{ site.author.uri | xml_escape }}</uri>
   </author>
-  {% if include.research_only %}
-    <rights>Content in this feed is licensed under Creative Commons Attribution 4.0 International (CC BY 4.0).</rights>
-    <link rel="license" href="https://creativecommons.org/licenses/by/4.0/" />
-  {% endif %}
   {% for post in site.posts %}
     {% if post.published != false and post.date <= site.time %}
       {% unless include.research_only and post.research_feed_included != true %}
@@ -37,7 +33,7 @@
             </author>
           {% endfor %}
           {% if post.syndication_license %}
-            <rights>Creative Commons Attribution 4.0 International (CC BY 4.0)</rights>
+            <rights>{{ post.syndication_license_name | xml_escape }}</rights>
             <link rel="license" href="{{ post.syndication_license }}" />
           {% endif %}
           {% assign abstract = post.scholarly.abstract | default: post.description %}

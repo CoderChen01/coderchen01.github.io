@@ -15,7 +15,7 @@ scholarly:
   author_orcids:
     Junjie Chen: 0009-0001-5288-048X
   language: en
-  license: ""
+  license: CC-BY-NC-ND-4.0
   archive: false
   abstract: >-
     Replace with a complete abstract covering the problem, approach, evidence,
