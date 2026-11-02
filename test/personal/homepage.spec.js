@@ -85,9 +85,11 @@ test("services show all visible entries in a fixed-height keyboard-scrollable re
   await expect(page.locator(".services-directory")).toHaveCSS("overflow-y", "visible");
   await expect(page.locator(".services-directory")).toContainText("Journal Reviewing");
   await expect(page.locator(".services-directory")).toContainText("Conference Reviewing");
+  await expect(page.locator(".services-directory .service-group").first()).toHaveCSS("border-top-width", "1px");
+  await expect(page.locator('link[rel="stylesheet"][href*="/assets/css/main.css"]')).toHaveAttribute("href", /[?&]build=\d+/);
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth)).toBe(true);
   await page.setViewportSize({ width: 1280, height: 1100 });
-  await expect(page.locator('#navbar a[href="/services/"]')).toBeVisible();
+  await expect(page.locator('#navbar a[href="/services/"]')).toHaveCount(0);
   await page.locator(".post").screenshot({ path: info.outputPath("services-page.png") });
 });
 

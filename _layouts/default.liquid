@@ -31,7 +31,11 @@
       {% endif %}
       <meta http-equiv="refresh" content="3; url={{ redirect }}">
     {% endif %}
-    {% include head.liquid %}
+    {% comment %}The theme cache digest excludes local Sass overrides; refresh the main stylesheet with each build.{% endcomment %}
+    {% capture site_head %}{% include head.liquid %}{% endcapture %}
+    {% assign main_css_prefix = '/assets/css/main.css' | relative_url | append: '?v=' %}
+    {% capture main_css_version %}{{ '/assets/css/main.css' | relative_url }}?build={{ site.time | date: '%s' }}&amp;v={% endcapture %}
+    {{ site_head | replace: main_css_prefix, main_css_version }}
     {% include scholarly-head.liquid %}
     <link rel="alternate" type="application/atom+xml" title="{{ site.blog_name | escape }}" href="{{ '/feed.xml' | relative_url }}">
     <link
