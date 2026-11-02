@@ -1,0 +1,91 @@
+entries:
+  - id: pattern-recognition
+    name: Pattern Recognition
+    acronym: PR
+    category: journal
+    role: Reviewer
+    period: ""
+    url: https://www.sciencedirect.com/journal/pattern-recognition
+    visible: true
+    order: 10
+  - id: information-fusion
+    name: Information Fusion
+    acronym: ""
+    category: journal
+    role: Reviewer
+    period: ""
+    url: https://www.sciencedirect.com/journal/information-fusion
+    visible: true
+    order: 20
+  - id: knowledge-based-systems
+    name: Knowledge-Based Systems
+    acronym: KBS
+    category: journal
+    role: Reviewer
+    period: ""
+    url: https://www.sciencedirect.com/journal/knowledge-based-systems
+    visible: true
+    order: 30
+  - id: information-processing-management
+    name: Information Processing & Management
+    acronym: IP&M
+    category: journal
+    role: Reviewer
+    period: ""
+    url: https://www.sciencedirect.com/journal/information-processing-and-management
+    visible: true
+    order: 40
+  - id: neurocomputing
+    name: Neurocomputing
+    acronym: ""
+    category: journal
+    role: Reviewer
+    period: ""
+    url: https://www.sciencedirect.com/journal/neurocomputing
+    visible: true
+    order: 50
+  - id: eaai
+    name: Engineering Applications of Artificial Intelligence
+    acronym: EAAI
+    category: journal
+    role: Reviewer
+    period: ""
+    url: https://www.sciencedirect.com/journal/engineering-applications-of-artificial-intelligence
+    visible: true
+    order: 60
+  - id: taffc
+    name: IEEE Transactions on Affective Computing
+    acronym: TAFFC
+    category: journal
+    role: Reviewer
+    period: ""
+    url: https://www.computer.org/csdl/journal/ta
+    visible: true
+    order: 70
+  - id: aaai
+    name: AAAI Conference on Artificial Intelligence
+    acronym: AAAI
+    category: conference
+    role: Reviewer
+    period: ""
+    url: https://aaai.org/conference/aaai/
+    visible: true
+    order: 10
+  - id: icme
+    name: IEEE International Conference on Multimedia & Expo
+    acronym: ICME
+    category: conference
+    role: Reviewer
+    period: ""
+    url: ""
+    visible: true
+    order: 20
+  - id: icassp
+    name: IEEE International Conference on Acoustics, Speech and Signal Processing
+    acronym: ICASSP
+    category: conference
+    role: Reviewer
+    period: ""
+    url: ""
+    visible: true
+    order: 30

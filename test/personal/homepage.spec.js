@@ -47,6 +47,38 @@ test("all news can be scrolled within the homepage", async ({ page }) => {
   await expect.poll(() => news.evaluate((element) => element.scrollTop)).toBeGreaterThan(0);
 });
 
+test("services show all visible entries in a fixed-height keyboard-scrollable region", async ({ page }, info) => {
+  await page.goto("/");
+  const services = page.locator(".services-scroll");
+  const entries = JSON.parse(
+    execFileSync(
+      "bundle",
+      [
+        "exec",
+        "ruby",
+        "-ryaml",
+        "-rjson",
+        "-e",
+        "puts JSON.generate(YAML.load_file('_data/services.yml').fetch('entries').select { |entry| entry['visible'] == true })",
+      ],
+      { encoding: "utf8" }
+    )
+  );
+  await expect(services.locator(".service-entry")).toHaveCount(entries.length);
+  for (const entry of entries) await expect(services.locator(`[data-service-id="${entry.id}"]`)).toContainText(entry.name);
+  await expect(services).toHaveCSS("height", "336px");
+  await page.locator(".services-section").scrollIntoViewIfNeeded();
+  await expect(page.locator(".services-section")).toHaveCSS("opacity", "1");
+  await page.locator(".services-section").screenshot({ path: info.outputPath("homepage-services.png") });
+  expect(await services.evaluate((element) => element.scrollHeight > element.clientHeight)).toBe(true);
+  await services.focus();
+  await page.keyboard.press("End");
+  await expect.poll(() => services.evaluate((element) => element.scrollTop)).toBeGreaterThan(0);
+  await page.setViewportSize({ width: 390, height: 844 });
+  await expect(services).toHaveCSS("height", "336px");
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth)).toBe(true);
+});
+
 test("publication notes appear immediately on hover and keyboard focus", async ({ page }) => {
   await page.goto("/publications/");
   const trigger = page.locator(".publication-note-trigger").first();

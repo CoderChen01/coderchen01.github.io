@@ -1,0 +1,48 @@
+{% assign services = site.data.services.entries | where: 'visible', true | sort: 'order' %}
+{% if services.size > 0 %}
+  <section class="home-section services-section" aria-labelledby="services-title">
+    <header class="section-heading">
+      <h2 id="services-title">Services</h2>
+      <span class="section-hint">Peer review · scroll to explore</span>
+    </header>
+    <div class="services-scroll" tabindex="0" role="region" aria-label="Academic services, scroll to view all reviewing activities">
+      {% assign categories = 'journal,conference' | split: ',' %}
+      {% for category in categories %}
+        {% assign group = services | where: 'category', category %}
+        {% if group.size > 0 %}
+          <section class="service-group" aria-labelledby="services-{{ category }}">
+            <h3 id="services-{{ category }}">
+              {% if category == 'journal' %}Journal Reviewing{% else %}Conference Reviewing{% endif %}
+              <span>{{ group.size }}</span>
+            </h3>
+            <ul class="services-list">
+              {% for service in group %}
+                <li class="service-entry" data-service-id="{{ service.id | escape }}">
+                  <div class="service-venue">
+                    {% if service.url and service.url != blank %}
+                      <a href="{{ service.url | escape }}" target="_blank" rel="noopener noreferrer">
+                        {{- service.name | escape -}}
+                        <span class="service-link-icon" aria-hidden="true">↗</span></a
+                      >
+                    {% else %}
+                      <span>{{ service.name | escape }}</span>
+                    {% endif %}
+                    {% if service.acronym and service.acronym != blank -%}
+                      <span class="service-acronym">{{ service.acronym | escape }}</span>
+                    {%- endif %}
+                  </div>
+                  <div class="service-details">
+                    <span>{{ service.role | escape }}</span>
+                    {% if service.period and service.period != blank -%}
+                      <span>{{ service.period | escape }}</span>
+                    {%- endif %}
+                  </div>
+                </li>
+              {% endfor %}
+            </ul>
+          </section>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </section>
+{% endif %}

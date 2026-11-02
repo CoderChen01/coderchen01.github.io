@@ -649,6 +649,119 @@ blockquote {
   }
 }
 
+.services-scroll {
+  height: 21rem;
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
+  scrollbar-width: thin;
+  scrollbar-color: var(--global-theme-color) transparent;
+  scrollbar-gutter: stable;
+  border: 1px solid var(--global-divider-color);
+  border-radius: 0.75rem;
+  padding: 1.1rem 1.25rem;
+  background: color-mix(in srgb, var(--global-theme-color) 2%, var(--global-bg-color));
+
+  &:focus-visible {
+    outline: 2px solid var(--global-theme-color);
+    outline-offset: 4px;
+  }
+}
+
+.service-group {
+  & + & {
+    margin-top: 1.5rem;
+  }
+
+  h3 {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin: 0 0 0.6rem;
+    color: var(--global-theme-color);
+    font-size: 0.74rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+
+    span {
+      color: var(--global-text-color-light);
+      font-size: 0.7rem;
+    }
+  }
+}
+
+.services-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.service-entry {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid var(--global-divider-color);
+  font-size: 0.87rem;
+
+  &:last-child {
+    border-bottom: 0;
+  }
+}
+.service-venue {
+  min-width: 0;
+  overflow-wrap: anywhere;
+
+  a {
+    color: var(--global-text-color);
+    text-decoration: none;
+  }
+  a:hover,
+  a:focus-visible {
+    color: var(--global-theme-color);
+  }
+}
+.service-link-icon {
+  font-size: 0.7rem;
+  margin-left: 0.35rem;
+  opacity: 0.6;
+}
+.service-acronym {
+  font-size: 0.68rem;
+  color: var(--global-theme-color);
+  margin-left: 0.55rem;
+  white-space: nowrap;
+}
+.service-details {
+  flex-shrink: 0;
+  text-align: right;
+  color: var(--global-text-color-light);
+  font-size: 0.75rem;
+
+  span {
+    display: block;
+  }
+}
+@media (max-width: 575px) {
+  .services-scroll {
+    padding: 0.9rem;
+  }
+  .service-entry {
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+  .service-details {
+    display: flex;
+    gap: 0.65rem;
+    text-align: left;
+  }
+  .services-section .section-hint {
+    font-size: 0.55rem;
+    letter-spacing: 0.025em;
+    margin-right: 0;
+  }
+}
+
 .home-news-scroll {
   max-height: min(27rem, 65vh);
   overflow-y: auto;
