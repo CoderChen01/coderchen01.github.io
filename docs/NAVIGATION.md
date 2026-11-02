@@ -1,0 +1,7 @@
+# Top navigation visibility
+
+In **CMS → Profile → Site navigation**, choose which page links appear in the website's top menu. The panel lists eligible standalone pages (including Home, Publications, Blogs, Services, News and CV), shows their URLs, and previews the selected links. **Save navigation** writes to the isolated workspace; inspect changes, preview and publish to update the public site. Hiding a menu link does not delete or hide its page or homepage section. Services starts hidden in the top menu but remains linked from its homepage heading.
+
+`_data/navigation.yml` stores boolean overrides under `visibility`, keyed by local page permalink. Absent overrides retain each page's existing `nav` setting; Home defaults to visible. `_plugins/site_navigation.rb` applies the overrides before rendering. The local `header.liquid` override allows Home to be toggled without adding a duplicate home link. Search, social links and theme controls keep their existing settings. Error pages, redirect aliases and placeholder dropdowns are not offered by the CMS. Newly added ordinary pages with valid local permalinks are discovered automatically.
+
+The CMS writes only this dedicated data file, preserves extra metadata, rejects stale revisions and leaves page front matter and body bytes intact. Run `bundle exec ruby test/site_navigation_test.rb` and the CMS navigation API/browser checks after changes. Keep the header override audit current.
