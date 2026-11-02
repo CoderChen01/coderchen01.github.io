@@ -672,6 +672,7 @@ blockquote {
     margin-top: 1.5rem;
   }
 
+  h2,
   h3 {
     display: flex;
     align-items: center;
@@ -694,6 +695,19 @@ blockquote {
   list-style: none;
   margin: 0;
   padding: 0;
+}
+.services-directory {
+  .service-group {
+    padding: 1.25rem 1.5rem;
+    border: 1px solid var(--global-divider-color);
+    border-radius: 0.75rem;
+    background: color-mix(in srgb, var(--global-theme-color) 2%, var(--global-bg-color));
+  }
+
+  .service-group h2 {
+    font-size: 0.85rem;
+    margin-bottom: 0.85rem;
+  }
 }
 .service-entry {
   display: flex;

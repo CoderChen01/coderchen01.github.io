@@ -77,6 +77,18 @@ test("services show all visible entries in a fixed-height keyboard-scrollable re
   await page.setViewportSize({ width: 390, height: 844 });
   await expect(services).toHaveCSS("height", "336px");
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth)).toBe(true);
+  await page.locator("#services-title a").click();
+  await expect(page).toHaveURL(/\/services\/$/);
+  await expect(page.getByRole("heading", { name: "Services", exact: true, level: 1 })).toBeVisible();
+  await expect(page.locator(".services-directory .service-entry")).toHaveCount(entries.length);
+  await expect(page.locator(".services-scroll")).toHaveCount(0);
+  await expect(page.locator(".services-directory")).toHaveCSS("overflow-y", "visible");
+  await expect(page.locator(".services-directory")).toContainText("Journal Reviewing");
+  await expect(page.locator(".services-directory")).toContainText("Conference Reviewing");
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth)).toBe(true);
+  await page.setViewportSize({ width: 1280, height: 1100 });
+  await expect(page.locator('#navbar a[href="/services/"]')).toBeVisible();
+  await page.locator(".post").screenshot({ path: info.outputPath("services-page.png") });
 });
 
 test("publication notes appear immediately on hover and keyboard focus", async ({ page }) => {

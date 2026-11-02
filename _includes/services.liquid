@@ -1,20 +1,40 @@
 {% assign services = site.data.services.entries | where: 'visible', true | sort: 'order' %}
 {% if services.size > 0 %}
-  <section class="home-section services-section" aria-labelledby="services-title">
-    <header class="section-heading">
-      <h2 id="services-title">Services</h2>
-      <span class="section-hint">Peer review · scroll to explore</span>
-    </header>
-    <div class="services-scroll" tabindex="0" role="region" aria-label="Academic services, scroll to view all reviewing activities">
+  <section
+    class="{% if include.full_page %}services-page{% else %}home-section services-section{% endif %}"
+    {% if include.full_page %}
+      aria-label="Academic reviewing activities"
+    {% else %}
+      aria-labelledby="services-title"
+    {% endif %}
+  >
+    {% unless include.full_page %}
+      <header class="section-heading">
+        <h2 id="services-title"><a href="{{ '/services/' | relative_url }}" style="color: inherit">Services</a></h2>
+        <span class="section-hint">Peer review · scroll to explore</span>
+      </header>
+    {% endunless %}
+    <div
+      {% if include.full_page %}
+        class="services-directory"
+      {% else %}
+        class="services-scroll" tabindex="0" role="region" aria-label="Academic services, scroll to view all reviewing activities"
+      {% endif %}
+    >
       {% assign categories = 'journal,conference' | split: ',' %}
       {% for category in categories %}
         {% assign group = services | where: 'category', category %}
         {% if group.size > 0 %}
           <section class="service-group" aria-labelledby="services-{{ category }}">
-            <h3 id="services-{{ category }}">
+            {% capture group_heading %}
               {% if category == 'journal' %}Journal Reviewing{% else %}Conference Reviewing{% endif %}
               <span>{{ group.size }}</span>
-            </h3>
+            {% endcapture %}
+            {% if include.full_page %}
+              <h2 id="services-{{ category }}">{{ group_heading }}</h2>
+            {% else %}
+              <h3 id="services-{{ category }}">{{ group_heading }}</h3>
+            {% endif %}
             <ul class="services-list">
               {% for service in group %}
                 <li class="service-entry" data-service-id="{{ service.id | escape }}">
@@ -45,4 +65,6 @@
       {% endfor %}
     </div>
   </section>
+{% elsif include.full_page %}
+  <p>No public service activities are currently listed.</p>
 {% endif %}
