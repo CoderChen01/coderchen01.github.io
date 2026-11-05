@@ -42,7 +42,7 @@ I was born in November 2002 in [Lu’an, Anhui, China](https://en.wikipedia.org/
 
 I am primarily interested in the following research question:
 
-> **How can we build psychologically grounded, fine-grained, multimodal, efficient, evolving, and full-duplex conversational AI systems that better understand and respond to human emotions?**
+> **How can we build psychologically grounded, fine-grained, multimodal, efficient, continually evolving, self-correcting, and full-duplex conversational AI systems in which subtle cues keep earning their influence, to better understand and support human emotions and mental well-being?**
 
 In particular, I am learning and exploring:
 
