@@ -14,11 +14,6 @@ related_posts: false
 studio_format: markdown
 scholarly:
   enabled: true
-  language: en
-  license: CC-BY-NC-ND-4.0
-  archive: false
-  author_orcids:
-    Junjie Chen: 0009-0001-5288-048X
   authors:
     - Junjie Chen
   abstract: >-
@@ -39,10 +34,19 @@ scholarly:
     The proposed architecture is a research hypothesis rather than a validated
     system.
   kind: research-note
+  language: en
+  author_orcids:
+    Junjie Chen: 0009-0001-5288-048X
+  license: CC-BY-NC-ND-4.0
+  archive: false
   pdf: >-
     assets/pdf/blog/6af73b83-9523-42e9-8ede-6d48380b7a19-socio_affective_iclr2027_source.pdf
 permalink: /blog/2026/toward-fine-grained-socio-affective-intelligence/
 ---
+
+> **📌 Read Our Position Paper — PsychEvolve**
+>
+> For a more detailed discussion of our research position, its psychological foundations, and the proposed blueprint for evolving full-duplex conversational agents, see our position paper: **[PsychEvolve: Subtle Cues Must Keep Earning Their Influence](https://www.junjie-chen.info/psychevolve-page/?v=2#position)**.
 
 Imagine a conversation in which someone quietly says, _“I'm fine.”_ There is a short pause before the answer. Their brow briefly tightens, and one hand moves toward the opposite arm. A conventional voice assistant may hear the words and proceed as if nothing happened. A video-language model may accurately describe the frown and hand movement. Neither capability, on its own, tells us what the person feels—or what the assistant ought to do next.
 
