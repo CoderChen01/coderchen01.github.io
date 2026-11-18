@@ -24,6 +24,7 @@ class ScholarlyArticlesTest < Minitest::Test
       blog = File.read(File.join(ROOT, "_pages/blog.md")).sub("enabled: true", "enabled: false")
       File.write(File.join(source, "blog.html"), blog)
       File.write(File.join(source, "assets/pdf/blog/test.pdf"), "%PDF-1.4\nFixture PDF\n%%EOF")
+      File.truncate(File.join(source, "assets/pdf/blog/test.pdf"), 6_000_000)
       base = {
         "layout" => "scholarly", "title" => "A {test} & 50%_result", "date" => "2026-01-01 01:02:03 +0800",
         "related_posts" => false,
@@ -68,6 +69,7 @@ class ScholarlyArticlesTest < Minitest::Test
       assert_equal "Actual institution", html_pdf.at_css('meta[name="citation_technical_report_institution"]')["content"]
       assert_includes html_pdf.at_css(".scholarly-kind").text, "Technical report"
       assert File.file?(File.join(output, "with-pdf/paper.pdf"))
+      assert_equal 6_000_000, File.size(File.join(output, "with-pdf/paper.pdf")), "publish PDFs larger than the old 5 MB limit"
       assert_includes File.read(File.join(output, "with-pdf/citation.bib")), "@techreport{"
       project = Nokogiri::HTML(File.read(File.join(output, "external/index.html")))
       assert_empty project.css('meta[http-equiv="refresh"]'), "keep the abstract page readable without an automatic redirect"
@@ -114,6 +116,11 @@ class ScholarlyArticlesTest < Minitest::Test
       write_post(source, "external", external)
       Jekyll::Site.new(config).process
       assert File.file?(File.join(output, "external/citation.bib")), "restoring an external entry restores its citation"
+      with_pdf["scholarly"]["pdf"] = "assets/pdf/blog/test.pdf"
+      write_post(source, "with-pdf", with_pdf)
+      File.truncate(File.join(source, "assets/pdf/blog/test.pdf"), 100_000_001)
+      error = assert_raises(Jekyll::Errors::FatalException) { Jekyll::Site.new(config).process }
+      assert_includes error.message, "exceeds 100 MB"
     end
   end
 
