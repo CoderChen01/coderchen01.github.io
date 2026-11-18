@@ -18,6 +18,8 @@ Uploads are stored under `assets/pdf/blog/` with unique filenames and never over
 
 The Jekyll generator publishes attachments as `<article-url>paper.pdf` and citations as `<article-url>citation.bib`. This keeps the PDF in the article's directory, as required for `citation_pdf_url`. The raw upload directory and templates are excluded from public output. Removing an attachment clears its reference; the original upload remains recoverable in Git.
 
+When `scholarly.bibtex_key` is empty, CMS previews and published citations use the same compact default: the first author's surname (up to 10 letters), publication year, a title word (up to 8 letters, skipping common leading words), and a four-character suffix derived from the local article URL. For example, `chen2026fine-0f5b`. Automatic keys are at most 27 characters; the URL suffix helps distinguish similar titles and stays the same when a saved article's filename changes. Names written as `Surname, Given name` and accented Latin names are supported; names or titles without Latin letters use `author` or `paper`. A manually entered key is retained verbatim. Both implementations are checked against the same fixtures in `test/fixtures/bibtex-keys.json`.
+
 ## Hide and restore
 
 The Blog editor's **Hide post** action sets `published: false` without deleting or rewriting the article body or its attachments. The entry stays in the editor with a **Hidden** badge; **Restore post** sets it back to visible while retaining its URL and publication time. Click **Publish** to apply either change to the public site. Saving visibility never automatically publishes other workspace edits.

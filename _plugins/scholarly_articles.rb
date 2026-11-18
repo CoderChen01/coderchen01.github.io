@@ -13,11 +13,24 @@ module ScholarlyArticles
     end
   end
 
+  def self.default_key(data, date)
+    name = Array(data["scholarly"]["authors"]).first.to_s.strip
+    surname = name.include?(",") ? name.split(",").first.to_s : name.split(/\s+/).last.to_s
+    author = surname.unicode_normalize(:nfkd).downcase.gsub(/[^a-z]/, "")[0, 10]
+    author = "author" if author.empty?
+    stop_words = %w[a an the toward towards on in for with from to by of and]
+    words = data["title"].to_s.unicode_normalize(:nfkd).downcase.gsub(/[\u0300-\u036f]/, "").scan(/[a-z]+/)
+    keyword = (words.find { |word| word.length > 1 && !stop_words.include?(word) } || "paper")[0, 8]
+    hash = 2166136261
+    data["url"].to_s.encode("UTF-8").each_byte { |byte| hash = ((hash ^ byte) * 16777619) & 0xffffffff }
+    "#{author}#{date.strftime('%Y')}#{keyword}-#{format('%08x', hash)[-4, 4]}"
+  end
+
   def self.bibtex(data, site)
     scholarly = data["scholarly"]
     date = data["date"].respond_to?(:strftime) ? data["date"] : Date.parse(data["date"].to_s)
     key = scholarly["bibtex_key"].to_s
-    key = "chen#{date.strftime('%Y')}#{data['slug'].to_s.gsub(/[^A-Za-z0-9]/, '')}" if key.empty?
+    key = default_key(data, date) if key.empty?
     report = scholarly["kind"] == "technical-report" && !scholarly["institution"].to_s.empty?
     fields = {
       "title" => data["title"],

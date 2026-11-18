@@ -4,6 +4,7 @@ require "tmpdir"
 require "fileutils"
 require "yaml"
 require "nokogiri"
+require "json"
 require "jekyll-toc"
 require "jekyll/scholar"
 require "jekyll-archives-v2"
@@ -12,6 +13,18 @@ require_relative "../_plugins/blog_feeds"
 
 class ScholarlyArticlesTest < Minitest::Test
   ROOT = File.expand_path("..", __dir__)
+
+  def test_compact_keys_match_cms_and_preserve_custom_keys
+    fixtures = JSON.parse(File.read(File.join(ROOT, "test/fixtures/bibtex-keys.json")))
+    site = Struct.new(:config).new({ "url" => "https://example.org", "baseurl" => "" })
+    fixtures.each do |fixture|
+      data = fixture.merge("scholarly" => { "authors" => fixture["authors"] })
+      assert_includes ScholarlyArticles.bibtex(data, site), "{#{fixture['expected']},"
+      assert_operator fixture["expected"].length, :<=, 27
+      data["scholarly"]["bibtex_key"] = "MyCustom:Key_1"
+      assert_includes ScholarlyArticles.bibtex(data, site), "{MyCustom:Key_1,"
+    end
+  end
 
   def test_static_html_optional_pdf_and_bibtex_downloads
     Dir.mktmpdir("scholarly-site-") do |source|
