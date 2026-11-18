@@ -4,18 +4,27 @@ layout: post
 <section class="scholarly-abstract" aria-labelledby="scholarly-abstract-title">
   <p class="scholarly-authors">{{ page.scholarly.authors | join: '; ' | escape }}</p>
   <p class="scholarly-kind">
-    {% if page.scholarly.kind == 'technical-report' %}Technical report{% else %}Research Blog{% endif %}
+    {% if page.external_link == true -%}
+      Project page
+    {%- elsif page.scholarly.kind == 'technical-report' -%}
+      Technical report
+    {%- else -%}
+      Research Blog
+    {%- endif %}
     {% if page.scholarly.institution and page.scholarly.institution != '' %} · {{ page.scholarly.institution | escape }}{% endif %}
     {% if page.scholarly.report_number and page.scholarly.report_number != '' %} · {{ page.scholarly.report_number | escape }}{% endif %}
   </p>
   <h2 id="scholarly-abstract-title">Abstract</h2>
   <p>{{ page.scholarly.abstract | escape | newline_to_br }}</p>
+  {% if page.external_link == true %}
+    <p><a href="{{ page.redirect | escape }}" target="_blank" rel="noopener noreferrer">Open project page ↗</a></p>
+  {% endif %}
   {% if page.scholarly.pdf and page.scholarly.pdf != '' %}
     <a href="{{ page.url | append: 'paper.pdf' | relative_url }}">Read PDF ↗</a>
   {% endif %}
 </section>
 
-{{ content }}
+{% unless page.external_link == true %}{{ content }}{% endunless %}
 
 <section class="scholarly-citation" aria-labelledby="scholarly-citation-title">
   <h2 id="scholarly-citation-title">Cite this article</h2>

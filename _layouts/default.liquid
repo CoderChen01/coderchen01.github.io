@@ -21,7 +21,7 @@
         document.documentElement.setAttribute('data-theme', theme);
       })();
     </script>
-    {% if page.redirect %}
+    {% if page.redirect and page.external_link != true %}
       {% if page.redirect == true %}
         {% assign redirect = site.baseurl | append: '/' %}
       {% elsif page.redirect contains '://' %}

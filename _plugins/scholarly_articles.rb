@@ -1,5 +1,6 @@
 # Frozen, static scholarly article metadata and citation downloads.
 require "date"
+require "uri"
 
 module ScholarlyArticles
   def self.enabled?(data)
@@ -24,7 +25,7 @@ module ScholarlyArticles
       "year" => date.strftime("%Y"),
       "month" => date.strftime("%m"),
       "url" => "#{site.config['url']}#{site.config['baseurl']}#{data['url']}",
-      "note" => report ? "Technical report" : "Research Blog"
+      "note" => data["external_link"] == true ? "Project page" : report ? "Technical report" : "Research Blog"
     }
     if report
       fields["institution"] = scholarly["institution"]
@@ -75,6 +76,18 @@ module ScholarlyArticles
 
     def generate(site)
       site.posts.docs.each do |post|
+        if post.data["external_link"] == true
+          target = post.data["redirect"].to_s
+          begin
+            uri = URI.parse(target)
+            valid = %w[http https].include?(uri.scheme) && uri.host && !uri.userinfo && !target.match?(/[\s\\]/)
+          rescue URI::InvalidURIError
+            valid = false
+          end
+          unless valid && ScholarlyArticles.enabled?(post.data)
+            raise Jekyll::Errors::FatalException, "#{post.relative_path}: external links need a public HTTP(S) URL and scholarly metadata"
+          end
+        end
         next unless ScholarlyArticles.enabled?(post.data)
 
         data = post.data.merge("url" => post.url, "slug" => post.data["slug"])

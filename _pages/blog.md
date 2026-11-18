@@ -80,7 +80,6 @@ pagination:
 <div class="row row-cols-{% if featured_posts.size <= 2 or is_even == 0 %}2{% else %}3{% endif %}">
 {% for post in featured_posts %}
 <div class="col mb-4">
-<a href="{{ post.url | relative_url }}">
 <div class="card hoverable">
 <div class="row g-0">
 <div class="col-md-12">
@@ -88,8 +87,17 @@ pagination:
 <div class="float-right">
 <i class="fa-solid fa-thumbtack fa-xs"></i>
 </div>
-<h3 class="card-title text-lowercase">{{ post.title }}</h3>
-<p class="card-text">{{ post.description }}</p>
+<h3 class="card-title text-lowercase">
+{% if post.redirect == blank %}
+<a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+{% elsif post.redirect contains '://' %}
+<a href="{{ post.redirect | escape }}" target="_blank" rel="noopener noreferrer">{{ post.title }} ↗</a>
+{% else %}
+<a href="{{ post.redirect | relative_url }}">{{ post.title }}</a>
+{% endif %}
+</h3>
+<p class="card-text">{{ post.description | escape }}</p>
+{% if post.external_link == true %}<p><a href="{{ post.url | relative_url }}">Abstract &amp; citation</a></p>{% endif %}
 
                     {% if post.external_source == blank %}
                       {% assign read_time = post.content | number_of_words | divided_by: 180 | plus: 1 %}
@@ -99,7 +107,7 @@ pagination:
                     {% assign year = post.date | date: "%Y" %}
 
                     <p class="post-meta">
-                      {{ read_time }} min read &nbsp; &middot; &nbsp;
+                      {% if post.external_link == true %}Project page{% else %}{{ read_time }} min read{% endif %} &nbsp; &middot; &nbsp;
                       <a href="{{ year | prepend: '/blog/' | relative_url }}">
                         <i class="fa-solid fa-calendar fa-sm"></i> {{ year }} </a>
                     </p>
@@ -107,7 +115,6 @@ pagination:
                 </div>
               </div>
             </div>
-          </a>
         </div>
       {% endfor %}
       </div>
@@ -146,7 +153,7 @@ pagination:
 {% if post.redirect == nil or post.redirect == '' %}
           <a class="post-title" href="{{ post.url | relative_url }}">{{ post.title }}</a>
         {% elsif post.redirect contains '://' %}
-          <a class="post-title" href="{{ post.redirect }}" target="_blank">{{ post.title }}</a>
+          <a class="post-title" href="{{ post.redirect | escape }}" target="_blank" rel="noopener noreferrer">{{ post.title }}</a>
           <svg width="2rem" height="2rem" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
             <path d="M17 13.5v6H5v-12h6m3-3h6v6m0-6-9 9" class="icon_svg-stroke" stroke="#999" stroke-width="1.5" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"></path>
           </svg>
@@ -154,9 +161,12 @@ pagination:
           <a class="post-title" href="{{ post.redirect | relative_url }}">{{ post.title }}</a>
         {% endif %}
       </h3>
-      <p>{{ post.description }}</p>
+      <p>{{ post.description | escape }}</p>
+{% if post.external_link == true %}
+<p><a class="post-abstract-link" href="{{ post.url | relative_url }}">Abstract &amp; citation</a>{% if post.scholarly.pdf and post.scholarly.pdf != '' %} &middot; <a href="{{ post.url | append: 'paper.pdf' | relative_url }}">PDF</a>{% endif %}</p>
+{% endif %}
       <p class="post-meta">
-        {{ read_time }} min read &nbsp; &middot; &nbsp;
+        {% if post.external_link == true %}Project page{% else %}{{ read_time }} min read{% endif %} &nbsp; &middot; &nbsp;
         {{ post.date | date: '%B %d, %Y' }}
         {% if post.external_source %}
         &nbsp; &middot; &nbsp; {{ post.external_source }}
