@@ -6,6 +6,7 @@ require "yaml"
 require "nokogiri"
 require "jekyll-toc"
 require "jekyll/scholar"
+require "jekyll-archives-v2"
 require_relative "../_plugins/scholarly_articles"
 require_relative "../_plugins/blog_feeds"
 
@@ -18,7 +19,10 @@ class ScholarlyArticlesTest < Minitest::Test
       %w[_layouts/scholarly.liquid _includes/scholarly-head.liquid _includes/content-license.liquid].each do |file|
         FileUtils.cp(File.join(ROOT, file), File.join(source, file))
       end
-      File.write(File.join(source, "_layouts/default.liquid"), '<html><head>{% include scholarly-head.liquid %}</head><body>{{ content }}</body></html>')
+      FileUtils.cp(File.join(ROOT, "_layouts/default.liquid"), File.join(source, "_layouts/default.liquid"))
+      %w[head header footer scripts].each { |name| File.write(File.join(source, "_includes/#{name}.liquid"), "") }
+      blog = File.read(File.join(ROOT, "_pages/blog.md")).sub("enabled: true", "enabled: false")
+      File.write(File.join(source, "blog.html"), blog)
       File.write(File.join(source, "assets/pdf/blog/test.pdf"), "%PDF-1.4\nFixture PDF\n%%EOF")
       base = {
         "layout" => "scholarly", "title" => "A {test} & 50%_result", "date" => "2026-01-01 01:02:03 +0800",
@@ -32,9 +36,12 @@ class ScholarlyArticlesTest < Minitest::Test
       with_pdf["scholarly"]["institution"] = "Actual institution"
       with_pdf["scholarly"]["report_number"] = "TR-1"
       write_post(source, "with-pdf", with_pdf)
+      external = Marshal.load(Marshal.dump(with_pdf))
+      external.merge!("external_link" => true, "redirect" => "https://example.github.io/project/?a=1&b=2", "featured" => true, "tags" => ["project"])
+      write_post(source, "external", external)
       write_post(source, "ordinary", { "layout" => "post", "title" => "Ordinary blog" })
       write_post(source, "scheduled", base.merge("date" => "2099-01-01 12:34:56 +0800"))
-      config = Jekyll.configuration({ "source" => source, "destination" => File.join(source, "_site"), "theme" => "al_folio_core", "url" => "https://example.org", "baseurl" => "", "timezone" => "Asia/Shanghai", "permalink" => "/blog/:year/:title/", "exclude" => ["assets/pdf/blog/"], "quiet" => true })
+      config = Jekyll.configuration({ "source" => source, "destination" => File.join(source, "_site"), "theme" => "al_folio_core", "url" => "https://example.org", "baseurl" => "", "timezone" => "Asia/Shanghai", "permalink" => "/blog/:year/:title/", "exclude" => ["assets/pdf/blog/"], "quiet" => true, "jekyll-archives" => { "posts" => { "enabled" => ["tags"], "permalinks" => { "tags" => "/blog/tag/:name/" } } } })
       site = Jekyll::Site.new(config)
       site.process
       output = File.join(source, "_site/blog/2026")
@@ -62,6 +69,24 @@ class ScholarlyArticlesTest < Minitest::Test
       assert_includes html_pdf.at_css(".scholarly-kind").text, "Technical report"
       assert File.file?(File.join(output, "with-pdf/paper.pdf"))
       assert_includes File.read(File.join(output, "with-pdf/citation.bib")), "@techreport{"
+      project = Nokogiri::HTML(File.read(File.join(output, "external/index.html")))
+      assert_empty project.css('meta[http-equiv="refresh"]'), "keep the abstract page readable without an automatic redirect"
+      assert_equal external["title"], project.at_css('meta[name="citation_title"]')["content"]
+      assert_includes project.at_css(".scholarly-abstract").text, external["scholarly"]["abstract"]
+      assert_equal external["redirect"], project.at_css(".scholarly-abstract a[target='_blank']")["href"]
+      refute_includes project.text, "Static body.", "retained editor source is not a published article body"
+      assert_equal "https://example.org/blog/2026/external/paper.pdf", project.at_css('meta[name="citation_pdf_url"]')["content"]
+      assert File.file?(File.join(output, "external/paper.pdf"))
+      assert_includes File.read(File.join(output, "external/citation.bib")), "note = {Project page}"
+      index = Nokogiri::HTML(File.read(File.join(source, "_site/blog/index.html")))
+      [".featured-posts .card-title a", ".post-list a.post-title[href^='https:']"].each do |selector|
+        link = index.at_css(selector)
+        assert_equal external["redirect"], link["href"]
+        assert_includes link["rel"], "noopener"
+      end
+      assert index.at_css("a.post-abstract-link[href='/blog/2026/external/']"), "expose a crawlable abstract link"
+      archive = Nokogiri::HTML(File.read(File.join(source, "_site/blog/tag/project/index.html")))
+      assert_equal external["redirect"], archive.at_css("a.post-link")["href"]
       refute File.exist?(File.join(source, "_site/assets/pdf/blog/test.pdf"))
       ordinary = Nokogiri::HTML(File.read(File.join(output, "ordinary/index.html")))
       assert_empty ordinary.css('meta[name^="citation_"], .scholarly-citation')
@@ -74,6 +99,21 @@ class ScholarlyArticlesTest < Minitest::Test
       refute File.exist?(File.join(source, "_site/blog/2099/scheduled/index.html"))
       Jekyll::Site.new(config.merge("future" => true)).process
       assert File.exist?(File.join(source, "_site/blog/2099/scheduled/index.html"))
+      external["scholarly"]["pdf"] = ""
+      write_post(source, "external", external)
+      Jekyll::Site.new(config).process
+      no_pdf = Nokogiri::HTML(File.read(File.join(output, "external/index.html")))
+      assert_empty no_pdf.css('meta[name="citation_pdf_url"], a[href$="paper.pdf"]')
+      refute File.exist?(File.join(output, "external/paper.pdf"))
+      external["published"] = false
+      write_post(source, "external", external)
+      Jekyll::Site.new(config).process
+      %w[index.html paper.pdf citation.bib].each { |file| refute File.exist?(File.join(output, "external", file)) }
+      refute_includes File.read(File.join(source, "_site/blog/index.html")), external["redirect"]
+      external["published"] = true
+      write_post(source, "external", external)
+      Jekyll::Site.new(config).process
+      assert File.file?(File.join(output, "external/citation.bib")), "restoring an external entry restores its citation"
     end
   end
 
