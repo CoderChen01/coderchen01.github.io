@@ -1,7 +1,7 @@
 ---
 layout: scholarly
 title: >-
-  PsychEvolve  Subtle Cues Must Keep Earning Their Influence if Full Duplex
+  PsychEvolve: Subtle Cues Must Keep Earning Their Influence if Full Duplex
   Agents Are to Reason Psychologically and Evolve
 date: "2026-11-16 00:00:00 +0800"
 description: ""
