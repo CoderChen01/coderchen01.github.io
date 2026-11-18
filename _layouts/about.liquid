@@ -64,7 +64,9 @@ layout: default
       <h2>
         <a href="{{ '/publications/' | relative_url }}" style="color: inherit">Selected Publications</a>
       </h2>
-      {% include selected_papers.liquid %}
+      <div class="publications">
+        {% homepage_bibliography --group_by none --query @*[selected=true]* %}
+      </div>
     {% endif %}
 
     {% include services.liquid %}
