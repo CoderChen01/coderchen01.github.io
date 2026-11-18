@@ -115,8 +115,8 @@ module ScholarlyArticles
         unless source.match?(%r{\Aassets/pdf/blog/[A-Za-z0-9][A-Za-z0-9._-]*\.pdf\z}) && File.file?(File.join(site.source, source))
           raise Jekyll::Errors::FatalException, "#{post.relative_path}: scholarly PDF is missing or outside assets/pdf/blog"
         end
-        if File.size(File.join(site.source, source)) > 5_000_000
-          raise Jekyll::Errors::FatalException, "#{post.relative_path}: scholarly PDF exceeds 5 MB"
+        if File.size(File.join(site.source, source)) > 100_000_000
+          raise Jekyll::Errors::FatalException, "#{post.relative_path}: scholarly PDF exceeds 100 MB"
         end
         site.static_files << PdfFile.new(site, source, post.url)
       end
