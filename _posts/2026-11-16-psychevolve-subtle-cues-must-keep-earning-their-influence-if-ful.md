@@ -55,6 +55,7 @@ math: true
 external_link: true
 redirect: "https://www.junjie-chen.info/psychevolve-page/"
 permalink: /blog/2026/psychevolve-subtle-cues-must-keep-earning-their-influence-if-ful/
+sitemap: false
 ---
 
 ## 1. Introduction
